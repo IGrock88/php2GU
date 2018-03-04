@@ -37,7 +37,8 @@ class Router
             "" => "index"
         ],
         "AdminController" => [
-            "" => "index"
+            "" => "index",
+            "orders" => "orders",
         ]
 
      ];

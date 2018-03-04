@@ -10,10 +10,10 @@ class Router
     use Singleton;
 
     private $controllers = [
-        ""      => ['controller' => "MainController"],
-        "goods" => ['controller' => "GoodsController"],
-        "user" => ['controller' => "UserController"],
-        "admin" => ['controller' => "AdminController"]
+        ""      => "MainController",
+        "goods" => "GoodsController",
+        "user" => "UserController",
+        "admin" => "AdminController"
     ];
 
     private $methods = [
@@ -32,14 +32,16 @@ class Router
             "" => "index",
             "orders" => "orders",
         ]
-
      ];
 
     public function start()
     {
         $route = explode("/", $_SERVER['REQUEST_URI']);
-        $controller = $this->controllers[$route[1]]['controller'];
-        $method = $this->methods[$controller][$route[2]];
+        $controllerPath = $route[1];
+        $methodPath = $route[2];
+
+        $controller = $this->controllers[$controllerPath];
+        $method = $this->methods[$controller][$methodPath];
 
         if(isset($controller) && isset($method)){
             $controller = 'engine\\Controllers\\' . $controller;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 27 2018 г., 12:27
+-- Время создания: Мар 04 2018 г., 14:22
 -- Версия сервера: 5.6.38
 -- Версия PHP: 7.2.0
 
@@ -32,17 +32,18 @@ CREATE TABLE `basket` (
   `id` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(11) NOT NULL,
+  `id_order` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `basket`
 --
 
-INSERT INTO `basket` (`id`, `id_product`, `quantity`, `id_user`) VALUES
-(36, 5, 1, 0),
-(37, 5, 1, 1),
-(38, 11, 4, 1);
+INSERT INTO `basket` (`id`, `id_product`, `quantity`, `id_user`, `id_order`) VALUES
+(36, 5, 1, 0, NULL),
+(37, 5, 1, 1, NULL),
+(38, 11, 4, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -160,6 +161,41 @@ INSERT INTO `materials` (`id_material`, `material_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `orders`
+--
+
+CREATE TABLE `orders` (
+  `id_order` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `amount` int(11) NOT NULL COMMENT 'цена в центах',
+  `datetime_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_order_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `orders`
+--
+
+INSERT INTO `orders` (`id_order`, `id_user`, `amount`, `datetime_create`, `id_order_status`) VALUES
+(1, 1, 999111, '2018-03-04 08:02:05', 1),
+(2, 2, 156445, '2018-03-04 08:02:05', 1),
+(3, 3, 51133, '2018-03-04 08:02:08', 1),
+(4, 4, 21345, '2018-03-04 08:02:08', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `order_status`
+--
+
+CREATE TABLE `order_status` (
+  `id_order_status` int(11) NOT NULL,
+  `order_status_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `Users`
 --
 
@@ -168,18 +204,22 @@ CREATE TABLE `Users` (
   `login` varchar(50) NOT NULL,
   `name` text NOT NULL,
   `pass` varchar(500) NOT NULL,
-  `prim` varchar(500) NOT NULL
+  `prim` varchar(500) NOT NULL,
+  `id_role` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `Users`
 --
 
-INSERT INTO `Users` (`id_user`, `login`, `name`, `pass`, `prim`) VALUES
-(1, 'user', 'Иван', '$2y$10$mBPas3uNzVeY0AYq4MWu7es7BfLAmI6j4r8fjmkaNRGeupNax69ZO', ''),
-(7, 'Igor', 'Игорь', '$2y$10$V3zPnMWjgMNYFg398bqO1eqMcVTKzD1vqiMRRKdbdkCIfeerE9m2q', ''),
-(8, 'Vasya', 'Вася', '$2y$10$u0RVPhfxF9Vidj8WBRC3hObF.ksz.3qfcIPvhaVaG0KRaWC81WHtq', ''),
-(9, 'Test', 'Test', '$2y$10$Y5LMHkg2LIWjBC8f6sCqhev4emvBBPhUZuGkX7pWRTumlbp5tt0Ea', '');
+INSERT INTO `Users` (`id_user`, `login`, `name`, `pass`, `prim`, `id_role`) VALUES
+(1, 'user', 'Иван', '$2y$10$mBPas3uNzVeY0AYq4MWu7es7BfLAmI6j4r8fjmkaNRGeupNax69ZO', '', 1),
+(7, 'Igor', 'Игорь', '$2y$10$V3zPnMWjgMNYFg398bqO1eqMcVTKzD1vqiMRRKdbdkCIfeerE9m2q', '', 1),
+(8, 'Vasya', 'Вася', '$2y$10$u0RVPhfxF9Vidj8WBRC3hObF.ksz.3qfcIPvhaVaG0KRaWC81WHtq', '', 1),
+(9, 'Test', 'Test', '$2y$10$Y5LMHkg2LIWjBC8f6sCqhev4emvBBPhUZuGkX7pWRTumlbp5tt0Ea', '', 1),
+(10, 'mvc', 'qwerty', '$2y$10$f32xPus4AmLlrkPvetIJPOwwJBZSdhlRavBSdpYwec1wGR/HStT1O', '', 1),
+(11, 'admin', 'admin', '$2y$10$hBdA3sedXQ21Q9VzKSQyyeuOfnwN8ORctWlFz.W1g1RrwG/OXmTiG', '', 2),
+(12, 'admin2', 'admin2', '$2y$10$ApoCx4Kj3hx3LDc4fxyqQ.gVmTZwRbFtYWh9Tl3fiuX1SRVAKXQJW', '', 2);
 
 -- --------------------------------------------------------
 
@@ -194,6 +234,36 @@ CREATE TABLE `users_auth` (
   `date` date NOT NULL,
   `prim` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `users_auth`
+--
+
+INSERT INTO `users_auth` (`id_user`, `id_user_session`, `hash_cookie`, `date`, `prim`) VALUES
+(1, 19, '1519916170.26727970696580357', '0000-00-00', '123456789'),
+(1, 25, '1519917402.9367487321560232', '0000-00-00', '123456789'),
+(1, 27, '0.82213000 1520125013782540798', '0000-00-00', '123456789'),
+(1, 30, '1520156984.49368204830326771', '0000-00-00', '123456789'),
+(11, 34, '1520157712.37223066865677171', '0000-00-00', '123456789');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user_role`
+--
+
+CREATE TABLE `user_role` (
+  `id_role` int(11) NOT NULL,
+  `role` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `user_role`
+--
+
+INSERT INTO `user_role` (`id_role`, `role`) VALUES
+(1, 'user'),
+(2, 'admin');
 
 --
 -- Индексы сохранённых таблиц
@@ -230,6 +300,18 @@ ALTER TABLE `materials`
   ADD PRIMARY KEY (`id_material`);
 
 --
+-- Индексы таблицы `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id_order`);
+
+--
+-- Индексы таблицы `order_status`
+--
+ALTER TABLE `order_status`
+  ADD PRIMARY KEY (`id_order_status`);
+
+--
 -- Индексы таблицы `Users`
 --
 ALTER TABLE `Users`
@@ -241,6 +323,12 @@ ALTER TABLE `Users`
 ALTER TABLE `users_auth`
   ADD PRIMARY KEY (`id_user_session`),
   ADD KEY `id_user` (`id_user`);
+
+--
+-- Индексы таблицы `user_role`
+--
+ALTER TABLE `user_role`
+  ADD PRIMARY KEY (`id_role`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -277,16 +365,34 @@ ALTER TABLE `materials`
   MODIFY `id_material` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT для таблицы `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `order_status`
+--
+ALTER TABLE `order_status`
+  MODIFY `id_order_status` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `users_auth`
 --
 ALTER TABLE `users_auth`
-  MODIFY `id_user_session` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user_session` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT для таблицы `user_role`
+--
+ALTER TABLE `user_role`
+  MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

@@ -1,0 +1,138 @@
+.slider {
+    min-height: 613px;
+    background: #e8e8e8 url(../img/main-slider.png) no-repeat 71% -151px;
+    margin-bottom: 98px;
+}
+
+.red-block {
+    width: 12px;
+    background-color: #f16d7f;
+    margin-right: 12px;
+    margin-top: 150px;
+    margin-left: -1px;
+}
+
+.slider-title {
+    display: block;
+    margin: 137px 0 -7px;
+    color: #222222;
+    font-size: 40px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.slider-title strong {
+    display: block;
+    font-size: 60px;
+    letter-spacing: 1.5px;
+    margin-bottom: -2px;
+}
+
+.slider-title span {
+    color: #f16d7f;
+}
+
+main > .flex-container {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+   
+}
+
+.comercial-banner {
+    margin: 0 0 17px;
+    position: relative;
+}
+
+.comercial-banner:last-child figcaption {
+    text-align: center;
+}
+
+.title {
+    position: absolute;
+    background-color: #ffffff;
+    top: 26px;
+    color: #222222;
+    font-family: "Lato - Black";
+    font-size: 18px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.45px;
+}
+
+main > .flex-container figcaption a{
+    display: block;
+    padding: 13px 17px 11px 18px;
+}
+
+.title span {
+    display: block;
+    color: #f16d7f;
+    font-size: 30px;
+    letter-spacing: 0.75px;
+    margin-top: 4px;
+}
+
+main > .flex-container figure > a img {
+    width: 100%;
+}
+
+.column{
+    -ms-flex-preferred-size: 560px;
+    flex-basis: 560px;
+    margin: 1px 2px 0 0;
+}
+
+.column-left{
+    margin-left: -3px;
+    margin-right: 10px;
+}
+
+.column-right{
+    margin-left: 10px;
+    margin-right: -2px;
+}
+
+main > .flex-container:last-child{
+    margin-bottom: 95px;
+}
+
+main > .flex-container:last-child .comercial{
+    width: 770px;
+    height: 532px;
+    margin: 0;
+    background-image: url("../img/layer-38.png");
+}
+
+main > .flex-container:last-child .comercial div{
+
+    margin: 140px 0 0 40px;
+    position: static;
+    background-color: transparent;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    font-size: 32px;
+    letter-spacing: 0.9px;
+}
+
+main > .flex-container:last-child .comercial div strong{
+    font-size: 54px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+main > .flex-container:last-child .comercial div span{
+    display: inline;
+    color: #f16d7f;
+}
+
+@media screen and (max-width: 500px){
+    main > .flex-container figcaption a{
+        padding: 0;
+        font-size: 15px;
+    }
+}
+

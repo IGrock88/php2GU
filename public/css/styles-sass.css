@@ -1,0 +1,224 @@
+table {
+  width: 100%;
+  margin-top: 85px;
+  border-collapse: collapse; }
+  table h6 {
+    color: #222222;
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase; }
+
+.cart-list-head {
+  margin-top: 85px; }
+  .cart-list-head tr td {
+    border-bottom: 1px solid #eaeaea; }
+  .cart-list-head tr td:not(:first-child) {
+    text-align: center; }
+  .cart-list-head h5 {
+    color: #222222;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.2px;
+    margin-top: 0; }
+
+.cart-list-items tr {
+  border-bottom: 1px solid #eaeaea; }
+  .cart-list-items tr .item-characteristics {
+    margin: 0; }
+    .cart-list-items tr .item-characteristics figcaption {
+      margin: 0 0 0 20px; }
+      .cart-list-items tr .item-characteristics figcaption h6 {
+        padding: 10px 0 35px; }
+  .cart-list-items tr img {
+    width: 101px;
+    height: 118px;
+    transition: transform 1s cubic-bezier(0.02, 0.86, 0, 1.1);
+    transform-origin: left; }
+  .cart-list-items tr img:hover {
+    transform: scale(4);
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(0, 1, 0.33, 0.98); }
+  .cart-list-items tr td:first-child {
+    text-align: left; }
+  .cart-list-items tr td {
+    text-align: center;
+    color: #656565;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 20px 0; }
+    .cart-list-items tr td .item-quantity {
+      width: 57px;
+      height: 33px;
+      border: 1px solid #eaeaea;
+      padding-left: 24px; }
+  .cart-list-items tr figcaption div {
+    color: #6f6e6e;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 20px; }
+    .cart-list-items tr figcaption div span {
+      color: #939292;
+      font-weight: 400; }
+
+tr td:first-child {
+  width: 44%; }
+
+.checkout__buttons {
+  justify-content: space-between;
+  flex-wrap: wrap; }
+
+.button-transp{
+  width: 238px;
+  height: 53px;
+  border: 1px solid #eaeaea;
+  color: #4a4a4a;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: #ffffff;
+  margin-top: 40px; }
+
+.button-transp:hover{
+  color: #f16d7f;
+  border: 1px solid #f16d7f; }
+
+.continue-button {
+  text-align: center;
+  padding-top: 17px; }
+
+.checkout .checkout-final {
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 75px; }
+  .checkout .checkout-final__column {
+    width: 32.83333%;
+    min-width: 290px;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px; }
+    .checkout .checkout-final__column h4 {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #222222;
+      margin-bottom: 8px; }
+    .checkout .checkout-final__column p {
+      color: #000000;
+      font-size: 14px;
+      font-weight: 300;
+      margin: 8px 0; }
+    .mini {
+      width: 103px;
+      height: 38px;
+      border: 1px solid #eaeaea;
+      background-color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #4a4a4a;
+      margin-top: 20px; }
+    .checkout .checkout-final__column input {
+      height: 48px;
+      border: 1px solid #eaeaea;
+      background-color: #ffffff;
+      color: #b1b1b1;
+      font-size: 13px;
+      font-weight: 300;
+      padding: 0 15px;
+      margin: 8px 0; }
+  .checkout .checkout-final__column.shiping-adress {
+    padding-left: 0; }
+  .checkout .checkout-final__column.proceed-to-checkout {
+    padding: 0 40px 0 0;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right; }
+  .checkout .checkout-final .proceed-to-checkout {
+    padding: 0 40px 0 40px;
+    background-color: #f5f3f3; }
+    .checkout .checkout-final .proceed-to-checkout .total-price {
+      width: 100%;
+      border-bottom: 1px solid #e2e2e2; }
+    .checkout .checkout-final .proceed-to-checkout .subtotal {
+      color: #4a4a4a;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      margin: 40px 0 0; }
+    .checkout .checkout-final .proceed-to-checkout .final-price {
+      color: #222222;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 10px 0 15px; }
+      .checkout .checkout-final .proceed-to-checkout .final-price output {
+        color: #f16d7f; }
+    .checkout .checkout-final .proceed-to-checkout #final-checkout {
+      width: 100%;
+      background-color: #f16d7f;
+      border: 1px solid #f16d7f;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 15px 0 40px; }
+    .checkout .checkout-final .proceed-to-checkout #final-checkout:hover {
+      border-bottom: 3px solid #c05d60;
+      transform: scale(1.01);
+      box-shadow: 0 9px 9px -5px #c05d60;
+      transition: transform 100ms, box-shadow 100ms; }
+    .checkout .checkout-final .proceed-to-checkout #final-checkout:active {
+      transform: scale(0.99);
+      box-shadow: inset 0 0 4px 2px #c05d60;
+      transition: none; }
+
+.shipping-total {
+  color: #000000;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 20px 30px;
+  display: none; }
+  .shipping-total .ship {
+    color: #656565;
+    font-size: 13px;
+    font-weight: 400; }
+
+@media screen and (max-width: 680px) {
+  .item-characteristics > a {
+    display: none;
+    justify-content: flex-start; }
+
+  .cart-list-head h5 {
+    font-size: 8px; }
+
+  .checkout .checkout-final {
+    justify-content: center; } }
+@media screen and (max-width: 515px) {
+  .hide-515px {
+    display: none; }
+
+  .show-515px {
+    display: block; }
+
+  .checkout {
+    padding: 0; }
+
+  .cart-list-items tr td .item-quantity {
+    padding-left: 9px; }
+
+  .cart-list-items tr .item-characteristics figcaption h6 {
+    padding: 0; } }
+@media screen and (max-width: 547px) {
+  .checkout__buttons > * {
+    margin: 40px 10px 0; }
+
+  .checkout__buttons {
+    justify-content: center; } }
+
+/*# sourceMappingURL=styles-sass.css.map */

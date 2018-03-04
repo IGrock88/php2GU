@@ -1,0 +1,15 @@
+{
+    "name": "igrock/gu-project",
+    "authors": [
+        {
+            "name": "IGrock88",
+            "email": "igrock88@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "engine\\": "engine/"
+        }
+    }
+}

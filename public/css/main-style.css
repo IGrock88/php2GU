@@ -1443,6 +1443,15 @@ input[type="email"]:valid {
     width: 400px;
 }
 
+.toMain{
+    color: #f16d7f;
+    text-transform: uppercase;
+}
+
+.toMain:hover{
+    text-decoration: underline;
+}
+
 #addProduct{
     text-align: center;
     background-color: lightblue;

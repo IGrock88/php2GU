@@ -21,7 +21,7 @@
         <strong class="userName"><?php echo $_SESSION['login'] ?></strong>
         <a class="account" href="/user/account/">Личный кабинет</a>
         <?php if ($content['userRole'] == 2): ?>
-            <a class="account" href="admin/">Админка</a>
+            <a class="account" href="/admin/">Админка</a>
         <?php endif; ?>
         <input class="exitAcount" type="submit" name="ExitLogin" value="log out" />
     </form>

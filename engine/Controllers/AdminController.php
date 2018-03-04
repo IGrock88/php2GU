@@ -3,8 +3,11 @@
 namespace engine\Controllers;
 
 
+use engine\Views\AdminView;
+
 class AdminController extends Controller
 {
+    protected $view;
 
     public function __construct()
     {
@@ -12,9 +15,15 @@ class AdminController extends Controller
         if($this->content['userRole'] != 2){
             header("location: /");
         }
+        $this->view = new AdminView();
     }
 
     public function index(){
-        echo "здравствуй хозяина";
+        $this->view->generate($this->content);
     }
+
+    public function orders(){
+        echo "заказы";
+    }
+
 }

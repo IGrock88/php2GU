@@ -44,7 +44,7 @@
                         <li><a href="#">Jackets/Coats</a></li>
                     </ul>
                 </div>
-                <figure class="promo-sales"><a href="#"><img src="../img/layer-42.png" alt=""></a><figcaption><a href="">Super<br>  sale!</a></figcaption></figure>
+                <figure class="promo-sales"><a href="#"><img src="../../img/layer-42.png" alt=""></a><figcaption><a href="">Super<br>  sale!</a></figcaption></figure>
             </div>
         </li>
         <li class="primary-menu__item-wrap"><a class="primary-menu__item" href="#">Kids</a></li>

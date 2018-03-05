@@ -6,7 +6,7 @@
         <label for="login">Логин</label><input type="text" id="login" name="login"><br>
         <label for="pass">Пароль</label><input type="password" id="pass" name="pass"><br>
         <label for="rememberme">Запомнить: </label><input type="checkbox" name="rememberme" id="rememberme" />
-        <input class="signAccount" type="submit" name="SubmitLogin" value="Войти" /> <a class="registration" href="/user/register/">Зарегистрироваться</a>
+        <input class="signAccount" type="submit" name="SubmitLogin" value="Войти" /> <a class="registration" href="/user/registration/">Зарегистрироваться</a>
     </form>
 <?php endif; ?>
 

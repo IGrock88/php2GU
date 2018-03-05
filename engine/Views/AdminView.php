@@ -6,7 +6,7 @@ namespace engine\Views;
 class AdminView extends AbstractView
 {
 
-    private $basisPage = "templates/adminBase.php";
+    private $basisPage = "templates/admin/adminBase.php";
 
     public function generate($content)
     {

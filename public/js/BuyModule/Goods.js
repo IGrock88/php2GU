@@ -9,7 +9,7 @@ function Goods(id, quantityGoods) {
 Goods.prototype.loadGoods = function () {
     $.ajax({
         type: 'POST',
-        url: '/goods/ajaxFeatureGoods',
+        url: '/goods/featureGoods',
         data: 'featureGoods='+ this.quantityGoods + '&startIndex=' + this.startIndex,
         context: this,
 

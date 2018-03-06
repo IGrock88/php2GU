@@ -10,6 +10,7 @@ class Auth
 
     private $isAuth = false;
     private $userRole = false;
+    private $login;
     private $db;
 
 
@@ -18,6 +19,7 @@ class Auth
         session_start();
         $this->db = $db;
         $this->init();
+
     }
 
     public function isAuth()
@@ -28,6 +30,13 @@ class Auth
     public function getUserRole(){
         return $this->userRole;
     }
+
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+
 
     private function init()
     {
@@ -51,6 +60,8 @@ class Auth
         if($this->isAuth){
             $this->checkUserRole($_SESSION['login']);
         }
+        $this->login = $_SESSION['login'];
+
     }
 
     private function userExit()
@@ -65,6 +76,7 @@ class Auth
         unset($_SESSION['id_user']);
         unset($_SESSION['IdUserSession']);
         unset($_SESSION['login']);
+        $this->login = "";
         unset($_SESSION['pass']);
         unset($_SESSION['basket']);
         unset($_SESSION['basketGoodsQuantity']);

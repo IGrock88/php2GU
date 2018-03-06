@@ -13,7 +13,7 @@ class ErrorController extends Controller
 {
     public function error404()
     {
-        $this->content['content'] = "templates/error404.php";
+        $this->content['content'] = "pages/error404.tmpl";
         $this->view->generate($this->content);
     }
 

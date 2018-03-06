@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+{% include 'parts/head.tmpl' %}
+<body>
+<div id="dialog" title="Сообщение">
+    <p id="addProduct">Товар добавлен в корзину</p>
+</div>
+<header class="header">
+    <div class="container flex-container">
+        <a href="/" class="logo header__logo">
+            <img src="../../img/logo.png" alt="b"><div>BRAN<span>D</span></div>
+        </a>
+        <form action="#" id="search">
+            <button type="button" class="drop-down-button button-gray">Browse
+            </button>
+            {% include 'parts/brause-category.tmpl' %}
+            <input class="search__input_text" type="search" placeholder="Search for Item...">
+            <input class="search__button" type="submit" value=" ">
+        </form>
+        <div id="live-card">
+            <a href="#"><img class="cart__icon" src="../../img/card-icon.svg" alt="Cart"></a>
+
+        </div>
+
+        {% include 'parts/auth-menu.tmpl' %}
+    </div>
+    <div class="flex-container">
+        {% include 'parts/main-menu.tmpl' %}
+    </div>
+</header>

@@ -19,6 +19,7 @@ class Controller
         $auth = new Auth($this->db);
         $this->content['isAuth'] = $auth->isAuth();
         $this->content['userRole'] = $auth->getUserRole();
+        $this->content['login'] = $auth->getLogin();
         $this->view = new View();
     }
 }

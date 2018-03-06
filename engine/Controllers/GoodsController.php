@@ -38,10 +38,10 @@ class GoodsController extends Controller
 
     public function view()
     {
-        $this->content['selected-goods'] = $this->goodsModel->getGoodsById(explode("/", $_SERVER['REQUEST_URI'])[3]);
-        if($this->content['selected-goods']){
-            $this->content['content'] = 'templates/goods.php';
-            $this->content['recommended-products'] = $this->goodsModel->getFeatureGoods(4);
+        $this->content['selectedGoods'] = $this->goodsModel->getGoodsById(explode("/", $_SERVER['REQUEST_URI'])[3]);
+        if($this->content['selectedGoods']){
+            $this->content['content'] = 'pages/goods.tmpl';
+            $this->content['recommendedProducts'] = $this->goodsModel->getFeatureGoods(4);
             $this->view->generate($this->content);
         }
         else{

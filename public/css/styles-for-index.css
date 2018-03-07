@@ -63,10 +63,10 @@ main > .flex-container {
     letter-spacing: 0.45px;
 }
 
-main > .flex-container figcaption a{
-    display: block;
-    padding: 13px 17px 11px 18px;
-}
+/*main > .flex-container figcaption a{*/
+    /*display: block;*/
+    /*padding: 13px 17px 11px 18px;*/
+/*}*/
 
 .title span {
     display: block;

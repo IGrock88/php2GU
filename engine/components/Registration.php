@@ -7,9 +7,9 @@ use engine\DB\DB;
 class Registration
 {
     private $db;
-    private const REG_STATUS_NO_REG = 0;
-    private const REG_STATUS_SUCCESS = 1;
-    private const REG_STATUS_LOGIN_IS_USE = 2;
+    const REG_STATUS_NO_REG = 0;
+    const REG_STATUS_SUCCESS = 1;
+    const REG_STATUS_LOGIN_IS_USE = 2;
     private $regStatus = self::REG_STATUS_NO_REG;
 
     public function __construct(DB $db)

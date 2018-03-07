@@ -34,7 +34,7 @@
         <div class="dropdown account">
             <div class="dropdown-trigger">
                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                    <span><?php echo $_SESSION['login']?></span>
+                    <span>{{ user.getLogin }}</span>
                     <span class="icon is-small">
                         <i class="fas fa-angle-down" aria-hidden="true"></i>
                     </span>
@@ -57,7 +57,9 @@
 </div>
 <section class="section">
 
-        <?php include $content['content'];?>
+    {% block content %}
+
+    {% endblock %}
 
 </section>
 <script>

@@ -3,13 +3,8 @@
 namespace engine\Views;
 
 
-class AdminView extends AbstractView
+class AdminView extends View
 {
+    protected $basisPage = "adminBase.tmpl";
 
-    private $basisPage = "templates/admin/adminBase.php";
-
-    public function generate($content)
-    {
-        include $this->basisPage;
-    }
 }

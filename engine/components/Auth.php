@@ -8,9 +8,9 @@ use engine\DB\DB;
 class Auth
 {
 
-    private $isAuth = false;
-    private $userRole = false;
+    private $user;
     private $db;
+    private $isAuth = false;
 
 
     public function __construct(DB $db)
@@ -18,15 +18,17 @@ class Auth
         session_start();
         $this->db = $db;
         $this->init();
+
+    }
+
+    public function getUser()
+    {
+        return $this->user;
     }
 
     public function isAuth()
     {
         return $this->isAuth;
-    }
-
-    public function getUserRole(){
-        return $this->userRole;
     }
 
     private function init()
@@ -48,9 +50,12 @@ class Auth
             $this->isAuth = $this->userExit();
         }
 
-        if($this->isAuth){
-            $this->checkUserRole($_SESSION['login']);
+        if($this->isAuth) {
+            $userRole = $this->checkUserRole($_SESSION['login']);
+            $this->user = new User($_SESSION['login'], $userRole, $_SESSION['name'], $_SESSION['id_user']);
         }
+
+
     }
 
     private function userExit()
@@ -65,6 +70,7 @@ class Auth
         unset($_SESSION['id_user']);
         unset($_SESSION['IdUserSession']);
         unset($_SESSION['login']);
+        $this->login = "";
         unset($_SESSION['pass']);
         unset($_SESSION['basket']);
         unset($_SESSION['basketGoodsQuantity']);
@@ -157,8 +163,9 @@ class Auth
 
     private function checkUserRole($login){
         $this->db->connect();
-        $this->userRole = $this->db->select("select id_role from Users where login = '$login'")[0]['id_role'];
+        $userRole = $this->db->select("select id_role from Users where login = '$login'")[0]['id_role'];
         $this->db->close();
+        return $userRole;
     }
 
 }

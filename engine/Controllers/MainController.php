@@ -10,7 +10,7 @@ class MainController extends Controller
 {
     public function index()
     {
-        $this->content['content'] = "templates/index.php";
+        $this->content['content'] = "pages/index.tmpl";
         $this->view->generate($this->content);
     }
 }

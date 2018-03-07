@@ -3,17 +3,17 @@
         <h2>you may like also</h2>
         <div class="flex-container goods" id="goods3">
 
-            <? foreach ($content['recommended-products'] as $item): ?>
-                <figure class="goods__item" data-id-product="<?=$item['id_product']?>">
+            {% for product in recommendedProducts %}
+                <figure class="goods__item" data-id-product="{{ product.id_product }}">
                     <button class="goods__button buy_button" type="button">Add To Cart</button>
                     <button class="goods__button compare-button" type="button"></button>
                     <button class="goods__button add-to-wish-button" type="button"></button>
-                    <a href="../goods/<?=$item['id_product']?>"><img src="../../<?=$item['img']?>" alt="goods photo"></a>
-                    <figcaption class="goods__caption"><a href="/goods/view/<?=$item['id_product']?>"><?=$item['title']?></a>
-                        <div class="goods__price">$<?=$item['price']/100?></div>
+                    <a href="../goods/<?=$item['id_product']?>"><img src="../../{{ product.img }}" alt="goods photo"></a>
+                    <figcaption class="goods__caption"><a href="/goods/view/{{ product.id_product }}">{{ product.title }}</a>
+                        <div class="goods__price">${{ (product.price / 100) }}</div>
                     </figcaption>
                 </figure>
-            <? endforeach; ?>
+            {% endfor %}
 
         </div>
     </section>

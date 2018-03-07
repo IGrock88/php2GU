@@ -1,8 +1,3 @@
-<?php
-    $item = $content['selected-goods'];
-?>
-
-
 <article id=slider class="product">
     <input type=radio name=slider id=slide1>
     <input checked type=radio name=slider id=slide2>
@@ -11,13 +6,13 @@
         <div id=overflow>
             <div class=inner>
                 <figure>
-                    <img src="../../<?php echo $item['img'] ?>" alt="">
+                    <img src="../../{{ selectedGoods.img }}" alt="">
                 </figure>
                 <figure>
-                    <img src="../../<?php echo $item['img'] ?>" alt="">
+                    <img src="../../{{ selectedGoods.img }}" alt="">
                 </figure>
                 <figure>
-                    <img src="../../<?php echo $item['img'] ?>" alt="">
+                    <img src="../../{{ selectedGoods.img }}" alt="">
                 </figure>
             </div>
         </div>
@@ -35,14 +30,13 @@
             <label for=slide3></label>
             <div id="caret"></div>
         </div>
-        <h4><?php echo $item['title'] ?></h4>
-        <p><?php echo $item['description'] ?>
-        </p>
+        <h4>{{ selectedGoods.title }}</h4>
+        <p>{{ selectedGoods.description }}</p>
         <div class="goods-chars flex-container">
-            <div>MATERIAL: <span><?php echo $item['material_name'] ?></span></div>
-            <div>DESIGNER: <span><?php echo $item['designer_name'] ?></span></div>
+            <div>MATERIAL: <span>{{ selectedGoods.material_name }}</span></div>
+            <div>DESIGNER: <span>{{ selectedGoods.designer_name }}</span></div>
         </div>
-        <output id="goods-price">$<?php echo $item['price']/100 ?></output>
+        <output id="goods-price">${{ (selectedGoods.price /100) }}</output>
         <form action="#" id="add-to-cart" class="flex-container">
             <div class="choose-color">
                 <h5>CHOOSE COLOR</h5>

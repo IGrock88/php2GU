@@ -19,12 +19,12 @@ class UserController extends Controller
     public function registration()
     {
         $this->content['regStatus'] = $this->userModel->runRegistration();
-        $this->content['content'] = 'templates/registration.php';
+        $this->content['content'] = 'pages/registration.tmpl';
         $this->view->generate($this->content);
     }
 
     public function account(){
-        $this->content['content'] = 'templates/account.php';
+        $this->content['content'] = 'pages/account.tmpl';
         $this->view->generate($this->content);
     }
 }

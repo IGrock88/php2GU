@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<?php include 'head.php' ?>
+{% include 'parts/head.tmpl' %}
 <body>
 <div id="dialog" title="Сообщение">
     <p id="addProduct">Товар добавлен в корзину</p>
@@ -14,7 +14,7 @@
         <form action="#" id="search">
             <button type="button" class="drop-down-button button-gray">Browse
             </button>
-                <?php include 'brause-category.php'?>
+            {% include 'parts/brause-category.tmpl' %}
             <input class="search__input_text" type="search" placeholder="Search for Item...">
             <input class="search__button" type="submit" value=" ">
         </form>
@@ -23,9 +23,9 @@
 
         </div>
 
-        <?php include 'auth-menu.php' ?>
+        {% include 'parts/auth-menu.tmpl' %}
     </div>
     <div class="flex-container">
-        <?php include 'main-menu.php' ?>
+        {% include 'parts/main-menu.tmpl' %}
     </div>
 </header>

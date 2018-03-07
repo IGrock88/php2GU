@@ -12,13 +12,13 @@
 {% endif %}
 
 {% if  isAuth == true %}
-    <button id="showAuthMenu" class="drop-down-button button-red">{{ login }}</button>
+    <button id="showAuthMenu" class="drop-down-button button-red">{{ user.getLogin }}</button>
     <div id="auth">
         <form action="/" method="post">
             <p>Вы авторизованы под логином</p>
-            <strong class="userName">{{ login }}</strong>
+            <strong class="userName">{{ user.getLogin }}</strong>
             <a class="account" href="/user/account/">Личный кабинет</a>
-            {% if  userRole == 2 %}
+            {% if  user.getRole == 2 %}
             <a class="account" href="/admin/">Админка</a>
             {% endif %}
             <input class="exitAcount" type="submit" name="ExitLogin" value="log out"/>

@@ -1,0 +1,18 @@
+{% extends basesTmpl %}
+
+{% block content %}
+<main class="container">
+    <h1>Регистрация</h1>
+    <form class="flex-container registrationForm" action="" method="post">
+        <label>Введите Login<input type="text" name="regLogin" required></label>
+        <label>Введите имя<input type="text" name="regName" required></label>
+        <label>Введите пароль<input type="text" name="regPass" required></label>
+        <input type="submit" name="regNewUser" value="Зарегистрироваться">
+        {% if regStatus == 1 %}
+        Регистрация успешна
+        {% elseif regStatus == 2 %}
+            Пользователь с таким логином уже существует
+        {% endif %}
+    </form>
+</main>
+{% endblock %}

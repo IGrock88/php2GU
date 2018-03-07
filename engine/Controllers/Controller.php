@@ -5,6 +5,7 @@ namespace engine\Controllers;
 
 use engine\components\Auth;
 use engine\DB\DB;
+use engine\Views\MainView;
 use engine\Views\View;
 
 class Controller
@@ -18,8 +19,7 @@ class Controller
         $this->db = DB::getInstance();
         $auth = new Auth($this->db);
         $this->content['isAuth'] = $auth->isAuth();
-        $this->content['userRole'] = $auth->getUserRole();
-        $this->content['login'] = $auth->getLogin();
-        $this->view = new View();
+        $this->content['user'] = $auth->getUser();
+        $this->view = new MainView();
     }
 }

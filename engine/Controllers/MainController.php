@@ -11,7 +11,6 @@ class MainController extends Controller
     public function index()
     {
         $this->content['content'] = "pages/index.tmpl";
-//        $this->content['content'] = "templates/index.php";
         $this->view->generate($this->content);
     }
 }

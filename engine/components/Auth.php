@@ -8,10 +8,9 @@ use engine\DB\DB;
 class Auth
 {
 
-    private $isAuth = false;
-    private $userRole = false;
-    private $login;
+    private $user;
     private $db;
+    private $isAuth = false;
 
 
     public function __construct(DB $db)
@@ -22,21 +21,15 @@ class Auth
 
     }
 
+    public function getUser()
+    {
+        return $this->user;
+    }
+
     public function isAuth()
     {
         return $this->isAuth;
     }
-
-    public function getUserRole(){
-        return $this->userRole;
-    }
-
-    public function getLogin()
-    {
-        return $this->login;
-    }
-
-
 
     private function init()
     {
@@ -57,10 +50,11 @@ class Auth
             $this->isAuth = $this->userExit();
         }
 
-        if($this->isAuth){
-            $this->checkUserRole($_SESSION['login']);
+        if($this->isAuth) {
+            $userRole = $this->checkUserRole($_SESSION['login']);
+            $this->user = new User($_SESSION['login'], $userRole, $_SESSION['name'], $_SESSION['id_user']);
         }
-        $this->login = $_SESSION['login'];
+
 
     }
 
@@ -169,8 +163,9 @@ class Auth
 
     private function checkUserRole($login){
         $this->db->connect();
-        $this->userRole = $this->db->select("select id_role from Users where login = '$login'")[0]['id_role'];
+        $userRole = $this->db->select("select id_role from Users where login = '$login'")[0]['id_role'];
         $this->db->close();
+        return $userRole;
     }
 
 }

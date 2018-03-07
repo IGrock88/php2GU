@@ -1,0 +1,164 @@
+{% extends basesTmpl %}
+
+{% block content %}
+    {% include "parts/breadcrumbs.tmpl" %}
+    <div class="container checkout">
+        <table>
+            <thead class="cart-list-head">
+            <tr class="">
+                <td><h5>Product Details</h5></td>
+                <td><h5>unite Price</h5></td>
+                <td><h5>Quantity</h5></td>
+                <td class="hide-515px"><h5>shipping</h5></td>
+                <td><h5>Subtotal</h5></td>
+                <td style="width: 40px;"><h5>ACTION</h5></td>
+            </tr>
+            </thead>
+            <tbody class="cart-list-items">
+            <tr>
+                <td>
+                    <figure class="item-characteristics flex-container">
+                        <a href="singlepage.html"><img src="img/layer-43%20(1).png" alt="photo"></a>
+                        <figcaption>
+                            <h6><a href="singlepage.html">Mango People T-shirt</a></h6>
+                            <div class="item-color">Color: <span>Red</span></div>
+                            <div class="item-size">Size: <span>XL</span></div>
+                        </figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <div class="item-price">$150</div>
+                </td>
+                <td><input class="item-quantity" type="number" min="1" value="1"></td>
+                <td class="hide-515px">
+                    <output class="ship">FREE</output>
+                </td>
+                <td>
+                    <output class="subtotal-price">$300</output>
+                </td>
+                <td>
+                    <button class="delete__button"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <figure class="item-characteristics flex-container">
+                        <a href="singlepage.html"><img src="img/layer-44.png" alt="photo"></a>
+                        <figcaption>
+                            <h6><a href="singlepage.html">Mango People T-shirt</a></h6>
+                            <div class="item-color">Color: <span>Red</span></div>
+                            <div class="item-size">Size: <span>XL</span></div>
+                        </figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <div class="item-price">$150</div>
+                </td>
+                <td><input class="item-quantity" type="number" min="1" value="1"></td>
+                <td class="hide-515px">
+                    <output class="ship">FREE</output>
+                </td>
+                <td>
+                    <output class="subtotal-price">$300</output>
+                </td>
+                <td>
+                    <button class="delete__button"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <figure class="item-characteristics flex-container">
+                        <a href="singlepage.html"><img src="img/feture%20(6).png" alt="photo"></a>
+                        <figcaption>
+                            <h6><a href="singlepage.html">Mango People T-shirt</a></h6>
+                            <div class="item-color">Color: <span>Red</span></div>
+                            <div class="item-size">Size: <span>XL</span></div>
+                        </figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <div class="item-price">$150</div>
+                </td>
+                <td><input class="item-quantity" type="number" min="1" value="1"></td>
+                <td class="hide-515px">
+                    <output class="ship">FREE</output>
+                </td>
+                <td>
+                    <output class="subtotal-price">$300</output>
+                </td>
+                <td>
+                    <button class="delete__button"></button>
+                </td>
+            </tr>
+            <tr class="">
+                <td>
+                    <figure class="item-characteristics flex-container">
+                        <a href="singlepage.html"><img src="img/feture%20(6).png" alt="photo"></a>
+                        <figcaption>
+                            <h6><a href="singlepage.html">Mango People T-shirt</a></h6>
+                            <div class="item-color">Color: <span>Red</span></div>
+                            <div class="item-size">Size: <span>XL</span></div>
+                        </figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <div class="item-price">$150</div>
+                </td>
+                <td><input class="item-quantity" type="number" min="1" value="1"></td>
+                <td class="hide-515px">
+                    <output class="ship">FREE</output>
+                </td>
+                <td>
+                    <output class="subtotal-price">$300</output>
+                </td>
+                <td>
+                    <button class="delete__button"></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="shipping-total show-515px">SHIPPING TOTAL: <output class="ship">FREE</output></div>
+        <form action="#" class="flex-container checkout__buttons">
+            <button id="clear-cart" class="button-transp">cLEAR SHOPPING CART</button>
+
+            <a href="index.html" id="continue-shop" class="continue-button button-transp">cONTINUE sHOPPING</a>
+        </form>
+        <div class="checkout-final flex-container">
+            <form class="shiping-adress checkout-final__column">
+                <h4>Shipping Adress</h4>
+                <input list="countries" placeholder="Country" type="text" required>
+                <datalist id="countries">
+                    <option value="Russia">
+                    <option value="USA">
+                    <option value="UK">
+                    <option value="France">
+                    <option value="German">
+                    <option value="Greece">
+                    <option value="Egipt">
+                    <option value="Peru">
+
+                </datalist>
+                <input placeholder="State" type="text" required>
+                <input placeholder="Postcode / Zip" type="text" required>
+                <button class="mini button-transp">get a quote</button>
+            </form>
+            <form action="#" class="coupon checkout-final__column">
+                <h4>coupon discount</h4>
+                <p>Enter your coupon code if you have one</p>
+                <input placeholder="Promo code" type="text" required>
+                <button class="mini button-transp">Apply coupon</button>
+            </form>
+            <form action="#" class="proceed-to-checkout checkout-final__column">
+                <div class="total-price">
+                    <div class="subtotal">Sub total&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<output>$900</output>
+                    </div>
+                    <div class="final-price">GRAND TOTAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<output>$900
+                        </output>
+                    </div>
+                </div>
+                <button id="final-checkout" class="button-transp" type="submit">proceed to checkout</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -49,7 +49,7 @@ Goods.prototype.render = function (endIndex) {
         var $buyButton = $('<button class="goods__button buy_button" type="button">Add To Cart</button>');
         var $compareButton = $('<button class="goods__button compare-button" type="button"></button>');
         var $addWishButton = $('<button class="goods__button add-to-wish-button" type="button"></button>');
-        var $addImg = $('<a href="/goods/'+ this.goods[i].id_product +'"><img src="' + this.goods[i].img
+        var $addImg = $('<a href="/goods/'+ this.goods[i].id_product +'"><img src="../../' + this.goods[i].img
             + '" alt="goods photo"></a>');
         var $goodsCaption = $('<figcaption class="goods__caption"><a href="/goods/view/'+ this.goods[i].id_product +'">' + this.goods[i].title +
             '</a><div class="goods__price">$' + (this.goods[i].price / 100).toFixed(2) + '</div></figcaption>');

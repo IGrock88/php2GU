@@ -1,0 +1,172 @@
+{% extends basesTmpl %}
+
+{% block content %}
+
+
+    {% include "parts/breadcrumbs.tmpl" %}
+
+<div class="container flex-container">
+    <aside>
+        <div>
+            <input id="category" type="checkbox">
+            <label class="drop-down-button" for="category">Category</label>
+            <nav>
+                <ul>
+                    <li><input id="category-input-1" type="checkbox"><label for="category-input-1">Accessories</label></li>
+                    <li><input id="category-input-2" type="checkbox"><label for="category-input-2">Bags</label></li>
+                    <li><input id="category-input-3" type="checkbox"><label for="category-input-3">Denim</label></li>
+                    <li><input id="category-input-4" type="checkbox"><label for="category-input-4">Hoodies & Sweatshirts</label></li>
+                    <li><input id="category-input-5" type="checkbox"><label for="category-input-5">Jackets & Coats</label></li>
+                    <li><input id="category-input-6" type="checkbox"><label for="category-input-6">Pants</label></li>
+                    <li><input id="category-input-7" type="checkbox"><label for="category-input-7">Polos</label></li>
+                    <li><input id="category-input-8" type="checkbox"><label for="category-input-8">Shirts</label></li>
+                    <li><input id="category-input-9" type="checkbox"><label for="category-input-9">Shoes</label></li>
+                    <li><input id="category-input-10" type="checkbox"><label for="category-input-10">Shorts</label></li>
+                    <li><input id="category-input-11" type="checkbox"><label for="category-input-11">Sweaters & Knits</label></li>
+                    <li><input id="category-input-12" type="checkbox"><label for="category-input-12">T-Shirts</label></li>
+                    <li><input id="category-input-13" type="checkbox"><label for="category-input-13">Tanks</label></li>
+                </ul>
+            </nav>
+        </div>
+        <div>
+            <input id="brand" type="checkbox">
+            <label class="drop-down-button" for="brand">BRAND</label>
+            <nav>
+                <ul>
+                    <li><input id="brand-input-1" type="checkbox"><label for="brand-input-1">ALCOTT</label></li>
+                    <li><input id="brand-input-2" type="checkbox"><label for="brand-input-2">Calvin Klein</label></li>
+                    <li><input id="brand-input-3" type="checkbox"><label for="brand-input-3">Diesel</label></li>
+                    <li><input id="brand-input-4" type="checkbox"><label for="brand-input-4">Gabano</label></li>
+                    <li><input id="brand-input-5" type="checkbox"><label for="brand-input-5">Geox</label></li>
+                </ul>
+            </nav>
+        </div>
+        <div>
+            <input id="designer" type="checkbox">
+            <label class="drop-down-button" for="designer">dESIGNER</label>
+            <nav>
+                <ul>
+                    <li><input id="designer-input-1" type="checkbox"><label for="designer-input-1">Nicola Formichetti</label></li>
+                    <li><input id="designer-input-2" type="checkbox"><label for="designer-input-2">Kenzo</label></li>
+                    <li><input id="designer-input-3" type="checkbox"><label for="designer-input-3">Marc Jacobs</label></li>
+                    <li><input id="designer-input-4" type="checkbox"><label for="designer-input-4">Fred Perry</label></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <main>
+        <form action="#" class="options">
+            <fieldset>
+                <legend>Trending now</legend>
+                <div class="flex-container">
+                    <input type="button" value="Bohemian">
+                    <input type="button" value="Floral">
+                    <input type="button" value="Lace">
+                    <input type="button" value="Floral">
+                    <input type="button" value="Lace">
+                    <input type="button" value="Bohemian">
+
+                </div>
+            </fieldset>
+            <fieldset class="size-options">
+                <legend>Size</legend>
+                <div class="flex-container">
+                    <div>
+                        <input id="xxs" type="checkbox">
+                        <label for="xxs">XXS</label>
+                    </div>
+                    <div>
+                        <input id="xs" type="checkbox">
+                        <label for="xs">XS</label>
+                    </div>
+                    <div>
+                        <input id="s" type="checkbox">
+                        <label for="s">S</label>
+                    </div>
+                    <div>
+                        <input id="m" type="checkbox">
+                        <label for="m">M</label>
+                    </div>
+                    <div>
+                        <input id="l" type="checkbox">
+                        <label for="l">L</label>
+                    </div>
+                    <div>
+                        <input id="xl" type="checkbox">
+                        <label for="xl">XL</label>
+                    </div>
+                    <div>
+                        <input id="xxl" type="checkbox">
+                        <label for="xxl">XXL</label>
+                    </div>
+
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>pRICE</legend>
+                <div id="slider-range"></div>
+                <div class="costrange"><span>$</span><input id="minCost" type="text" value="52" readonly></div>
+                <div class="costrange"><span>$</span><input id="maxCost" type="text" value="400" readonly></div>
+                <script type="text/javascript">
+                    jQuery("#slider-range").slider({
+                        min: 0,
+                        max: 1000,
+                        values: [52, 400],
+                        range: true,
+                        stop: function(event, ui) {
+                            var slider = $("#slider-range");
+                            $("#minCost").val($("#slider-range").slider("values", 0));
+                            jQuery("#maxCost").val(jQuery("#slider-range").slider("values", 1));
+                        },
+                        slide: function(event, ui) {
+                            $("#minCost").val($("#slider-range").slider("values", 0));
+                            $("#maxCost").val($("#slider-range").slider("values", 1));
+                        }
+                    });
+                </script>
+            </fieldset>
+        </form>
+        <form action="#" class="sort">
+            <div><span>Sort By</span>
+                <select name="sort-by" id="sort-by">
+                    <option id="sort-by-name">Name</option>
+                    <option id="sort-by-price">Price</option>
+                </select>
+            </div>
+            <div><span>Show</span>
+                <select name="show" id="show-quantity-goods">
+                    <option value="9">9</option>
+                    <option value="12">12</option>
+                    <option value="15">15</option>
+                    <option value="18">18</option>
+                </select>
+            </div>
+
+        </form>
+        <div class="flex-container goods" id="goods2">
+
+        </div>
+        <script>
+            var goods2 = new Goods('goods2', 9);
+        </script>
+        <div class="flex-container" style="justify-content: space-between; flex-wrap: wrap;">
+            <div class="paginator">
+                <a href="#" class="back"><i class="fa fa-angle-left fa-lg" aria-hidden="true"></i></a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <span>.....</span>
+                <a href="#">20</a>
+                <a href="#" class="forward"><i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></a>
+            </div>
+            <a href="#">View All</a>
+        </div>
+    </main>
+</div>
+{% include "parts/comercials.tmpl" %}
+
+{% endblock %}

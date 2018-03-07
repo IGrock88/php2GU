@@ -38,8 +38,8 @@ Basket.prototype.render = function () {
         '                              <span>TOTAL</span>' +
         '                              <div id="total-price"></div>' +
         '                         </div>' +
-        '                         <a href="checkout.html">Checkout</a>' +
-        '                         <a href="shoppingcart.html">Go to cart</a>' +
+        '                         <a href="/basket/checkout">Checkout</a>' +
+        '                         <a href="/basket/cart">Go to cart</a>' +
         '                     </div>')
                     .append('<div id="' + this.id + '__quantity-items"></div>');
 

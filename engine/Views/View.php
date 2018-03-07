@@ -12,7 +12,7 @@ class View
         $content['basesTmpl'] = $this->basisPage;
 
         try {
-            $loader = new \Twig_Loader_Filesystem('twigtemplates/');
+            $loader = new \Twig_Loader_Filesystem('templates/');
             $twig = new \Twig_Environment($loader);
             $template = $twig->loadTemplate($content['content']);
 

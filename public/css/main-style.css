@@ -1452,10 +1452,11 @@ input[type="email"]:valid {
     text-decoration: underline;
 }
 
-#addProduct{
+#dialog > p{
     text-align: center;
-    background-color: lightblue;
+    background-color: #f16d7f;
     position: fixed;
+    color: #ffffff;
     z-index: 100;
     width: 100%;
     font-size: 20px;

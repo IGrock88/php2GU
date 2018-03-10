@@ -14,11 +14,11 @@ class Auth
     private $requests;
 
 
-    public function __construct(DB $db)
+    public function __construct(DB $db, Request $request)
     {
         session_start();
         $this->db = $db;
-        $this->requests
+        $this->requests = $request;
         $this->init();
 
     }
@@ -35,7 +35,7 @@ class Auth
 
     private function init()
     {
-        if ($_POST['SubmitLogin'])   //Если попытка авторизации через форму, то пытаемся авторизоваться
+        if ($this->requests->getPostParams()['SubmitLogin'])   //Если попытка авторизации через форму, то пытаемся авторизоваться
         {
             $this->isAuth = $this->authWithCredential($_POST['login'], $_POST['pass']);
         }
@@ -47,7 +47,7 @@ class Auth
         {
             $this->isAuth = $this->checkAuthWithCookie();
         }
-        if ($_POST['ExitLogin'])
+        if ($this->requests->getPostParams()['ExitLogin'])
         {
             $this->isAuth = $this->userExit();
         }

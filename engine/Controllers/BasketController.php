@@ -18,21 +18,35 @@ class BasketController extends Controller
 
     public function addProduct()
     {
-        echo "добавили товар";
+        if($this->content['isAuth']) {
+           $result = $this->basketModel->addProduct($this->request->getPostParams()['id_product'], $this->content['user']->getId());
+           echo json_encode(["result" => $result]);
+        }
+        else{
+            echo json_encode(["result" => 2]);
+            //TODO: сделать корзину для не авторизованных пользователй с помощью куки
+        }
     }
 
     public function loadBasket()
     {
         if($this->content['isAuth']) {
-            echo $this->basketModel->loadBasketGoods($this->content['user']->getId());
+            echo $this->basketModel->getJSONBasket($this->content['user']->getId());
         }
         else{
             //TODO: сделать корзину для не авторизованных пользователй с помощью куки
         }
     }
 
-    public function deleteProduct(){
-
+    public function deleteProduct()
+    {
+        if($this->content['isAuth']) {
+            $result = $this->basketModel->delProduct($this->request->getPostParams()['id_product'] ,$this->content['user']->getId());
+            echo json_encode(["result" => $result]);
+        }
+        else{
+            //TODO: сделать корзину для не авторизованных пользователй с помощью куки
+        }
     }
 
     public function checkout()

@@ -63,7 +63,7 @@ Basket.prototype.refreshItemList = function () {
 
         var $itemCaption = $('<div class="live-card__item-caption">' +
             '                       <h6><a href="/goods/view/' + this.items[itemKey].id_product + '">' + this.items[itemKey].title + '</a></h6>' +
-            '                       <div class="stars"><img src="../../img/stars.png" alt="stars"></div>' +
+            '                       <div class="stars"></div>' +
             '                       <div class="goods-quantity">' + this.items[itemKey].quantity + '</div> X' +
             '                       <div class="goods-price">$' + (this.items[itemKey].price / 100).toFixed(2) + '</div>' +
             '                 </div>');
@@ -109,6 +109,7 @@ Basket.prototype.addItem = function (idProduct) {
         dataType: 'json',
         context: this,
         success: function (data) {
+            console.log(data);
             if(data.result == 1){
                 this.loadBasketItems();
                 var $message = $('#addProduct');
@@ -117,8 +118,15 @@ Basket.prototype.addItem = function (idProduct) {
                     $message.slideUp();
                 }, 3000);
             }
-            else{
-                console.log("Товар не добавлен");
+            else if(data.result == 2){
+                var $message = $('#notAuth');
+                $message.slideDown();
+                setTimeout(function () {
+                    $message.slideUp();
+                }, 3000);
+            }
+            else {
+                console.log("товар не добавлен");
             }
         }
     });
@@ -134,6 +142,7 @@ Basket.prototype.deleteItem = function (idProduct) {
         dataType: 'json',
         context: this,
         success: function (data) {
+            console.log(data);
             if(data.result == 1){
                 this.loadBasketItems();
             }

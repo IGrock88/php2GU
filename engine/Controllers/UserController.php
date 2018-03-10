@@ -27,4 +27,9 @@ class UserController extends Controller
         $this->content['content'] = 'pages/account.tmpl';
         $this->view->generate($this->content);
     }
+
+    public function orders(){
+        $this->content['content'] = 'pages/orders.tmpl';
+        $this->view->generate($this->content);
+    }
 }

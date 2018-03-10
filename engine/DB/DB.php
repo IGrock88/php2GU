@@ -2,6 +2,7 @@
 
 
 namespace engine\DB;
+
 use engine\components\Singleton;
 
 class DB
@@ -55,21 +56,38 @@ class DB
 
     public function delete($table, $where = null)
     {
-        $sql = 'DELETE FROM '.$table;
-        if($where != null){
-            $sql = $sql .' WHERE '.$where;
+        $sql = 'DELETE FROM ' . $table;
+        if ($where != null) {
+            $sql = $sql . ' WHERE ' . $where;
         }
-        if(mysqli_query($this->connection, $sql)){
+        if (mysqli_query($this->connection, $sql)) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
-    public function update()
+    public function update($table, $rows, $where)
     {
-      //TODO: Доделать метод
+        $sql = 'UPDATE ' . $table . ' SET ';
+        $keys = array_keys($rows);
+        for ($i = 0; $i < count($rows); $i++) {
+            if (is_string($rows[$keys[$i]])) {
+                $sql .= $keys[$i] . '="' . $rows[$keys[$i]] . '"';
+            } else {
+                $sql .= $keys[$i] . '=' . $rows[$keys[$i]];
+            }
+            if ($i != count($rows) - 1) {
+                $sql .= ',';
+            }
+        }
+
+        $sql .= ' WHERE ' . $where;
+        if (mysqli_query($this->connection, $sql)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

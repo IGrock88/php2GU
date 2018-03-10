@@ -8,7 +8,6 @@ use engine\Models\GoodsModel;
 
 class GoodsController extends Controller
 {
-
     private $goodsModel;
 
     public function __construct()
@@ -19,9 +18,9 @@ class GoodsController extends Controller
 
     public function featureGoods()
     {
-        if(isset($_POST['featureGoods'])){
+        if(isset($this->request->getPostParams()['featureGoods'])){
 
-            $result['goods'] = $this->goodsModel->getFeatureGoods($_POST['featureGoods'], $_POST['startIndex']);
+            $result['goods'] = $this->goodsModel->getFeatureGoods($this->request->getPostParams()['featureGoods'], $this->request->getPostParams()['startIndex']);
             if($result['goods']){
                 $result['quantity'] = count($result['goods']);
                 echo json_encode($result);
@@ -31,14 +30,14 @@ class GoodsController extends Controller
             }
         }
         else{
-            echo json_encode("не удача");
+            echo json_encode(['result' => 2]);
         }
 
     }
 
     public function view()
     {
-        $this->content['selectedGoods'] = $this->goodsModel->getGoodsById(explode("/", $_SERVER['REQUEST_URI'])[3]);
+        $this->content['selectedGoods'] = $this->goodsModel->getGoodsById($this->request->getUrl()[3]);
         if($this->content['selectedGoods']){
             $this->content['content'] = 'pages/goods.tmpl';
             $this->content['recommendedProducts'] = $this->goodsModel->getFeatureGoods(4);

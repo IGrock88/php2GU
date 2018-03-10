@@ -5,11 +5,13 @@ namespace engine\Controllers;
 
 use engine\Models\AdminModel;
 use engine\Views\AdminView;
+use engine\Views\View;
 
 class AdminController extends Controller
 {
     protected $view;
     private $adminModel;
+    private $basisTmpl = "adminBase.tmpl";
 
     public function __construct()
     {
@@ -17,7 +19,7 @@ class AdminController extends Controller
         if ($this->content['user']->getRole() != 2) {
             header("location: /");
         }
-        $this->view = new AdminView();
+        $this->view = new View($this->basisTmpl);
         $this->adminModel = new AdminModel($this->db);
     }
 

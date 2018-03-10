@@ -6,6 +6,7 @@
             <h1 style="text-align: center">Личный кабинет</h1>
             <p class="welcome">Здравствуйте <strong class="userLogin">{{ user.getName }}</strong></p>
             <p class="userName">Ваш логин: {{ user.getLogin }}</p>
+            <p class="orders"><a href="/user/orders">Заказы</a></p>
         </main>
     {% else %}
         <main class="container account-info account-info__not_reg">

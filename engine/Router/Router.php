@@ -20,7 +20,7 @@ class Router
 {
     use Singleton;
     private $controllerDir = "engine/Controllers"; // путь к дериктории с контроллерами
-    private $mainControllerName = "MainController"; // основной контроллер, на него идёт перенаправление если не задан путь к контроллеру
+    private $mainControllerName = "Controller"; // основной контроллер, на него идёт перенаправление если не задан путь к контроллеру
     private $errorControllerName = "ErrorController"; // контроллер для обработки ошибок
     private $defaultMethod = "index"; //дефолтный метод в контроллере, на него будет перенаправление, если не задана третья часть пути отвечающая за выбор метода
     private $controllers = [];

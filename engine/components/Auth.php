@@ -11,12 +11,14 @@ class Auth
     private $user;
     private $db;
     private $isAuth = false;
+    private $requests;
 
 
-    public function __construct(DB $db)
+    public function __construct(DB $db, Request $request)
     {
         session_start();
         $this->db = $db;
+        $this->requests = $request;
         $this->init();
 
     }
@@ -33,7 +35,7 @@ class Auth
 
     private function init()
     {
-        if ($_POST['SubmitLogin'])   //Если попытка авторизации через форму, то пытаемся авторизоваться
+        if ($this->requests->getPostParams()['SubmitLogin'])   //Если попытка авторизации через форму, то пытаемся авторизоваться
         {
             $this->isAuth = $this->authWithCredential($_POST['login'], $_POST['pass']);
         }
@@ -45,7 +47,7 @@ class Auth
         {
             $this->isAuth = $this->checkAuthWithCookie();
         }
-        if ($_POST['ExitLogin'])
+        if ($this->requests->getPostParams()['ExitLogin'])
         {
             $this->isAuth = $this->userExit();
         }
@@ -89,7 +91,7 @@ class Auth
         {
             $passHash = $userDate['pass'];
             $id_user = $userDate['id_user'];
-            $idUserCookie = microtime(true) . rand(100,10000000000000);
+            $idUserCookie = microtime(true) . rand(100,1000000);
             if (password_verify($password, $passHash))
             {
 
@@ -97,7 +99,7 @@ class Auth
                 $_SESSION['IdUserSession'] = $idUserCookie;
                 $_SESSION['login'] = $userName;
                 $_SESSION['name'] = $userDate['name'];
-                $this->db->insert('users_auth', "id_user, hash_cookie, date, prim", [$id_user, $idUserCookie, "now()", '123456789']);
+                $this->db->insert('users_auth', "id_user, hash_cookie, prim", [$id_user, $idUserCookie, '123456789']);
                 $this->db->close();
                 $isAuth = true;
 

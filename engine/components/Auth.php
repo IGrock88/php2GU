@@ -11,12 +11,14 @@ class Auth
     private $user;
     private $db;
     private $isAuth = false;
+    private $requests;
 
 
     public function __construct(DB $db)
     {
         session_start();
         $this->db = $db;
+        $this->requests
         $this->init();
 
     }
@@ -89,7 +91,7 @@ class Auth
         {
             $passHash = $userDate['pass'];
             $id_user = $userDate['id_user'];
-            $idUserCookie = microtime(true) . rand(100,10000000000000);
+            $idUserCookie = microtime(true) . rand(100,1000000);
             if (password_verify($password, $passHash))
             {
 
@@ -97,7 +99,7 @@ class Auth
                 $_SESSION['IdUserSession'] = $idUserCookie;
                 $_SESSION['login'] = $userName;
                 $_SESSION['name'] = $userDate['name'];
-                $this->db->insert('users_auth', "id_user, hash_cookie, date, prim", [$id_user, $idUserCookie, "now()", '123456789']);
+                $this->db->insert('users_auth', "id_user, hash_cookie, prim", [$id_user, $idUserCookie, '123456789']);
                 $this->db->close();
                 $isAuth = true;
 

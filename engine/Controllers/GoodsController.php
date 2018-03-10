@@ -31,7 +31,7 @@ class GoodsController extends Controller
             }
         }
         else{
-            echo json_encode("не удача");
+            echo json_encode(['result' => 2]);
         }
 
     }

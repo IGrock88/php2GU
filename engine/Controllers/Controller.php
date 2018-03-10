@@ -13,6 +13,7 @@ class Controller
     protected $view;
     protected $content;
     protected $db;
+    private $basisTmpl = "base.tmpl";
 
     public function __construct()
     {
@@ -20,6 +21,6 @@ class Controller
         $auth = new Auth($this->db);
         $this->content['isAuth'] = $auth->isAuth();
         $this->content['user'] = $auth->getUser();
-        $this->view = new MainView();
+        $this->view = new View($this->basisTmpl);
     }
 }

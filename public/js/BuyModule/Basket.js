@@ -2,6 +2,7 @@
 //TODO: реализовать работу на стороне PHP
 
 function Basket(id) {
+    console.log("bas");
     this.id = id;
     this.items = [];
     this.countGoods = 0;
@@ -14,8 +15,8 @@ function Basket(id) {
 Basket.prototype.loadBasketItems = function () {
     $.ajax({
         type: 'POST',
-        url: '../index.php',
-        data: 'typeRequest=loadBasket',
+        url: '/basket/loadBasket',
+        data: 'basket:basket',
         dataType: 'json',
         context: this,
         success: function (data) {
@@ -58,11 +59,11 @@ Basket.prototype.refreshItemList = function () {
             class: 'live-card__item'
         });
 
-        var $itemImg = $('<a href="../goods/' + this.items[itemKey].id_product + '"><img  class="cart-goods-img" src="../'+ this.items[itemKey].img +'" alt="Goods photo"></a>');
+        var $itemImg = $('<a href="/goods/view/' + this.items[itemKey].id_product + '"><img  class="cart-goods-img" src="../../'+ this.items[itemKey].img +'" alt="Goods photo"></a>');
 
         var $itemCaption = $('<div class="live-card__item-caption">' +
-            '                       <h6><a href="../goods/' + this.items[itemKey].id_product + '">' + this.items[itemKey].title + '</a></h6>' +
-            '                       <div class="stars"><img src="../img/stars.png" alt="stars"></div>' +
+            '                       <h6><a href="/goods/view/' + this.items[itemKey].id_product + '">' + this.items[itemKey].title + '</a></h6>' +
+            '                       <div class="stars"><img src="../../img/stars.png" alt="stars"></div>' +
             '                       <div class="goods-quantity">' + this.items[itemKey].quantity + '</div> X' +
             '                       <div class="goods-price">$' + (this.items[itemKey].price / 100).toFixed(2) + '</div>' +
             '                 </div>');
@@ -103,8 +104,8 @@ Basket.prototype.setQuantity = function () {
 Basket.prototype.addItem = function (idProduct) {
     $.ajax({
         type: 'POST',
-        url: '../index.php',
-        data: 'typeRequest=addProduct&id_product=' + idProduct,
+        url: '/basket/addProduct',
+        data: 'id_product=' + idProduct,
         dataType: 'json',
         context: this,
         success: function (data) {
@@ -128,8 +129,8 @@ Basket.prototype.addItem = function (idProduct) {
 Basket.prototype.deleteItem = function (idProduct) {
     $.ajax({
         type: 'POST',
-        url: '../index.php',
-        data: 'typeRequest=delProduct&id_product=' + idProduct,
+        url: '/basket/deleteProduct',
+        data: 'id_product=' + idProduct,
         dataType: 'json',
         context: this,
         success: function (data) {

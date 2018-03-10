@@ -5,6 +5,12 @@ namespace engine\Views;
 
 class View
 {
+    private $basisPage;
+
+    public function __construct($basisPage)
+    {
+        $this->basisPage = $basisPage;
+    }
 
     public function generate($content)
     {
@@ -17,9 +23,8 @@ class View
             $template = $twig->loadTemplate($content['content']);
 
             echo $template->render($content);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo '<b>Мы не нашли шаблоны, но вот вам котики';
-
         }
     }
 }

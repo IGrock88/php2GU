@@ -19,7 +19,9 @@ class BasketController extends Controller
     public function addProduct()
     {
         if($this->content['isAuth']) {
-           $result = $this->basketModel->addProduct($this->request->getPostParams()['id_product'], $this->content['user']->getId());
+           $result = $this->basketModel->addProduct($this->request->getPostParams()['id_product'],
+                                                    $this->content['user']->getId(),
+                                                    $this->request->getPostParams()['productQuantity']);
            echo json_encode(["result" => $result]);
         }
         else{

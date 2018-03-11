@@ -118,6 +118,8 @@ Basket.prototype.calculateTotalPriceAndQuantity = function () {
 
 Basket.prototype.setTotalPrice = function () {
     $('#total-price').text('$' + (this.totalPrice / 100).toFixed(2));
+    $('#subtotalPrice').text('$' + (this.totalPrice / 100).toFixed(2));
+    $('#totalPrice').text('$' + (this.totalPrice / 100).toFixed(2));
 };
 
 Basket.prototype.setQuantity = function () {
@@ -131,11 +133,11 @@ Basket.prototype.setQuantity = function () {
     }
 };
 
-Basket.prototype.addItem = function (idProduct) {
+Basket.prototype.addItem = function (idProduct, productQuantity) {
     $.ajax({
         type: 'POST',
         url: '/basket/addProduct',
-        data: 'id_product=' + idProduct,
+        data: 'id_product=' + idProduct + '&productQuantity=' + productQuantity,
         dataType: 'json',
         context: this,
         success: function (data) {
@@ -146,14 +148,14 @@ Basket.prototype.addItem = function (idProduct) {
                 $message.slideDown();
                 setTimeout(function () {
                     $message.slideUp();
-                }, 3000);
+                }, 1000);
             }
             else if(data.result == 2){
                 var $message = $('#notAuth');
                 $message.slideDown();
                 setTimeout(function () {
                     $message.slideUp();
-                }, 3000);
+                }, 1000);
             }
             else {
                 console.log("товар не добавлен");
@@ -175,6 +177,11 @@ Basket.prototype.deleteItem = function (idProduct) {
             console.log(data);
             if(data.result == 1){
                 this.loadBasketItems();
+                var $message = $('#deleteProduct');
+                $message.slideDown();
+                setTimeout(function () {
+                    $message.slideUp();
+                }, 1000);
             }
             else{
                 console.log("Товар не удален");

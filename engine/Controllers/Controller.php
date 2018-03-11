@@ -27,9 +27,4 @@ class Controller
         $this->view = new View($this->basisTmpl);
     }
 
-    public function index()
-    {
-        $this->content['content'] = "pages/index.tmpl";
-        $this->view->generate($this->content);
-    }
 }

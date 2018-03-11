@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var basket = new Basket('live-card');
-
+    basket.renderBasketMenu();
 
     $('#show_more').on('click', function () {
         goods1.showMore();
@@ -12,12 +12,13 @@ $(document).ready(function () {
     });
 
     //слушатель для кнопок удаления из корзины
-    $('#live-card').on('click', '.delete__button', function () {
+    $('.basket_items').on('click', '.delete__button', function () {
         basket.deleteItem($(this).attr('data-id-product'));
     });
 
-    // TODO: доработать под движок PHP
-    $('#show-quantity-goods').change(function(){ // select для выбора количества отображаемых товаров на product.html
-        // goods2.render($(this).val());
+
+    $('#show-quantity-goods').change(function(){
+        $('#goods2').empty();
+        goods2.loadGoods(0, $(this).val());
     });
 });

@@ -530,7 +530,7 @@ header .flex-container:not(.container) {
     padding: 0 30px;
 }
 
-.subscribe button {
+.subscribe__button {
     width: 107px;
     height: 100%;
     border-radius: 0 23px 23px 0;
@@ -539,6 +539,15 @@ header .flex-container:not(.container) {
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.35px;
+}
+
+.subscribe__button_orders{
+    width: auto;
+    padding: 5px;
+}
+
+.subscribe__button_orders:hover{
+    background-color: #9f9f9f;
 }
 
 footer .logo {

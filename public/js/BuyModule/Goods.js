@@ -1,16 +1,19 @@
-function Goods(id, quantityGoods) {
+function Goods(id) {
     this.id = id;
     this.startIndex = 0;
-    this.quantityGoods = quantityGoods;
+    this.quantityGoods = 0;
     this.goods = [];
-    this.loadGoods();
+
 }
 
-Goods.prototype.loadGoods = function () {
+Goods.prototype.loadGoods = function (startIndex, quantityGoods) {
+
+    this.startIndex = startIndex;
+    this.quantityGoods = quantityGoods;
     $.ajax({
         type: 'POST',
         url: '/goods/featureGoods',
-        data: 'featureGoods='+ this.quantityGoods + '&startIndex=' + this.startIndex,
+        data: 'featureGoods='+ quantityGoods + '&startIndex=' + startIndex,
         context: this,
 
         success: function (data) {
@@ -27,18 +30,19 @@ Goods.prototype.loadGoods = function () {
                 for (var i = 0; i < data.quantity; i++){
                     this.goods.push(data.goods[i]);
                 }
-                this.render(this.quantityGoods + this.startIndex);
+                this.render(startIndex);
             }
         },
         dataType: 'JSON',
     });
 }
 
-Goods.prototype.render = function (endIndex) {
+Goods.prototype.render = function (startIndex) {
     var $container = $('#' + this.id);
-    $container.empty();
 
-    for(var i = 0; i < endIndex; i++){
+    var endIndex = startIndex + this.quantityGoods;
+
+    for(var i = startIndex; i < endIndex; i++){
         if(this.goods[i] === undefined) break;
         var $item = $('<figure />', {
             class: 'goods__item',
@@ -60,7 +64,7 @@ Goods.prototype.render = function (endIndex) {
 }
 
 Goods.prototype.showMore = function () {
-    this.loadGoods();
+    this.loadGoods(this.startIndex, this.quantityGoods);
 }
 
 

@@ -62,7 +62,7 @@ private $dbBasketTable = 'basket';
     private function loadBasketGoods($idUser)
     {
         $this->db->connect();
-        $basketDate = $this->db->select("select b.id_product, b.quantity, g.price, g.img, g.title from $this->dbBasketTable as b
+        $basketDate = $this->db->select("select b.id_product, b.quantity, g.price, g.img, g.title   from $this->dbBasketTable as b
                                           JOIN goods as g ON b.id_product=g.id_product
                                           where id_user='$idUser'");
         $totalQuantity = 0;

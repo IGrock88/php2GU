@@ -23,13 +23,16 @@ class UserController extends Controller
         $this->view->generate($this->content);
     }
 
-    public function account(){
+    public function account()
+    {
         $this->content['content'] = 'pages/account.tmpl';
         $this->view->generate($this->content);
     }
 
-    public function orders(){
+    public function orders()
+    {
         $this->content['content'] = 'pages/orders.tmpl';
         $this->view->generate($this->content);
     }
+
 }

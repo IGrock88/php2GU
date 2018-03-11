@@ -24,7 +24,7 @@ private $dbBasketTable = 'basket';
         ]);
     }
 
-    public function addProduct($idProduct, $idUser){
+    public function addProduct($idProduct, $idUser, $quantity){
 
         $this->db->connect();
         $productDate = $this->db->select("select * from $this->dbBasketTable where id_product='$idProduct' AND id_user='$idUser'")[0];
@@ -32,10 +32,10 @@ private $dbBasketTable = 'basket';
 
         if($productDate){
 
-            $result = $this->updateProduct($idProduct, $idUser, ++$productDate['quantity']);
+            $result = $this->updateProduct($idProduct, $idUser, ($quantity + $productDate['quantity']));
         }
         else{
-            $result = $this->insertProduct($idProduct, $idUser);
+            $result = $this->insertProduct($idProduct, $idUser, $quantity);
         }
         $this->db->close();
         return $result;
@@ -55,16 +55,16 @@ private $dbBasketTable = 'basket';
         return $this->db->update($this->dbBasketTable, ['quantity' => $quantity], "id_product=$idProduct and id_user=$idUser");
     }
 
-    private function insertProduct($idProduct, $idUser, $quantity = 1){
+    private function insertProduct($idProduct, $idUser, $quantity){
         return $this->db->insert($this->dbBasketTable, "id_product, quantity, id_user", [$idProduct, $quantity, $idUser]);
     }
 
     private function loadBasketGoods($idUser)
     {
         $this->db->connect();
-        $basketDate = $this->db->select("select b.id_product, b.quantity, g.price, g.img, g.title   from $this->dbBasketTable as b
+        $basketDate = $this->db->select("select b.id_product, b.quantity, g.price, g.img, g.title, b.id_order  from $this->dbBasketTable as b
                                           JOIN goods as g ON b.id_product=g.id_product
-                                          where id_user='$idUser'");
+                                          where id_user='$idUser' AND id_order is null");
         $totalQuantity = 0;
         for ($i = 0; $i < count($basketDate); $i++) {
             $totalQuantity += $basketDate[$i]['quantity'];

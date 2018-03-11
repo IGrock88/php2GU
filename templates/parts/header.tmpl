@@ -3,10 +3,7 @@
 
 {% include 'parts/head.tmpl' %}
 <body>
-<div id="dialog" title="Сообщение">
-    <p id="addProduct">Товар добавлен в корзину</p>
-    <p id="notAuth">Вы не авторизованы, пожалуйста войдите под своим логином и паролем</p>
-</div>
+{% include 'parts/topMessage.tmpl' %}
 <header class="header">
     <div class="container flex-container">
         <a href="/" class="logo header__logo">

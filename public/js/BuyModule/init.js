@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var DEFAULT_QUANTITY_PRODUCT_ADD_TO_BASKET = 1;
     var basket = new Basket('live-card');
     basket.renderBasketMenu();
 
@@ -6,9 +7,9 @@ $(document).ready(function () {
         goods1.showMore();
     });
 
-    // слушатели для кнопок добавления в корзину
+    // слушатели для кнопок добавления в корзину в фигурах
     $('.goods').on('click', '.buy_button', function () {
-        basket.addItem($(this).parent().attr('data-id-product'));
+        basket.addItem($(this).parent().attr('data-id-product'), DEFAULT_QUANTITY_PRODUCT_ADD_TO_BASKET);
     });
 
     //слушатель для кнопок удаления из корзины

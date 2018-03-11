@@ -1,15 +1,44 @@
 // Класс реализующий работу корзины,
-//TODO: реализовать работу на стороне PHP
 
 function Basket(id) {
-    console.log("bas");
     this.id = id;
     this.items = [];
     this.countGoods = 0;
     this.totalPrice = 0;
+}
+
+Basket.prototype.renderBasketMenu = function () {
     this.render();
     this.setQuantity();
     this.loadBasketItems();
+}
+
+Basket.prototype.renderBasketPage = function () {
+    var $container = $('#basketItems');
+    $container.empty();
+    console.log(this.items);
+    for(var itemKey in this.items){
+        var goodsPrice = (this.items[itemKey].price / 100).toFixed(2);
+        $container.append('<tr>' +
+            '                <td>' +
+            '                    <figure class="item-characteristics flex-container">' +
+            '                        <a href="/goods/view/' + this.items[itemKey].id_product + '"><img src="../../'+ this.items[itemKey].img +'" alt="photo"></a>' +
+            '                        <figcaption>' +
+            '                            <h6><a href="/goods/view/' + this.items[itemKey].id_product + '">' + this.items[itemKey].title + '</a></h6>' +
+            '                        </figcaption>' +
+            '                    </figure>' +
+            '                </td>' +
+            '                <td><div class="item-price">$' + (this.items[itemKey].price / 100).toFixed(2) + '</div></td>' +
+            '                <td><input class="item-quantity" type="number" min="1" value="' + this.items[itemKey].quantity + '"></td>' +
+            '                <td class="hide-515px">' +
+            '                    <output class="ship">FREE</output>' +
+            '                </td>' +
+            '                <td><output class="subtotal-price">$ ' + (this.items[itemKey].price * this.items[itemKey].quantity / 100).toFixed(2) + '</output></td>' +
+            '                <td><button class="delete__button" data-id-product='+ this.items[itemKey].id_product +'></button></td>' +
+            '             </tr>');
+    }
+
+
 }
 
 Basket.prototype.loadBasketItems = function () {
@@ -27,6 +56,7 @@ Basket.prototype.loadBasketItems = function () {
             }
             this.countGoods = data.total_quantity;
             this.refreshItemList();
+            this.renderBasketPage();
         }
     });
 };

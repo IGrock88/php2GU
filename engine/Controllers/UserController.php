@@ -3,22 +3,16 @@
 namespace engine\Controllers;
 
 
+use engine\Models\BasketModel;
 use engine\Models\UserModel;
 
 class UserController extends Controller
 {
 
-    private $userModel;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->userModel = new UserModel($this->db);
-    }
-
     public function registration()
     {
-        $this->content['regStatus'] = $this->userModel->runRegistration();
+        $userModel = new UserModel($this->db);
+        $this->content['regStatus'] = $userModel->runRegistration();
         $this->content['content'] = 'pages/registration.tmpl';
         $this->view->generate($this->content);
     }
@@ -33,6 +27,14 @@ class UserController extends Controller
     {
         $this->content['content'] = 'pages/orders.tmpl';
         $this->view->generate($this->content);
+    }
+
+    public function ajaxCheckout(){
+        $userModel = new UserModel($this->db);
+        if($userModel->checkout($this->content['user']->getId())){
+            echo json_encode(["result" => JSON_SUCCESS]);
+        }
+
     }
 
 }

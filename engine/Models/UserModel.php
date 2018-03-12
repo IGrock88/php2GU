@@ -13,4 +13,19 @@ class UserModel extends Model
         $registration->init();
         return $registration->getRegStatus();
     }
+
+    public function checkout($idUser){
+        $basketModel = new BasketModel($this->db);
+        $basketPrice = $basketModel->getBasketTotalPrice($idUser);
+        $result= 0;
+
+        if($basketPrice){
+            $link = $this->db->connect();
+            $this->db->insert("orders", "id_user, amount", [$idUser, $basketPrice]);
+            $orderId = mysqli_insert_id($link);
+            $result = $basketModel->updateOrder($orderId, $idUser);
+        }
+        return $result;
+
+    }
 }

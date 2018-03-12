@@ -290,7 +290,7 @@ section.also-like .goods figure {
 }
 
 @media screen and (min-width: 768px)  {
-    #add-to-cart [type="submit"]:after, #add-to-cart [type="submit"]:before{
+    #add-to-cart #buy_button:after, #add-to-cart #buy_button:before{
         content: "";
         display: block;
         width: 100%;
@@ -304,26 +304,26 @@ section.also-like .goods figure {
         transition: transform 0.3s, background-color 0s 0.3s, -webkit-transform 0.3s;
     }
 
-    #add-to-cart [type="submit"]:after{
+    #add-to-cart #buy_button:after{
         top: 98%;
         -webkit-transform: rotate(90deg) scaleX(0.105) translate(-255px,-270px);
                 transform: rotate(90deg) scaleX(0.105) translate(-255px,-270px);
     }
 
-    #add-to-cart [type="submit"]:before{
+    #add-to-cart #buy_button:before{
         -webkit-transform: rotate(90deg) scaleX(0.105) translate(259px,270px);
                 transform: rotate(90deg) scaleX(0.105) translate(259px,270px);
         top: 0;
     }
 
-    #add-to-cart [type="submit"]:hover{
+    #add-to-cart #buy_button:hover{
         border-left-color: transparent;
         border-right-color: transparent;
         -webkit-transition: none;
         transition: none;
     }
 
-    #add-to-cart [type="submit"]:hover:after, #add-to-cart [type="submit"]:hover:before{
+    #add-to-cart #buy_button:hover:after, #add-to-cart #buy_button:hover:before{
         -webkit-transform: rotate(0) scaleX(1) translate(0);
                 transform: rotate(0) scaleX(1) translate(0);
         -webkit-animation: hover-button 0.3s 200ms forwards;
@@ -338,7 +338,7 @@ section.also-like .goods figure {
 }
 
 @media screen and (max-width: 768px){
-    #add-to-cart [type="submit"]:hover{
+    #add-to-cart #buy_button:hover{
         -webkit-animation: hover-button 0.6s 400ms forwards;
                 animation: hover-button 0.6s 400ms forwards;
         -webkit-transition: none;

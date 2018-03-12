@@ -9,6 +9,7 @@ class BasketController extends Controller
 {
 
     private $basketModel;
+    const NOT_AUTH_STATUS = 2;
 
     public function __construct()
     {
@@ -25,7 +26,7 @@ class BasketController extends Controller
            echo json_encode(["result" => $result]);
         }
         else{
-            echo json_encode(["result" => 2]);
+            echo json_encode(["result" => NOT_AUTH_STATUS]);
             //TODO: сделать корзину для не авторизованных пользователй с помощью куки
         }
     }

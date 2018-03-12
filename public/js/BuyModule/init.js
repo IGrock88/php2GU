@@ -12,9 +12,17 @@ $(document).ready(function () {
         basket.addItem($(this).parent().attr('data-id-product'), DEFAULT_QUANTITY_PRODUCT_ADD_TO_BASKET);
     });
 
+    $('#buy_button').on('click', function () {
+        var quantity = $('#quantity').val();
+        basket.addItem($(this).attr('data-id-product'), quantity);
+    })
     //слушатель для кнопок удаления из корзины
     $('.basket_items').on('click', '.delete__button', function () {
         basket.deleteItem($(this).attr('data-id-product'));
+    });
+
+    $('#final-checkout').on('click', function () {
+        basket.checkout();
     });
 
 

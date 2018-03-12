@@ -37,8 +37,6 @@ Basket.prototype.renderBasketPage = function () {
             '                <td><button class="delete__button" data-id-product='+ this.items[itemKey].id_product +'></button></td>' +
             '             </tr>');
     }
-
-
 }
 
 Basket.prototype.loadBasketItems = function () {
@@ -185,6 +183,33 @@ Basket.prototype.deleteItem = function (idProduct) {
             }
             else{
                 console.log("Товар не удален");
+            }
+        }
+    });
+}
+
+Basket.prototype.checkout = function () {
+    $.ajax({
+        type: 'POST',
+        url: '/user/ajaxCheckout',
+        data: 'basket: basket',
+        dataType: 'json',
+        context: this,
+        beforeSend: function () {
+
+        },
+        success: function (data) {
+            console.log(data);
+            if(data.result == 1){
+                this.loadBasketItems();
+                var $message = $('#successCheckout');
+                $message.slideDown();
+                setTimeout(function () {
+                    $message.slideUp();
+                }, 3000);
+            }
+            else{
+                alert("Что то пошло не так заказ не оформлен повторите попозже");
             }
         }
     });

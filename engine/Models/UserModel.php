@@ -5,6 +5,7 @@ namespace engine\Models;
 
 use engine\components\Registration;
 use engine\components\Auth;
+use engine\DB\DB;
 
 class UserModel extends Model
 {
@@ -26,6 +27,18 @@ class UserModel extends Model
             $result = $basketModel->updateOrder($orderId, $idUser);
         }
         return $result;
-
     }
+
+    public function getOrdersByUser($idUser)
+    {
+        $this->db->connect();
+        $result = $this->db->select("select * from orders as o
+                                          JOIN order_status as os ON o.id_order_status=os.id_order_status
+                                          WHERE id_user = $idUser");
+        $this->db->close();
+        return $result;
+    }
+
+
+
 }

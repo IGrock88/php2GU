@@ -1,11 +1,29 @@
 {% extends basesTmpl %}
 
 {% block content %}
-
-<div class="container">
-    <h1>Ваши заказы</h1>
-    <div class="flex-container orders">
-
+    <div class="container">
+        <h1>Ваши заказы</h1>
+        <table class="orders">
+            <tr>
+                <td>Номер заказа</td>
+                <td>Дата заказа</td>
+                <td>Сумма</td>
+                <td>Статус</td>
+                <td>Действие</td>
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td><p class="order__title">{{ order.id_order }}</p></td>
+                    <td><p class="order__time">{{ order.datetime_create }}</p></td>
+                    <td><p class="order__amount">$ {{ (order.amount / 100) }}</p></td>
+                    <td><p class="order__status">{{ order.order_status_name }}</p></td>
+                    <td><a class="show-order" href="/user/order/{{ order.id_order }}">Посмотреть </a>
+                        <a class="show-order" href="/user/delorder/{{ order.id_order }}"> Удалить</a>
+                    </td>
+                </tr>
+            {% else %}
+                <h3>У вас нет заказов</h3>
+            {% endfor %}
+        </table>
     </div>
-</div>
 {% endblock %}

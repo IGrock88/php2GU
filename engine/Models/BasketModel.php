@@ -14,6 +14,17 @@ class BasketModel extends Model
 
     private $dbBasketTable = 'basket';
 
+    public function deleteOrderById($idOrder, $idUser)
+    {
+        $this->db->connect();
+        $result = $this->db->delete($this->dbBasketTable, "id_order=$idOrder and id_user=$idUser");
+        if($result){
+            $result = $this->db->delete("orders", "id_order=$idOrder and id_user=$idUser");
+        }
+        $this->db->close();
+        return $result;
+    }
+
     public function getBasketTotalPrice($idUser)
     {
         $this->db->connect();
@@ -38,7 +49,7 @@ class BasketModel extends Model
     {
 
         $this->db->connect();
-        $productDate = $this->db->select("select * from $this->dbBasketTable where id_product='$idProduct' AND id_user='$idUser' id_order is null")[0];
+        $productDate = $this->db->select("select * from $this->dbBasketTable where id_product='$idProduct' AND id_user='$idUser' AND id_order is null")[0];
         $this->db->close();
         $result = 0;
         if ($productDate) {
@@ -65,7 +76,7 @@ class BasketModel extends Model
     public function updateProduct($idProduct, $idUser, $quantity)
     {
         $this->db->connect();
-        $result = $this->db->update($this->dbBasketTable, ['quantity' => $quantity], "id_product=$idProduct and id_user=$idUser id_order is null");
+        $result = $this->db->update($this->dbBasketTable, ['quantity' => $quantity], "id_product=$idProduct and id_user=$idUser and id_order is null");
         $this->db->close();
         return $result;
     }

@@ -17,4 +17,12 @@ class AdminModel extends Model
         $this->db->close();
         return $result;
     }
+
+    public function deleteOrderById($idOrder)
+    {
+        $this->db->connect();
+        $result = $this->db->delete("basket", "id_order=$idOrder");
+        $this->db->close();
+        return $result;
+    }
 }

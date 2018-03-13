@@ -550,6 +550,23 @@ header .flex-container:not(.container) {
     background-color: #9f9f9f;
 }
 
+.orders{
+    margin-bottom: 50px;
+}
+
+.order{
+    justify-content: space-between;
+    align-items: center;
+}
+
+.show-order:hover{
+color: #f16d7f;
+}
+
+.orders td:first-child{
+    width: auto;
+}
+
 footer .logo {
     margin: 0 0 29px;
 }

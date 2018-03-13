@@ -4,6 +4,7 @@ namespace engine\Controllers;
 
 
 use engine\Models\BasketModel;
+use engine\Models\OrderModel;
 use engine\Models\UserModel;
 
 class UserController extends Controller
@@ -25,23 +26,30 @@ class UserController extends Controller
 
     public function orders()
     {
-        $userModel = new UserModel($this->db);
+        $orderModel = new OrderModel($this->db);
         $this->content['content'] = 'pages/orders.tmpl';
-        $this->content['orders'] = $userModel->getOrdersByUser($this->content['user']->getId());
+        $this->content['orders'] = $orderModel->getOrdersByUser($this->content['user']->getId());
         $this->view->generate($this->content);
     }
 
     public function order()
     {
-        $basketModel = new BasketModel($this->db);
-
+        $orderModel = new OrderModel($this->db);
+        $this->content['content'] = 'pages/single-order.tmpl';
+        $this->content['singleOrder'] = $orderModel->loadOrderById($this->content['user']->getId(), $this->request->getUrl()[3]);
+        $totalPriceOrder = 0;
+        foreach ($this->content['singleOrder'] as $key => $item){
+            $totalPriceOrder = $totalPriceOrder + ($item['price'] * $item['quantity']);
+        }
+        $this->content['totalPriceOrder'] = $totalPriceOrder;
+        $this->view->generate($this->content);
     }
 
     public function delorder()
     {
         if($this->content['isAuth']){
-            $basketModel = new BasketModel($this->db);
-            $basketModel->deleteOrderById($this->request->getUrl()[3], $this->content['user']->getId());
+            $orderModel = new OrderModel($this->db);
+            $orderModel->deleteOrderById($this->request->getUrl()[3], $this->content['user']->getId());
             header("location: /user/orders");
         }
     }

@@ -1,0 +1,46 @@
+{% extends basesTmpl %}
+
+{% block content %}
+    <div class="container checkout userOrder">
+    <a href="/user/orders" class="button">Назад к заказам</a>
+    <table>
+        <thead class="cart-list-head">
+        <tr class="">
+            <td><h5>Product Details</h5></td>
+            <td><h5>unite Price</h5></td>
+            <td><h5>Quantity</h5></td>
+            <td class="hide-515px"><h5>shipping</h5></td>
+            <td><h5>Subtotal</h5></td>
+        </tr>
+        </thead>
+        <tbody class="cart-list-items basket_items">
+        {% for orderItem in singleOrder %}
+            <tr>
+                <td>
+                    <figure class="item-characteristics flex-container"><a href="/goods/view/{{ orderItem.id_product }}"><img
+                                    src="../../{{ orderItem.img }}" alt="photo"></a>
+                        <figcaption><h6><a href="/goods/view/18">{{ orderItem.title }}</a></h6></figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <div class="item-price">${{ orderItem.price / 100 }}</div>
+                </td>
+                <td><input class="item-quantity" type="number" min="1" value="{{ orderItem.quantity }}" readonly></td>
+                <td class="hide-515px">
+                    <output class="ship">FREE</output>
+                </td>
+                <td>
+                    <output class="subtotal-price">$ {{ orderItem.quantity * orderItem.price / 100 }}</output>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="total-price">
+        <div class="final-price">TOTAL PRICE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<output id="total">${{ totalPriceOrder / 100 }}
+            </output>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

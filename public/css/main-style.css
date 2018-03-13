@@ -554,6 +554,10 @@ header .flex-container:not(.container) {
     margin-bottom: 50px;
 }
 
+.userOrder{
+    margin-bottom: 50px;
+}
+
 .order{
     justify-content: space-between;
     align-items: center;

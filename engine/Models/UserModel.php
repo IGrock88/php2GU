@@ -29,16 +29,4 @@ class UserModel extends Model
         return $result;
     }
 
-    public function getOrdersByUser($idUser)
-    {
-        $this->db->connect();
-        $result = $this->db->select("select * from orders as o
-                                          JOIN order_status as os ON o.id_order_status=os.id_order_status
-                                          WHERE id_user = $idUser");
-        $this->db->close();
-        return $result;
-    }
-
-
-
 }

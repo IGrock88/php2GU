@@ -14,16 +14,6 @@ class BasketModel extends Model
 
     private $dbBasketTable = 'basket';
 
-    public function deleteOrderById($idOrder, $idUser)
-    {
-        $this->db->connect();
-        $result = $this->db->delete($this->dbBasketTable, "id_order=$idOrder and id_user=$idUser");
-        if($result){
-            $result = $this->db->delete("orders", "id_order=$idOrder and id_user=$idUser");
-        }
-        $this->db->close();
-        return $result;
-    }
 
     public function getBasketTotalPrice($idUser)
     {

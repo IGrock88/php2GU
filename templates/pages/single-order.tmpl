@@ -3,6 +3,7 @@
 {% block content %}
     <div class="container checkout userOrder">
     <a href="/user/orders" class="button">Назад к заказам</a>
+        <h2>Заказ номер <span style="color: #f16d7f">{{ singleOrder[0].id_order }}</span></h2>
     <table>
         <thead class="cart-list-head">
         <tr class="">
@@ -25,7 +26,7 @@
                 <td>
                     <div class="item-price">${{ orderItem.price / 100 }}</div>
                 </td>
-                <td><input class="item-quantity" type="number" min="1" value="{{ orderItem.quantity }}" readonly></td>
+                <td>{{ orderItem.quantity }}</td>
                 <td class="hide-515px">
                     <output class="ship">FREE</output>
                 </td>

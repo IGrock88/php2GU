@@ -24,9 +24,12 @@ class UserModel extends Model
             $link = $this->db->connect();
             $this->db->insert("orders", "id_user, amount", [$idUser, $basketPrice]);
             $orderId = mysqli_insert_id($link);
-            $result = $basketModel->updateOrder($orderId, $idUser);
+            $orderModel = new OrderModel($this->db);
+            $result = $orderModel->updateOrder($orderId, $idUser);
         }
         return $result;
     }
+
+
 
 }

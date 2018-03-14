@@ -11,6 +11,9 @@ namespace engine\Models;
 
 class AdminModel extends Model
 {
+    private $approvedOrderStatus = 2;
+    private $notApprovedOrderStatus = 1;
+
     public function getOrders(){
         $this->db->connect();
         $result = $this->db->select("select * from orders");
@@ -21,8 +24,32 @@ class AdminModel extends Model
     public function deleteOrderById($idOrder)
     {
         $this->db->connect();
-        $result = $this->db->delete("basket", "id_order=$idOrder");
+        $result = $this->db->delete("orders", "id_order=$idOrder");
+        if($result){
+            $result = $this->db->delete("basket", "id_order=$idOrder");
+        }
         $this->db->close();
         return $result;
+    }
+
+    public function approveOrder($idOrder)
+    {
+        $this->db->connect();
+        $result = $this->db->update("orders",['id_order_status' => $this->approvedOrderStatus], "id_order=$idOrder");
+        $this->db->close();
+        return $result;
+    }
+
+    public function cancelApproveOrder($idOrder)
+    {
+        $this->db->connect();
+        $result = $this->db->update("orders",['id_order_status' => $this->notApprovedOrderStatus], "id_order=$idOrder");
+        $this->db->close();
+        return $result;
+    }
+
+    public function showOrderDetail($idOrder)
+    {
+
     }
 }

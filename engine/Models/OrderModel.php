@@ -41,4 +41,12 @@ class OrderModel extends Model
         $this->db->close();
         return $result;
     }
+
+    public function updateOrder($idOder, $idUser)
+    {
+        $this->db->connect();
+        $result = $this->db->update('basket', ['id_order' => $idOder], "id_user=$idUser and id_order is null");
+        $this->db->close();
+        return $result;
+    }
 }

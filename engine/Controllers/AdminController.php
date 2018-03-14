@@ -37,9 +37,46 @@ class AdminController extends Controller
 
     public function getOrders()
     {
-        $result['orders'] = $this->adminModel->getOrders();
-        $result['orders_quantity'] = count($result['orders']);
+        $ordersDate = $this->adminModel->getOrders();
+        $result['orders'] = $ordersDate;
+        $result['orders_quantity'] = count($ordersDate);
         echo json_encode($result);
+    }
+
+    public function deleteOrder()
+    {
+        if($this->adminModel->deleteOrderById($this->request->getPostParams()['idOrder'])){
+            echo json_encode(['result' => JSON_SUCCESS]);
+        }
+        else{
+            echo json_encode(['result' => JSON_FAILURE]);
+        }
+    }
+
+    public function approveOrder()
+    {
+        if($this->adminModel->approveOrder($this->request->getPostParams()['idOrder'])){
+            echo json_encode(['result' => JSON_SUCCESS]);
+        }
+        else{
+            echo json_encode(['result' => JSON_FAILURE]);
+        }
+    }
+
+    public function cancelApproveOrder()
+    {
+        if($this->adminModel->cancelApproveOrder($this->request->getPostParams()['idOrder'])){
+            echo json_encode(['result' => JSON_SUCCESS]);
+        }
+        else{
+            echo json_encode(['result' => JSON_FAILURE]);
+        }
+    }
+
+    public function showOrderDetail()
+    {
+        $ordersDate = $this->adminModel->showOrderDetail($this->request->getPostParams()['idOrder']);
+
     }
 
 }

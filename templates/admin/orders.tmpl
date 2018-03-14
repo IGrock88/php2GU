@@ -7,7 +7,31 @@
 </div>
 <script>
     var orders = new Orders('orders');
-    orders.render();
+    orders.load();
+    var flag = true;
+
+    var $ordersButton = $('#orders');
+    $ordersButton.on('click', '.order_del', function () {
+        orders.deleteOrder($(this).parent().attr('data-id-order'));
+    });
+    $ordersButton.on('click', '.order__approve', function () {
+        orders.approveOrder($(this).parent().attr('data-id-order'));
+    });
+    $ordersButton.on('click', '.order__disApprove', function () {
+        orders.disApproveOrder($(this).parent().attr('data-id-order'));
+    });
+    $ordersButton.on('click', '.order__show', function () {
+        if(flag){
+            $('#order' + $(this).parent().attr('data-id-order')).slideDown();
+            flag = false;
+        }else {
+            $('#order' + $(this).parent().attr('data-id-order')).slideUp();
+            flag = true;
+        }
+
+    });
+
+
 </script>
 
     {% endblock %}

@@ -71,14 +71,6 @@ class BasketModel extends Model
         return $result;
     }
 
-    public function updateOrder($idOder, $idUser)
-    {
-        $this->db->connect();
-        $result = $this->db->update($this->dbBasketTable, ['id_order' => $idOder], "id_user=$idUser and id_order is null");
-        $this->db->close();
-        return $result;
-    }
-
     private function insertProduct($idProduct, $idUser, $quantity)
     {
         $this->db->connect();

@@ -50,6 +50,11 @@ class AdminModel extends Model
 
     public function showOrderDetail($idOrder)
     {
-
+        $this->db->connect();
+        $result = $this->db->select("select b.id_product, b.quantity, g.price, g.img, g.title, b.id_order  from basket as b
+                                          JOIN goods as g ON b.id_product=g.id_product
+                                          where id_order='$idOrder'");
+        $this->db->close();
+        return $result;
     }
 }

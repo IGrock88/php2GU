@@ -45,30 +45,27 @@ class AdminController extends Controller
 
     public function deleteOrder()
     {
-        if($this->adminModel->deleteOrderById($this->request->getPostParams()['idOrder'])){
+        if ($this->adminModel->deleteOrderById($this->request->getPostParams()['idOrder'])) {
             echo json_encode(['result' => JSON_SUCCESS]);
-        }
-        else{
+        } else {
             echo json_encode(['result' => JSON_FAILURE]);
         }
     }
 
     public function approveOrder()
     {
-        if($this->adminModel->approveOrder($this->request->getPostParams()['idOrder'])){
+        if ($this->adminModel->approveOrder($this->request->getPostParams()['idOrder'])) {
             echo json_encode(['result' => JSON_SUCCESS]);
-        }
-        else{
+        } else {
             echo json_encode(['result' => JSON_FAILURE]);
         }
     }
 
     public function cancelApproveOrder()
     {
-        if($this->adminModel->cancelApproveOrder($this->request->getPostParams()['idOrder'])){
+        if ($this->adminModel->cancelApproveOrder($this->request->getPostParams()['idOrder'])) {
             echo json_encode(['result' => JSON_SUCCESS]);
-        }
-        else{
+        } else {
             echo json_encode(['result' => JSON_FAILURE]);
         }
     }
@@ -76,7 +73,15 @@ class AdminController extends Controller
     public function showOrderDetail()
     {
         $ordersDate = $this->adminModel->showOrderDetail($this->request->getPostParams()['idOrder']);
-
+        if ($ordersDate) {
+            $result['orderDetail'] = $ordersDate;
+            $result['quantity'] = count($ordersDate);
+            $result['result'] = JSON_SUCCESS;
+            echo json_encode($result);
+        } else {
+            $result['result'] = JSON_FAILURE;
+            echo json_encode($result);
+        }
     }
 
 }

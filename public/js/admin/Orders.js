@@ -1,8 +1,6 @@
 function Orders(id) {
     this.id = id;
     this.orders = [];
-    this.orderDetail = [];
-    this.isShowDetail = false;
     this.quantity = 0;
 }
 
@@ -22,9 +20,9 @@ Orders.prototype.load = function () {
             this.render();
 
         },
-        dataType: 'JSON',
+        dataType: 'JSON'
     });
-}
+};
 
 Orders.prototype.render = function () {
     var $container = $('#' + this.id);
@@ -46,13 +44,13 @@ Orders.prototype.render = function () {
         else if(this.orders[i].id_order_status == 1){
             $content.append('<a class="button is-primary order__approve">Одобрить</a>');
         }
-        $content.append('<a class="button is-link order__show">Посмотреть заказ</a>', '<a class="button is-danger order_del">Удалить</a>');
+        $content.append('<a class="button is-link order__show">Посмотреть заказ</a>', '<a class="button is-link order__hide">Скрыть заказ</a>' , '<a class="button is-danger order_del">Удалить</a>');
         $order.append($content);
-        $order.append('<div id="order' + this.orders[i].id_order + '" class="show_detail" style="display: none"></div>');
+        $order.append('<div id="order_' + this.orders[i].id_order + '" class="show_detail" style="display: none"></div>');
         $container.append($order);
 
     }
-}
+};
 
 Orders.prototype.deleteOrder = function (idOrder) {
     $.ajax({
@@ -67,9 +65,9 @@ Orders.prototype.deleteOrder = function (idOrder) {
                 this.load();
             }
         },
-        dataType: 'JSON',
+        dataType: 'JSON'
     });
-}
+};
 
 Orders.prototype.approveOrder = function (idOrder) {
     $.ajax({
@@ -84,9 +82,9 @@ Orders.prototype.approveOrder = function (idOrder) {
                 this.load();
             }
         },
-        dataType: 'JSON',
+        dataType: 'JSON'
     });
-}
+};
 
 Orders.prototype.disApproveOrder = function (idOrder) {
     $.ajax({
@@ -100,22 +98,8 @@ Orders.prototype.disApproveOrder = function (idOrder) {
                 this.load();
             }
         },
-        dataType: 'JSON',
+        dataType: 'JSON'
     });
-}
+};
 
-Orders.prototype.getDetail = function (idOrder) {
-    $.ajax({
-        type: 'POST',
-        url: '/admin/showOrderDetail',
-        context: this,
-        data: "idOrder=" + idOrder,
-        success: function (data) {
-            console.log(data);
-            if(data.result == 1){
-                this.load();
-            }
-        },
-        dataType: 'JSON',
-    });
-}
+

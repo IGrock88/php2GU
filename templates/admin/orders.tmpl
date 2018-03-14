@@ -1,37 +1,29 @@
 {% extends basesTmpl %}
 
     {% block content %}
+        <div id="orders">
 
-<div id="orders">
+        </div>
+        <script>
+            var orders = new Orders('orders');
+            var singleOrder = new SingleOrder();
+            orders.load();
 
-</div>
-<script>
-    var orders = new Orders('orders');
-    orders.load();
-    var flag = true;
-
-    var $ordersButton = $('#orders');
-    $ordersButton.on('click', '.order_del', function () {
-        orders.deleteOrder($(this).parent().attr('data-id-order'));
-    });
-    $ordersButton.on('click', '.order__approve', function () {
-        orders.approveOrder($(this).parent().attr('data-id-order'));
-    });
-    $ordersButton.on('click', '.order__disApprove', function () {
-        orders.disApproveOrder($(this).parent().attr('data-id-order'));
-    });
-    $ordersButton.on('click', '.order__show', function () {
-        if(flag){
-            $('#order' + $(this).parent().attr('data-id-order')).slideDown();
-            flag = false;
-        }else {
-            $('#order' + $(this).parent().attr('data-id-order')).slideUp();
-            flag = true;
-        }
-
-    });
-
-
-</script>
-
+            var $ordersButton = $('#orders');
+            $ordersButton.on('click', '.order_del', function () {
+                orders.deleteOrder($(this).parent().attr('data-id-order'));
+            });
+            $ordersButton.on('click', '.order__approve', function () {
+                orders.approveOrder($(this).parent().attr('data-id-order'));
+            });
+            $ordersButton.on('click', '.order__disApprove', function () {
+                orders.disApproveOrder($(this).parent().attr('data-id-order'));
+            });
+            $ordersButton.on('click', '.order__show', function () {
+                singleOrder.getDetail($(this).parent().attr('data-id-order'));
+            });
+            $ordersButton.on('click', '.order__hide', function () {
+                singleOrder.hideDetail($(this).parent().attr('data-id-order'));
+            });
+        </script>
     {% endblock %}

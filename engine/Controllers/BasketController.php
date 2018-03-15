@@ -19,13 +19,12 @@ class BasketController extends Controller
 
     public function addProduct()
     {
-        if($this->content['isAuth']) {
-           $result = $this->basketModel->addProduct($this->request->getPostParams()['id_product'],
-                                                    $this->content['user']->getId(),
-                                                    $this->request->getPostParams()['productQuantity']);
-           echo json_encode(["result" => $result]);
-        }
-        else{
+        if ($this->content['isAuth']) {
+            $result = $this->basketModel->addProduct($this->request->getPostParams()['id_product'],
+                $this->content['user']->getId(),
+                $this->request->getPostParams()['productQuantity']);
+            echo json_encode(["result" => $result]);
+        } else {
             echo json_encode(["result" => NOT_AUTH_STATUS]);
             //TODO: сделать корзину для не авторизованных пользователй с помощью куки
         }
@@ -33,21 +32,19 @@ class BasketController extends Controller
 
     public function loadBasket()
     {
-        if($this->content['isAuth']) {
+        if ($this->content['isAuth']) {
             echo $this->basketModel->getJSONBasket($this->content['user']->getId());
-        }
-        else{
+        } else {
             //TODO: сделать корзину для не авторизованных пользователй с помощью куки
         }
     }
 
     public function deleteProduct()
     {
-        if($this->content['isAuth']) {
-            $result = $this->basketModel->delProduct($this->request->getPostParams()['id_product'] ,$this->content['user']->getId());
+        if ($this->content['isAuth']) {
+            $result = $this->basketModel->delProduct($this->request->getPostParams()['id_product'], $this->content['user']->getId());
             echo json_encode(["result" => $result]);
-        }
-        else{
+        } else {
             //TODO: сделать корзину для не авторизованных пользователй с помощью куки
         }
     }
@@ -62,5 +59,20 @@ class BasketController extends Controller
     {
         $this->content['content'] = 'pages/cart.tmpl';
         $this->view->generate($this->content);
+    }
+
+    public function ajaxChangeQuantity()
+    {
+        $productQuantity = $this->request->getPostParams()['productQuantity'];
+        if($productQuantity >= 0){
+            $result = $this->basketModel->updateProduct($this->request->getPostParams()['id_product'],
+                                                        $this->content['user']->getId(),
+                                                        $productQuantity);
+            echo json_encode(["result" => $result]);
+        }
+        else{
+            echo json_encode(["result" => JSON_WRONG]);
+        }
+
     }
 }

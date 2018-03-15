@@ -30,4 +30,23 @@ $(document).ready(function () {
         $('#goods2').empty();
         goods2.loadGoods(0, $(this).val());
     });
+
+    $('.basket_items').on('change', '.item-quantity', function () {
+        var quantity = parseInt($(this).val());
+        if(quantity > 0){
+
+            basket.changeQuantity($(this).attr('data-id-product'), quantity);
+        }
+        else if(quantity === 0){
+            basket.deleteItem($(this).attr('data-id-product'));
+        }
+        else {
+            var $message = $('#negativeQuantity');
+            $message.slideDown();
+            setTimeout(function () {
+                $message.slideUp();
+            }, 500);
+            basket.loadBasketItems();
+        }
+    });
 });

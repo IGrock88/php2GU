@@ -44,7 +44,7 @@ Orders.prototype.render = function () {
         else if(this.orders[i].id_order_status == 1){
             $content.append('<a class="button is-primary order__approve">Одобрить</a>');
         }
-        $content.append('<a class="button is-link order__show">Посмотреть заказ</a>', '<a class="button is-link order__hide">Скрыть заказ</a>' , '<a class="button is-danger order_del">Удалить</a>');
+        $content.append('<a class="button is-link order__show">Посмотреть детали</a>', '<a class="button is-link order__hide">Скрыть детали</a>' , '<a class="button is-danger order_del">Удалить</a>');
         $order.append($content);
         $order.append('<div id="order_' + this.orders[i].id_order + '" class="show_detail" style="display: none"></div>');
         $container.append($order);

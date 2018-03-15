@@ -55,8 +55,7 @@ class BasketModel extends Model
     {
         $sql = "delete from basket WHERE id_product='$idProduct' AND id_user='$idUser' AND id_order is null";
         $this->db->connect();
-        $this->db->delete($this->dbBasketTable, "id_product=$idProduct AND id_user=$idUser");
-        if ($this->db->delete($this->dbBasketTable, "id_product=$idProduct AND id_user=$idUser")) {
+        if ($this->db->delete($this->dbBasketTable, "id_product=$idProduct AND id_user=$idUser AND id_order is null")) {
             return true;
         }
         $this->db->close();

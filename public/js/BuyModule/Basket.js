@@ -29,7 +29,7 @@ Basket.prototype.renderBasketPage = function () {
             '                    </figure>' +
             '                </td>' +
             '                <td><div class="item-price">$' + (this.items[itemKey].price / 100).toFixed(2) + '</div></td>' +
-            '                <td><input class="item-quantity" type="number" min="1" value="' + this.items[itemKey].quantity + '"></td>' +
+            '                <td><input class="item-quantity" type="number" min="0" value="' + this.items[itemKey].quantity + '" data-id-product="'+ this.items[itemKey].id_product +'"></td>' +
             '                <td class="hide-515px">' +
             '                    <output class="ship">FREE</output>' +
             '                </td>' +
@@ -214,3 +214,38 @@ Basket.prototype.checkout = function () {
         }
     });
 }
+
+Basket.prototype.changeQuantity = function (idProduct, productQuantity) {
+    console.log(idProduct, productQuantity);
+
+    $.ajax({
+        type: 'POST',
+        url: '/basket/ajaxChangeQuantity',
+        data: 'id_product=' + idProduct + '&productQuantity=' + productQuantity,
+        dataType: 'json',
+        context: this,
+        success: function (data) {
+            console.log(data);
+            if(data.result == 1){
+                this.loadBasketItems();
+                var $message = $('#changeQuantity');
+                $message.slideDown();
+                setTimeout(function () {
+                    $message.slideUp();
+                }, 500);
+            }
+            else if(data.result == 2){
+                var $message = $('#negativeQuantity');
+                $message.slideDown();
+                setTimeout(function () {
+                    $message.slideUp();
+                }, 500);
+            }
+            else {
+                console.log("Количество не изменено");
+            }
+        }
+    });
+
+
+};

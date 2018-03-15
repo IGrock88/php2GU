@@ -58,7 +58,6 @@ SingleOrder.prototype.render = function (idOrder) {
         '      <th>Цена товара</th>' +
         '      <th>Количество товара</th>' +
         '      <th>Сумма</th>' +
-        '      <th>Действие</th>' +
         '    </tr>' +
         '  </thead>' +
         '</table>');
@@ -75,7 +74,6 @@ SingleOrder.prototype.render = function (idOrder) {
                        '      <td>' +(this.orderDetail[i].price / 100).toFixed(2) + '</td>' +
                        '      <td>' + this.orderDetail[i].quantity + '</td>' +
                        '      <td>' + (this.orderDetail[i].price * this.orderDetail[i].quantity / 100).toFixed(2) + '</td>' +
-                       '      <td>Удалить</td>' +
                        '   </tr>');
 
     }

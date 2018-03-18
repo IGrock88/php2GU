@@ -206,12 +206,15 @@ main form.options fieldset:nth-child(3) div.costrange:nth-of-type(3) {
 }
 
 main > .goods.flex-container {
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+
+            justify-content: flex-start;
 }
 
-.goods.flex-container > figure {
+figure.goods__item{
+    margin: auto 22px 36px 0;
+}
+
+figure.goods__item:nth-child(3n){
     margin: auto 0 36px 0;
 }
 
@@ -255,6 +258,24 @@ font-weight: 400;
     outline: none;
 }
 
+@media only screen and (max-width: 1214px){
+    figure.goods__item:nth-child(3n){
+        margin: auto 22px 36px 0;
+    }
+}
+
+@media only screen and (max-width: 1155px){
+    figure.goods__item{
+        margin: auto 0 36px 0;
+    }
+    main > .goods.flex-container{
+        justify-content: space-between;
+    }
+    figure.goods__item:nth-child(3n){
+        margin: auto 0 36px 0;
+    }
+}
+
 @media only screen and (max-width: 1024px){
     .flex-container > aside{
         -ms-flex-preferred-size: 100%;
@@ -265,7 +286,38 @@ font-weight: 400;
         -ms-flex-preferred-size: 100%;
             flex-basis: 100%;
     }
+
+    figure.goods__item{
+        margin: auto 22px 36px 0;
+    }
+
+    figure.goods__item:nth-child(3n){
+        margin: auto 0 36px 0;
+    }
+
+    main > .goods.flex-container{
+        justify-content: flex-start;
+    }
 }
+
+@media screen and (max-width: 918px){
+
+    figure.goods__item:nth-child(3n){
+        margin: auto 22px 36px 0;
+    }
+}
+
+@media screen and (max-width: 874px){
+    main > .goods.flex-container{
+        justify-content: space-between;
+    }
+
+    figure.goods__item{
+        margin: auto 22px 36px 0;
+    }
+
+}
+
 
 @media screen and (max-width: 585px){
     main > .goods.flex-container{

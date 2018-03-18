@@ -1047,7 +1047,7 @@ main > section header p {
     -ms-flex-preferred-size: 266px;
         flex-basis: 266px;
     height: 367px;
-    margin: auto auto 36px auto;
+    margin: auto 0 36px 0;
     position: relative;
 
 }

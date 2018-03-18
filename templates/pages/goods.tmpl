@@ -1,9 +1,15 @@
 {% extends basesTmpl %}
 
+{% block head %}
+    {{ parent() }}
+    <link rel="stylesheet" href="../../css/styles-for-singlepage.css">
+    <link rel="stylesheet" href="../../css/singlepage-slider.css">
+{% endblock %}
+
 {% block content %}
     {% include "parts/breadcrumbs.tmpl" %}
 
-    {% include "parts/single-item.tmpl"%}
+    {% include "parts/single-item.tmpl" %}
 
     {% include "parts/recommended-goods.tmpl" %}
 {% endblock %}

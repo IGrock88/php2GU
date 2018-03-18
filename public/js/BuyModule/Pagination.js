@@ -1,4 +1,4 @@
-function GoodsByCategory(id, idCategory) {
+function Pagination(id, idCategory) {
     this.id = id;
     this.quantityGoods = 0;
     this.quantityOnPage = 0;
@@ -8,11 +8,11 @@ function GoodsByCategory(id, idCategory) {
     this.isSuccessAjax = false;
 }
 
-GoodsByCategory.prototype.setQuantityOnPage = function (quantityOnPage) {
+Pagination.prototype.setQuantityOnPage = function (quantityOnPage) {
     this.quantityOnPage = quantityOnPage;
 }
 
-GoodsByCategory.prototype.loadGoodsByCategory = function (startIndex) {
+Pagination.prototype.loadGoodsByCategory = function (startIndex) {
 
     $.ajax({
         type: 'POST',
@@ -21,7 +21,6 @@ GoodsByCategory.prototype.loadGoodsByCategory = function (startIndex) {
         context: this,
         async: false,
         success: function (data) {
-            console.log(data);
             this.goods = [];
 
             this.quantityGoods = data.quantity;
@@ -43,7 +42,7 @@ GoodsByCategory.prototype.loadGoodsByCategory = function (startIndex) {
     return this.isSuccessAjax;
 };
 
-GoodsByCategory.prototype.render = function () {
+Pagination.prototype.render = function () {
 
     var $container = $('#' + this.id);
     $container.empty();
@@ -68,7 +67,7 @@ GoodsByCategory.prototype.render = function () {
     }
 };
 
-GoodsByCategory.prototype.initPaginator = function initPaginator() {
+Pagination.prototype.initPaginator = function initPaginator() {
     $("#light-pagination").pagination({
         items: this.totalQuantity,
         itemsOnPage: this.quantityOnPage,

@@ -173,10 +173,10 @@
     </div>
     <script>
         var $idCategory = $('#light-pagination').attr('data-id-category');
-        var goodsByCategory = new GoodsByCategory('goods2', $idCategory);
-        goodsByCategory.setQuantityOnPage(9);
-        goodsByCategory.loadGoodsByCategory(0);
-        goodsByCategory.initPaginator();
+        var pagination = new Pagination('goods2', $idCategory);
+        pagination.setQuantityOnPage(9);
+        pagination.loadGoodsByCategory(0);
+        pagination.initPaginator();
 
     </script>
     {% include "parts/comercials.tmpl" %}

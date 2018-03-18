@@ -312,8 +312,7 @@
 					$link = $('<span >' + (options.text) + '</span>');
 				}
 				$link.click(function(event){
-				    console.log(pageIndex);
-                    if(goodsByCategory.loadGoodsByCategory(pageIndex))
+                    if(pagination.loadGoodsByCategory(pageIndex))
 					    return methods._selectPage.call(self, pageIndex, event);
 				});
 			}

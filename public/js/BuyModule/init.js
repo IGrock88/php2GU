@@ -29,9 +29,9 @@ $(document).ready(function () {
         $('#goods2').empty();
         var quantity = parseInt($(this).val());
 
-        goodsByCategory.setQuantityOnPage(quantity);
-        goodsByCategory.loadGoodsByCategory(0);
-        goodsByCategory.initPaginator();
+        pagination.setQuantityOnPage(quantity);
+        pagination.loadGoodsByCategory(0);
+        pagination.initPaginator();
 
     });
 

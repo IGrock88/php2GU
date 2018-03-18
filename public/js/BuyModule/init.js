@@ -54,4 +54,9 @@ $(document).ready(function () {
         }
     });
 
+    $('#showAll').on('click', function () {
+       pagination.loadGoodsAll();
+        $(this).hide();
+    });
+
 });

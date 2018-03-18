@@ -42,6 +42,13 @@ Pagination.prototype.loadGoodsByCategory = function (startIndex) {
     return this.isSuccessAjax;
 };
 
+Pagination.prototype.loadGoodsAll = function () {
+    this.quantityOnPage = this.totalQuantity;
+    this.loadGoodsByCategory(0);
+    $("#light-pagination").hide();
+
+};
+
 Pagination.prototype.render = function () {
 
     var $container = $('#' + this.id);

@@ -1269,7 +1269,7 @@ section > a button > i {
     color: #ef5b70;
 }
 
-.paginator + a {
+#showAll {
     width: 153px;
     height: 47px;
     border-radius: 3px;
@@ -1278,7 +1278,6 @@ section > a button > i {
     color: #ef5b70;
     font-size: 16px;
     font-weight: 300;
-    line-height: 47px;
     text-align: center;
 }
 

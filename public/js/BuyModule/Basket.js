@@ -16,7 +16,6 @@ Basket.prototype.renderBasketMenu = function () {
 Basket.prototype.renderBasketPage = function () {
     var $container = $('#basketItems');
     $container.empty();
-    console.log(this.items);
     for(var itemKey in this.items){
         var goodsPrice = (this.items[itemKey].price / 100).toFixed(2);
         $container.append('<tr>' +
@@ -48,7 +47,6 @@ Basket.prototype.loadBasketItems = function () {
         context: this,
         success: function (data) {
             this.items = [];
-            console.log(data);
             for (var itemKey in data.basket){
                 this.items.push(data.basket[itemKey]);
             }

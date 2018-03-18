@@ -64,7 +64,7 @@ main form legend {
 }
 
 
-main form {
+.options, .sort {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -73,7 +73,7 @@ main form {
     margin-bottom: 40px;
 }
 
-main form fieldset {
+main .options fieldset {
     width: 266px;
     height: 93px;
     padding: 0;
@@ -81,21 +81,21 @@ main form fieldset {
     position: relative;
 }
 
-main form fieldset .flex-container {
+main .options fieldset .flex-container {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
 }
 
-main form.options fieldset:first-child {
+main .options fieldset:first-child {
     width: 198px;
     margin-right: 91px;
 }
 
-main form.options fieldset:last-child {
+main .options fieldset:last-child {
     margin-right: 0;
 }
 
-main form.options fieldset:first-child input {
+main .options fieldset:first-child input {
     color: #6f6e6e;
     font-size: 14px;
     font-weight: 400;
@@ -108,14 +108,17 @@ main form.options fieldset:first-child input {
     cursor: pointer;
 }
 
-main form.options fieldset:first-child input:hover{
+main .options fieldset:first-child input:hover{
     color: #f16d7f;
 }
 
-main form.options fieldset:first-child input:last-child {
+main .options fieldset:first-child input:last-child {
     border-right: none;
 }
 
+#quantityGoods{
+    margin: 0;
+}
 
 .breadcrumb + .flex-container {
     -ms-flex-wrap: wrap;
@@ -242,7 +245,7 @@ font-weight: 400;
     padding-top: 6px;
 }
 
-form.sort div select {
+.sort div select {
     border: none;
 	border-left: 1px solid #ef5b70;
     padding-bottom: 2px;

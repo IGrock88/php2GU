@@ -10,6 +10,7 @@ use engine\DB\DB;
 class GoodsModel extends Model
 {
     private $goodsTable = "goods";
+    const DEFAULT_SHOW_CATEGORY_GOODS = 9;
 
     public function getFeatureGoods($quantityGoods, $startIndex = 0)
     {
@@ -32,10 +33,18 @@ class GoodsModel extends Model
         return $result[0];
     }
 
-    public function getGoodsByCategory($idCategory)
+    public function getGoodsByCategory($idCategory, $startIndex = 0, $quantity = SELF::DEFAULT_SHOW_CATEGORY_GOODS)
     {
         $this->db->connect();
-        $result = $this->db->select("select * from $this->goodsTable WHERE id_category=$idCategory");
+        $result = $this->db->select("select * from $this->goodsTable WHERE id_category=$idCategory limit $startIndex, $quantity");
+        $this->db->close();
+        return $result;
+    }
+
+    public function getGoodsQuantityByCategory($idCategory)
+    {
+        $this->db->connect();
+        $result = $this->db->select("SELECT count(*) as quantity FROM goods WHERE id_category=$idCategory")[0]['quantity'];
         $this->db->close();
         return $result;
     }

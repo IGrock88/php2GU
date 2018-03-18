@@ -25,10 +25,14 @@ $(document).ready(function () {
         basket.checkout();
     });
 
-
     $('#show-quantity-goods').change(function(){
         $('#goods2').empty();
-        goods2.loadGoods(0, $(this).val());
+        var quantity = parseInt($(this).val());
+
+        goodsByCategory.setQuantityOnPage(quantity);
+        goodsByCategory.loadGoodsByCategory(0);
+        goodsByCategory.initPaginator();
+
     });
 
     $('.basket_items').on('change', '.item-quantity', function () {
@@ -49,4 +53,5 @@ $(document).ready(function () {
             basket.loadBasketItems();
         }
     });
+
 });

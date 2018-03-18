@@ -89,7 +89,7 @@ p {
 }
 
 button,
-input[type="submit"], label {
+input[type="submit"], label, .page-link {
     cursor: pointer;
 }
 
@@ -1230,7 +1230,6 @@ section > a button > i {
 }
 
 .paginator {
-    min-width: 264px;
     height: 47px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1244,10 +1243,23 @@ section > a button > i {
     padding: 0 17px;
 }
 
-.paginator a, .paginator span {
+.paginator li, .paginator .a {
     color: #c4c4c4;
-    margin-left: auto;
+    margin: 0 0 0 5px;
+    padding: 1px 0 0 0;
+    display: inline-block;
+    background-color: transparent;
 }
+
+.paginator li:first-child{
+    margin: 0;
+}
+
+.paginator span{
+    display: inline;
+}
+
+
 
 .paginator .active {
     color: #ef5b70;
@@ -1272,10 +1284,6 @@ section > a button > i {
 
 .paginator span {
     margin: 0;
-}
-
-.paginator :nth-last-child(2), .paginator :first-child {
-    margin-left: 0;
 }
 
 .comercial-list {

@@ -20,7 +20,7 @@ class BasketController extends Controller
                 $quantity);
             echo json_encode(["result" => $result]);
         } else {
-            echo json_encode(["result" => NOT_AUTH_STATUS]);
+            echo json_encode(["result" => self::NOT_AUTH_STATUS]);
             //TODO: сделать корзину для не авторизованных пользователй с помощью куки
         }
     }

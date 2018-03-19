@@ -1,18 +1,28 @@
 {% extends basesTmpl %}
 
+{% block head %}
+    {{ parent() }}
+    <link rel="stylesheet" href="../../css/styles-for-checkout.css">
+{% endblock %}
+
 {% block content %}
     {% include "parts/breadcrumbs.tmpl" %}
     <section class="container flex-container checkout">
         <ul class="checkout__stages stages">
             <li class="checkout__stage stage">
-                <input name="change-stage" class="checkbox" id="address" type="radio" checked><label class="stage__head-label head-label" for="address">01.&nbsp;&nbsp;&nbsp;Shipping Adress</label>
+                <input name="change-stage" class="checkbox" id="address" type="radio" checked><label
+                        class="stage__head-label head-label" for="address">01.&nbsp;&nbsp;&nbsp;Shipping Adress</label>
                 <div class="checkout__pane pane">
                     <div class="column pane__column">
                         <h2 class="pane__head-title">Check as a guest or register</h2>
                         <p>Register with us for future convenience</p>
                         <form class="checkout__form" action="#">
-                            <input name="checkout-way" class="checkbox pane__checkbox" id="checkout-guest" type="radio"><label class="pane__label label pane__label_radio" for="checkout-guest">checkout as guest</label>
-                            <input name="checkout-way" class="checkbox pane__checkbox" id="checkout-register" type="radio"><label class="pane__label label pane__label_radio" for="checkout-register">register</label>
+                            <input name="checkout-way" class="checkbox pane__checkbox" id="checkout-guest" type="radio"><label
+                                    class="pane__label label pane__label_radio" for="checkout-guest">checkout as
+                                guest</label>
+                            <input name="checkout-way" class="checkbox pane__checkbox" id="checkout-register"
+                                   type="radio"><label class="pane__label label pane__label_radio"
+                                                       for="checkout-register">register</label>
                         </form>
                         <h2 class="pane__head-title">register and save time!</h2>
                         <p>Register with us for future convenience</p>
@@ -26,8 +36,12 @@
                         <h2 class="pane__head-title">Already registed?</h2>
                         <p>Please log in below</p>
                         <form class="checkout__form" action="#">
-                            <label for="email" class="pane__label label required">EMAIL ADDRESS</label><input class="text-input checkout__text-input" id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
-                            <label for="pass" class="pane__label label pass required">PASSWORD</label><input class="text-input checkout__text-input" id="pass" type="password" pattern="[A-Za-z0-9]{6,}" required>
+                            <label for="email" class="pane__label label required">EMAIL ADDRESS</label><input
+                                    class="text-input checkout__text-input" id="email" type="email"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                            <label for="pass" class="pane__label label pass required">PASSWORD</label><input
+                                    class="text-input checkout__text-input" id="pass" type="password"
+                                    pattern="[A-Za-z0-9]{6,}" required>
                             <span>* Required Fileds</span>
                             <button class="button column__button" type="submit">Log in</button>
                             <a href="#">Forgot Password ?</a>
@@ -37,23 +51,33 @@
                 </div>
             </li>
             <li class="checkout__stage stage">
-                <input name="change-stage" class="checkbox" id="billing" type="radio"><label class="stage__head-label head-label" for="billing">02.&nbsp;&nbsp;&nbsp;Billing information</label>
+                <input name="change-stage" class="checkbox" id="billing" type="radio"><label
+                        class="stage__head-label head-label" for="billing">02.&nbsp;&nbsp;&nbsp;Billing
+                    information</label>
                 <div class="checkout__pane pane"></div>
             </li>
             <li class="checkout__stage stage">
-                <input name="change-stage" class="checkbox" id="ship-info" type="radio"><label class="stage__head-label head-label" for="ship-info">03.&nbsp;&nbsp;&nbsp;Shipping information</label>
+                <input name="change-stage" class="checkbox" id="ship-info" type="radio"><label
+                        class="stage__head-label head-label" for="ship-info">03.&nbsp;&nbsp;&nbsp;Shipping
+                    information</label>
                 <div class="checkout__pane pane"></div>
             </li>
             <li class="checkout__stage stage">
-                <input name="change-stage" class="checkbox" id="ship-method" type="radio"><label class="stage__head-label head-label" for="ship-method">04.&nbsp;&nbsp;&nbsp;SHIPPING METHOD</label>
+                <input name="change-stage" class="checkbox" id="ship-method" type="radio"><label
+                        class="stage__head-label head-label" for="ship-method">04.&nbsp;&nbsp;&nbsp;SHIPPING
+                    METHOD</label>
                 <div class="checkout__pane pane"></div>
             </li>
             <li class="checkout__stage stage">
-                <input name="change-stage" class="checkbox" id="pay-method" type="radio"><label class="stage__head-label head-label" for="pay-method">05.&nbsp;&nbsp;&nbsp;PAYMENT METHOD</label>
+                <input name="change-stage" class="checkbox" id="pay-method" type="radio"><label
+                        class="stage__head-label head-label" for="pay-method">05.&nbsp;&nbsp;&nbsp;PAYMENT
+                    METHOD</label>
                 <div class="checkout__pane pane"></div>
             </li>
             <li class="checkout__stage stage">
-                <input name="change-stage" class="checkbox" id="order-review" type="radio"><label class="stage__head-label head-label" for="order-review">06.&nbsp;&nbsp;&nbsp;ORDER REVIEW</label>
+                <input name="change-stage" class="checkbox" id="order-review" type="radio"><label
+                        class="stage__head-label head-label" for="order-review">06.&nbsp;&nbsp;&nbsp;ORDER
+                    REVIEW</label>
                 <div class="checkout__pane pane"></div>
             </li>
         </ul>

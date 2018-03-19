@@ -130,6 +130,9 @@ Basket.prototype.setQuantity = function () {
 };
 
 Basket.prototype.addItem = function (idProduct, productQuantity) {
+    if(productQuantity > 0){
+
+
     $.ajax({
         type: 'POST',
         url: '/basket/addProduct',
@@ -158,6 +161,14 @@ Basket.prototype.addItem = function (idProduct, productQuantity) {
             }
         }
     });
+    }
+    else {
+        var $message = $('#negativeQuantity');
+        $message.slideDown();
+        setTimeout(function () {
+            $message.slideUp();
+        }, 500);
+    }
 
 
 };

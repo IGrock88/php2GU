@@ -9,19 +9,29 @@ class CategoryController extends Controller
 {
     private $categoryes = [
       "men" => 2,
-      "women" => 1
+      "women" => 1,
+        "kids" => 3
     ];
 
 
-    public function man(){
+    public function men(){
         $this->content['content'] = 'pages/category.tmpl';
         $this->content['idCategory'] = $this->categoryes['men'];
+        $this->content['breadCrumbCategory'] = 'men';
         $this->view->generate($this->content);
     }
 
     public function women(){
         $this->content['content'] = 'pages/category.tmpl';
         $this->content['idCategory'] = $this->categoryes['women'];
+        $this->content['breadCrumbCategory'] = 'women';
+        $this->view->generate($this->content);
+    }
+
+    public function kids(){
+        $this->content['content'] = 'pages/category.tmpl';
+        $this->content['idCategory'] = $this->categoryes['kids'];
+        $this->content['breadCrumbCategory'] = 'kids';
         $this->view->generate($this->content);
     }
 

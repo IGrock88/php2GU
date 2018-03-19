@@ -35,6 +35,9 @@ class GoodsController extends Controller
         if($this->content['selectedGoods']){
             $this->content['content'] = 'pages/goods.tmpl';
             $this->content['recommendedProducts'] = $goodsModel->getFeatureGoods(4);
+            $category = $this->content['selectedGoods']['category'];
+            $category = substr($category, 0, stripos($category, "Collection"));
+            $this->content['breadCrumbCategory'] = $category;
             $this->view->generate($this->content);
         }
         else{

@@ -12,7 +12,7 @@ class View
         $this->basisPage = $basisPage;
     }
 
-    public function generate($content)
+    public function generate(array $content)
     {
         \Twig_Autoloader::register();
         $content['basesTmpl'] = $this->basisPage;

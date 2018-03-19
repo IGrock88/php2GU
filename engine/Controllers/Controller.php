@@ -24,8 +24,6 @@ class Controller
         $auth = new Auth($this->db, $this->request);
         $this->content['isAuth'] = $auth->isAuth();
         $this->content['user'] = $auth->getUser();
-        $this->content['breadCrumbCategory'] = $this->request->getUrl()[1];
-        $this->content['breadCrumbMethod'] = $this->request->getUrl()[2];
         $this->view = new View($this->basisTmpl);
     }
 

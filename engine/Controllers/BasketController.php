@@ -13,10 +13,11 @@ class BasketController extends Controller
     public function addProduct()
     {
         $basketModel = new BasketModel($this->db);
-        if ($this->content['isAuth']) {
+        $quantity = $this->request->getPostParams()['productQuantity'];
+        if ($this->content['isAuth'] && $quantity > 0) {
             $result = $basketModel->addProduct($this->request->getPostParams()['id_product'],
                 $this->content['user']->getId(),
-                $this->request->getPostParams()['productQuantity']);
+                $quantity);
             echo json_encode(["result" => $result]);
         } else {
             echo json_encode(["result" => NOT_AUTH_STATUS]);

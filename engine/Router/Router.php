@@ -15,10 +15,12 @@ namespace engine\Router;
 */
 
 use engine\components\Singleton;
+use engine\Views\TwigRender;
 
 class Router
 {
     use Singleton;
+
     private $controllerDir = "engine/Controllers"; // путь к дериктории с контроллерами
     private $mainControllerName = "MainController"; // основной контроллер, на него идёт перенаправление если не задан путь к контроллеру
     private $errorControllerName = "ErrorController"; // контроллер для обработки ошибок
@@ -38,7 +40,7 @@ class Router
 
         if(isset($this->controllers[$controllerPath])){
             $controller = 'engine\\controllers\\' . $this->controllers[$controllerPath];
-            $controllerObj = new $controller();
+            $controllerObj = new $controller(new TwigRender());
             if(method_exists($controllerObj, $method)){
                 $controllerObj->$method();
                 exit(); //если успешно подгружен нужный класс и метод завершаем выполнение

@@ -14,20 +14,16 @@ class Controller
     protected $content;
     protected $db;
     protected $request;
-    protected $basisTmpl = "base.tmpl";
+    protected $render;
 
-    public function __construct()
+    public function __construct(IRender $render)
     {
         $this->db = DB::getInstance();
         $this->request = new Request();
         $auth = new Auth($this->db, $this->request);
         $this->content['isAuth'] = $auth->isAuth();
         $this->content['user'] = $auth->getUser();
-    }
-
-    protected function render(IRender $render)
-    {
-        $render->render($this->content);
+        $this->render = $render;
     }
 
 }

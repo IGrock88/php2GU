@@ -15,6 +15,6 @@ class MainController extends Controller
     public function index()
     {
         $this->content['content'] = "pages/index.tmpl";
-        $this->render(new TwigRender($this->basisTmpl));
+        $this->render->render($this->content);
     }
 }

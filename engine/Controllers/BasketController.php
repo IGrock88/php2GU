@@ -50,13 +50,13 @@ class BasketController extends Controller
     public function checkout()
     {
         $this->content['content'] = 'pages/checkout.tmpl';
-        $this->render(new TwigRender($this->basisTmpl));
+        $this->render->render($this->content);
     }
 
     public function cart()
     {
         $this->content['content'] = 'pages/cart.tmpl';
-        $this->render(new TwigRender($this->basisTmpl));
+        $this->render->render($this->content);
     }
 
     public function ajaxChangeQuantity()

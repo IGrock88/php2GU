@@ -11,4 +11,5 @@ namespace engine\Views;
 interface IRender
 {
     public function render(array $content);
+    public function setBaseTmpl($basisTemplate);
 }

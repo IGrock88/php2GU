@@ -15,13 +15,13 @@ class UserController extends Controller
         $userModel = new UserModel($this->db);
         $this->content['regStatus'] = $userModel->runRegistration();
         $this->content['content'] = 'pages/registration.tmpl';
-        $this->render(new TwigRender($this->basisTmpl));
+        $this->render->render($this->content);
     }
 
     public function account()
     {
         $this->content['content'] = 'pages/account.tmpl';
-        $this->render(new TwigRender($this->basisTmpl));
+        $this->render->render($this->content);
     }
 
     public function orders()
@@ -29,7 +29,7 @@ class UserController extends Controller
         $orderModel = new OrderModel($this->db);
         $this->content['content'] = 'pages/orders.tmpl';
         $this->content['orders'] = $orderModel->getOrdersByUser($this->content['user']->getId());
-        $this->render(new TwigRender($this->basisTmpl));
+        $this->render->render($this->content);
     }
 
     public function order()
@@ -38,25 +38,26 @@ class UserController extends Controller
         $this->content['content'] = 'pages/single-order.tmpl';
         $this->content['singleOrder'] = $orderModel->loadOrderById($this->content['user']->getId(), $this->request->getUrl()[3]);
         $totalPriceOrder = 0;
-        foreach ($this->content['singleOrder'] as $key => $item){
+        foreach ($this->content['singleOrder'] as $key => $item) {
             $totalPriceOrder = $totalPriceOrder + ($item['price'] * $item['quantity']);
         }
         $this->content['totalPriceOrder'] = $totalPriceOrder;
-        $this->render(new TwigRender($this->basisTmpl));
+        $this->render->render($this->content);
     }
 
     public function delorder()
     {
-        if($this->content['isAuth']){
+        if ($this->content['isAuth']) {
             $orderModel = new OrderModel($this->db);
             $orderModel->deleteOrderById($this->request->getUrl()[3], $this->content['user']->getId());
             header("location: /user/orders");
         }
     }
 
-    public function ajaxCheckout(){
+    public function ajaxCheckout()
+    {
         $userModel = new UserModel($this->db);
-        if($userModel->checkout($this->content['user']->getId())){
+        if ($userModel->checkout($this->content['user']->getId())) {
             echo json_encode(["result" => JSON_SUCCESS]);
         }
 

@@ -7,7 +7,7 @@ class TwigRender implements IRender
 {
     private $basisTemplate;
 
-    public function __construct($basisTemplate)
+    public function __construct($basisTemplate = "base.tmpl")
     {
         $this->basisTemplate = $basisTemplate;
     }
@@ -26,5 +26,10 @@ class TwigRender implements IRender
         } catch (\Exception $e) {
             echo '<b>Мы не нашли шаблоны, но вот вам котики';
         }
+    }
+
+    public function setBaseTmpl($basisTemplate)
+    {
+        $this->basisTemplate = $basisTemplate;
     }
 }

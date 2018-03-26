@@ -5,33 +5,33 @@ namespace engine\Controllers;
 
 use engine\Models\AdminModel;
 use engine\Views\AdminView;
-use engine\Views\TwigRender;
+use engine\Views\IRender;
 
 class AdminController extends Controller
 {
     private $adminModel;
     protected $basisTmpl = "adminBase.tmpl";
 
-    public function __construct()
+    public function __construct(IRender $render)
     {
-        parent::__construct();
+        parent::__construct($render);
         if ($this->content['user']->getRole() != 2) {
             header("location: /");
         }
-        $this->view = new TwigRender($this->basisTmpl);
+        $this->render->setBaseTmpl($this->basisTmpl);
         $this->adminModel = new AdminModel($this->db);
     }
 
     public function index()
     {
         $this->content['content'] = "admin/indexAdmin.tmpl";
-        $this->render(new TwigRender($this->basisTmpl));
+        $this->render->render($this->content);
     }
 
     public function orders()
     {
         $this->content['content'] = "admin/orders.tmpl";
-        $this->render(new TwigRender($this->basisTmpl));
+        $this->render->render($this->content);
     }
 
     public function getOrders()

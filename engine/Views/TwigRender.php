@@ -3,19 +3,13 @@
 namespace engine\Views;
 
 
-class View
+class TwigRender implements IRender
 {
-    private $basisPage;
 
-    public function __construct($basisPage)
-    {
-        $this->basisPage = $basisPage;
-    }
-
-    public function generate(array $content)
+    public function render($basisTemplate, array $content)
     {
         \Twig_Autoloader::register();
-        $content['basesTmpl'] = $this->basisPage;
+        $content['basesTmpl'] = $basisTemplate;
 
         try {
             $loader = new \Twig_Loader_Filesystem('templates/');

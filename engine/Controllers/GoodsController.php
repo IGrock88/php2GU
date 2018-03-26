@@ -5,6 +5,7 @@ namespace engine\Controllers;
 
 
 use engine\Models\GoodsModel;
+use engine\Views\TwigRender;
 
 class GoodsController extends Controller
 {
@@ -38,7 +39,7 @@ class GoodsController extends Controller
             $category = $this->content['selectedGoods']['category'];
             $category = substr($category, 0, stripos($category, "Collection"));
             $this->content['breadCrumbCategory'] = $category;
-            $this->view->generate($this->content);
+            $this->render(new TwigRender());
         }
         else{
             header('Location: /error404');

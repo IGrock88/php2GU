@@ -4,6 +4,7 @@ namespace engine\Controllers;
 
 
 use engine\Models\GoodsModel;
+use engine\Views\TwigRender;
 
 class CategoryController extends Controller
 {
@@ -18,21 +19,21 @@ class CategoryController extends Controller
         $this->content['content'] = 'pages/category.tmpl';
         $this->content['idCategory'] = $this->categoryes['men'];
         $this->content['breadCrumbCategory'] = 'men';
-        $this->view->generate($this->content);
+        $this->render(new TwigRender());
     }
 
     public function women(){
         $this->content['content'] = 'pages/category.tmpl';
         $this->content['idCategory'] = $this->categoryes['women'];
         $this->content['breadCrumbCategory'] = 'women';
-        $this->view->generate($this->content);
+        $this->render(new TwigRender());
     }
 
     public function kids(){
         $this->content['content'] = 'pages/category.tmpl';
         $this->content['idCategory'] = $this->categoryes['kids'];
         $this->content['breadCrumbCategory'] = 'kids';
-        $this->view->generate($this->content);
+        $this->render(new TwigRender());
     }
 
     public function ajaxLoadGoodsByCategory()

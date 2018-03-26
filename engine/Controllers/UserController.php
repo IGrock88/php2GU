@@ -3,9 +3,9 @@
 namespace engine\Controllers;
 
 
-use engine\Models\BasketModel;
 use engine\Models\OrderModel;
 use engine\Models\UserModel;
+use engine\Views\TwigRender;
 
 class UserController extends Controller
 {
@@ -15,13 +15,13 @@ class UserController extends Controller
         $userModel = new UserModel($this->db);
         $this->content['regStatus'] = $userModel->runRegistration();
         $this->content['content'] = 'pages/registration.tmpl';
-        $this->view->generate($this->content);
+        $this->render(new TwigRender());
     }
 
     public function account()
     {
         $this->content['content'] = 'pages/account.tmpl';
-        $this->view->generate($this->content);
+        $this->render(new TwigRender());
     }
 
     public function orders()
@@ -29,7 +29,7 @@ class UserController extends Controller
         $orderModel = new OrderModel($this->db);
         $this->content['content'] = 'pages/orders.tmpl';
         $this->content['orders'] = $orderModel->getOrdersByUser($this->content['user']->getId());
-        $this->view->generate($this->content);
+        $this->render(new TwigRender());
     }
 
     public function order()
@@ -42,7 +42,7 @@ class UserController extends Controller
             $totalPriceOrder = $totalPriceOrder + ($item['price'] * $item['quantity']);
         }
         $this->content['totalPriceOrder'] = $totalPriceOrder;
-        $this->view->generate($this->content);
+        $this->render(new TwigRender());
     }
 
     public function delorder()

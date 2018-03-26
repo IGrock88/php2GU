@@ -6,12 +6,11 @@ namespace engine\Controllers;
 use engine\components\Auth;
 use engine\components\Request;
 use engine\DB\DB;
-use engine\Views\MainView;
-use engine\Views\View;
+use engine\Views\IRender;
+
 
 class Controller
 {
-    protected $view;
     protected $content;
     protected $db;
     protected $request;
@@ -24,7 +23,11 @@ class Controller
         $auth = new Auth($this->db, $this->request);
         $this->content['isAuth'] = $auth->isAuth();
         $this->content['user'] = $auth->getUser();
-        $this->view = new View($this->basisTmpl);
+    }
+
+    protected function render(IRender $render)
+    {
+        $render->render($this->basisTmpl, $this->content);
     }
 
 }

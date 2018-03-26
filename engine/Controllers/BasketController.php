@@ -4,6 +4,7 @@ namespace engine\Controllers;
 
 
 use engine\Models\BasketModel;
+use engine\Views\TwigRender;
 
 class BasketController extends Controller
 {
@@ -49,13 +50,13 @@ class BasketController extends Controller
     public function checkout()
     {
         $this->content['content'] = 'pages/checkout.tmpl';
-        $this->view->generate($this->content);
+        $this->render(new TwigRender());
     }
 
     public function cart()
     {
         $this->content['content'] = 'pages/cart.tmpl';
-        $this->view->generate($this->content);
+        $this->render(new TwigRender());
     }
 
     public function ajaxChangeQuantity()

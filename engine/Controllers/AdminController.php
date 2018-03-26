@@ -5,7 +5,7 @@ namespace engine\Controllers;
 
 use engine\Models\AdminModel;
 use engine\Views\AdminView;
-use engine\Views\View;
+use engine\Views\TwigRender;
 
 class AdminController extends Controller
 {
@@ -19,7 +19,7 @@ class AdminController extends Controller
         if ($this->content['user']->getRole() != 2) {
             header("location: /");
         }
-        $this->view = new View($this->basisTmpl);
+        $this->view = new TwigRender($this->basisTmpl);
         $this->adminModel = new AdminModel($this->db);
     }
 

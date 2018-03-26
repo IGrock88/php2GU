@@ -9,9 +9,8 @@ use engine\Views\TwigRender;
 
 class AdminController extends Controller
 {
-    protected $view;
     private $adminModel;
-    private $basisTmpl = "adminBase.tmpl";
+    protected $basisTmpl = "adminBase.tmpl";
 
     public function __construct()
     {
@@ -26,13 +25,13 @@ class AdminController extends Controller
     public function index()
     {
         $this->content['content'] = "admin/indexAdmin.tmpl";
-        $this->view->generate($this->content);
+        $this->render(new TwigRender($this->basisTmpl));
     }
 
     public function orders()
     {
         $this->content['content'] = "admin/orders.tmpl";
-        $this->view->generate($this->content);
+        $this->render(new TwigRender($this->basisTmpl));
     }
 
     public function getOrders()

@@ -39,7 +39,7 @@ class GoodsController extends Controller
             $category = $this->content['selectedGoods']['category'];
             $category = substr($category, 0, stripos($category, "Collection"));
             $this->content['breadCrumbCategory'] = $category;
-            $this->render(new TwigRender());
+            $this->render(new TwigRender($this->basisTmpl));
         }
         else{
             header('Location: /error404');

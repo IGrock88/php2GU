@@ -15,13 +15,13 @@ class UserController extends Controller
         $userModel = new UserModel($this->db);
         $this->content['regStatus'] = $userModel->runRegistration();
         $this->content['content'] = 'pages/registration.tmpl';
-        $this->render(new TwigRender());
+        $this->render(new TwigRender($this->basisTmpl));
     }
 
     public function account()
     {
         $this->content['content'] = 'pages/account.tmpl';
-        $this->render(new TwigRender());
+        $this->render(new TwigRender($this->basisTmpl));
     }
 
     public function orders()
@@ -29,7 +29,7 @@ class UserController extends Controller
         $orderModel = new OrderModel($this->db);
         $this->content['content'] = 'pages/orders.tmpl';
         $this->content['orders'] = $orderModel->getOrdersByUser($this->content['user']->getId());
-        $this->render(new TwigRender());
+        $this->render(new TwigRender($this->basisTmpl));
     }
 
     public function order()
@@ -42,7 +42,7 @@ class UserController extends Controller
             $totalPriceOrder = $totalPriceOrder + ($item['price'] * $item['quantity']);
         }
         $this->content['totalPriceOrder'] = $totalPriceOrder;
-        $this->render(new TwigRender());
+        $this->render(new TwigRender($this->basisTmpl));
     }
 
     public function delorder()

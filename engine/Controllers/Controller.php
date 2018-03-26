@@ -14,7 +14,7 @@ class Controller
     protected $content;
     protected $db;
     protected $request;
-    private $basisTmpl = "base.tmpl";
+    protected $basisTmpl = "base.tmpl";
 
     public function __construct()
     {
@@ -27,7 +27,7 @@ class Controller
 
     protected function render(IRender $render)
     {
-        $render->render($this->basisTmpl, $this->content);
+        $render->render($this->content);
     }
 
 }

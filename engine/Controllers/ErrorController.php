@@ -10,7 +10,7 @@ class ErrorController extends Controller
     public function error404()
     {
         $this->content['content'] = "pages/error404.tmpl";
-        $this->render(new TwigRender());
+        $this->render(new TwigRender($this->basisTmpl));
     }
 
 }

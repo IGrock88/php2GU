@@ -19,21 +19,21 @@ class CategoryController extends Controller
         $this->content['content'] = 'pages/category.tmpl';
         $this->content['idCategory'] = $this->categoryes['men'];
         $this->content['breadCrumbCategory'] = 'men';
-        $this->render(new TwigRender());
+        $this->render(new TwigRender($this->basisTmpl));
     }
 
     public function women(){
         $this->content['content'] = 'pages/category.tmpl';
         $this->content['idCategory'] = $this->categoryes['women'];
         $this->content['breadCrumbCategory'] = 'women';
-        $this->render(new TwigRender());
+        $this->render(new TwigRender($this->basisTmpl));
     }
 
     public function kids(){
         $this->content['content'] = 'pages/category.tmpl';
         $this->content['idCategory'] = $this->categoryes['kids'];
         $this->content['breadCrumbCategory'] = 'kids';
-        $this->render(new TwigRender());
+        $this->render(new TwigRender($this->basisTmpl));
     }
 
     public function ajaxLoadGoodsByCategory()

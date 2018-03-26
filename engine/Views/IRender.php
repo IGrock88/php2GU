@@ -10,5 +10,5 @@ namespace engine\Views;
 
 interface IRender
 {
-    public function render($basisTemplate, array $content);
+    public function render(array $content);
 }

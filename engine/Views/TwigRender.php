@@ -5,11 +5,17 @@ namespace engine\Views;
 
 class TwigRender implements IRender
 {
+    private $basisTemplate;
 
-    public function render($basisTemplate, array $content)
+    public function __construct($basisTemplate)
+    {
+        $this->basisTemplate = $basisTemplate;
+    }
+
+    public function render(array $content)
     {
         \Twig_Autoloader::register();
-        $content['basesTmpl'] = $basisTemplate;
+        $content['basesTmpl'] = $this->basisTemplate;
 
         try {
             $loader = new \Twig_Loader_Filesystem('templates/');

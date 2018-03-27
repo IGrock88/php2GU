@@ -11,11 +11,12 @@ class AdminController extends Controller
 {
     private $adminModel;
     protected $basisTmpl = "adminBase.tmpl";
+    const ADMIN_ROLE_ID = 2;
 
-    public function __construct(IRender $render)
+    public function __construct(IRender $render, DB $db, Request $request, Auth $auth)
     {
-        parent::__construct($render);
-        if ($this->content['user']->getRole() != 2) {
+        parent::__construct($render, $db, $request, $auth);
+        if ($this->content['user']->getRole() != self::ADMIN_ROLE_ID) {
             header("location: /");
         }
         $this->render->setBaseTmpl($this->basisTmpl);

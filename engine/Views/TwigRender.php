@@ -5,9 +5,11 @@ namespace engine\Views;
 
 class TwigRender implements IRender
 {
+    const DEFAULT_BASE_TEMPLATE = "base.tmpl";
     private $basisTemplate;
 
-    public function __construct($basisTemplate = "base.tmpl")
+
+    public function __construct($basisTemplate = self::DEFAULT_BASE_TEMPLATE)
     {
         $this->basisTemplate = $basisTemplate;
     }

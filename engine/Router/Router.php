@@ -14,8 +14,12 @@ namespace engine\Router;
 можно задать в $errorControllerName
 */
 
+use engine\components\Auth;
+use engine\components\Request;
 use engine\components\Singleton;
-use engine\Views\TwigRender;
+use engine\DB\DB;
+use engine\Views\IRender;
+
 
 class Router
 {
@@ -27,12 +31,11 @@ class Router
     private $defaultMethod = "index"; //дефолтный метод в контроллере, на него будет перенаправление, если не задана третья часть пути отвечающая за выбор метода
     private $controllers = [];
 
-    public function start()
+    public function start(IRender $render, DB $db, Request $request, Auth $auth)
     {
         $this->getControllers();
-        $route = explode("/", $_SERVER['REQUEST_URI']);
-        $controllerPath = $route[1];
-        $method = $route[2];
+        $controllerPath = $request->getUrl()[1];
+        $method = $request->getUrl()[2];
 
         if($method == ""){
             $method = $this->defaultMethod;
@@ -40,7 +43,7 @@ class Router
 
         if(isset($this->controllers[$controllerPath])){
             $controller = 'engine\\controllers\\' . $this->controllers[$controllerPath];
-            $controllerObj = new $controller(new TwigRender());
+            $controllerObj = new $controller($render, $db, $request, $auth);
             if(method_exists($controllerObj, $method)){
                 $controllerObj->$method();
                 exit(); //если успешно подгружен нужный класс и метод завершаем выполнение

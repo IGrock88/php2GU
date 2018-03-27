@@ -9,18 +9,18 @@ use engine\DB\DB;
 use engine\Views\IRender;
 
 
-class Controller
+abstract class Controller
 {
     protected $content;
     protected $db;
     protected $request;
     protected $render;
 
-    public function __construct(IRender $render)
+
+    public function __construct(IRender $render, DB $db, Request $request, Auth $auth)
     {
-        $this->db = DB::getInstance();
-        $this->request = new Request();
-        $auth = new Auth($this->db, $this->request);
+        $this->db = $db;
+        $this->request = $request;
         $this->content['isAuth'] = $auth->isAuth();
         $this->content['user'] = $auth->getUser();
         $this->render = $render;

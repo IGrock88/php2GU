@@ -15,6 +15,11 @@ use engine\Views\TwigRender;
 class App
 {
     use Singleton;
+
+    public $db;
+    public $request;
+    public $auth;
+
     public function init()
     {
         $db = DB::getInstance();

@@ -3,13 +3,9 @@
 
 namespace engine\DB;
 
-use engine\components\Singleton;
 
-class DB
+class DB extends AbstractDb
 {
-    use Singleton;
-
-    private $connection;
 
     public function close()
     {

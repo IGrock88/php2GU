@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function __construct(IRender $render, DB $db, Request $request, Auth $auth)
     {
         parent::__construct($render, $db, $request, $auth);
-        if ($this->content['user']->getRgitole() != self::ADMIN_ROLE_ID) {
+        if ($this->content['user']->getRole() != self::ADMIN_ROLE_ID) {
             header("location: /");
         }
         $this->render->setBaseTmpl($this->basisTmpl);

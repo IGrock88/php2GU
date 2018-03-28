@@ -3,8 +3,9 @@
 namespace engine\Controllers;
 
 
+use engine\components\App;
 use engine\Models\BasketModel;
-use engine\Views\TwigRender;
+
 
 class BasketController extends Controller
 {
@@ -13,10 +14,10 @@ class BasketController extends Controller
 
     public function addProduct()
     {
-        $basketModel = new BasketModel($this->db);
-        $quantity = $this->request->getPostParams()['productQuantity'];
+        $basketModel = new BasketModel(App::$db);
+        $quantity = App::$request->getPostParams()['productQuantity'];
         if ($this->content['isAuth'] && $quantity > 0) {
-            $result = $basketModel->addProduct($this->request->getPostParams()['id_product'],
+            $result = $basketModel->addProduct(App::$request->getPostParams()['id_product'],
                 $this->content['user']->getId(),
                 $quantity);
             echo json_encode(["result" => $result]);
@@ -28,7 +29,7 @@ class BasketController extends Controller
 
     public function loadBasket()
     {
-        $basketModel = new BasketModel($this->db);
+        $basketModel = new BasketModel(App::$db);
         if ($this->content['isAuth']) {
             echo $basketModel->getJSONBasket($this->content['user']->getId());
         } else {
@@ -38,9 +39,9 @@ class BasketController extends Controller
 
     public function deleteProduct()
     {
-        $basketModel = new BasketModel($this->db);
+        $basketModel = new BasketModel(App::$db);
         if ($this->content['isAuth']) {
-            $result = $basketModel->delProduct($this->request->getPostParams()['id_product'], $this->content['user']->getId());
+            $result = $basketModel->delProduct(App::$request->getPostParams()['id_product'], $this->content['user']->getId());
             echo json_encode(["result" => $result]);
         } else {
             //TODO: сделать корзину для не авторизованных пользователй с помощью куки
@@ -61,10 +62,10 @@ class BasketController extends Controller
 
     public function ajaxChangeQuantity()
     {
-        $basketModel = new BasketModel($this->db);
-        $productQuantity = $this->request->getPostParams()['productQuantity'];
+        $basketModel = new BasketModel(App::$db);
+        $productQuantity = App::$request->getPostParams()['productQuantity'];
         if($productQuantity >= 0){
-            $result = $basketModel->updateProduct($this->request->getPostParams()['id_product'],
+            $result = $basketModel->updateProduct(App::$request->getPostParams()['id_product'],
                                                         $this->content['user']->getId(),
                                                         $productQuantity);
             echo json_encode(["result" => $result]);

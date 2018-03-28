@@ -4,7 +4,7 @@ namespace engine\Controllers;
 
 
 use engine\Models\GoodsModel;
-use engine\Views\TwigRender;
+use engine\components\App;
 
 class CategoryController extends Controller
 {
@@ -38,11 +38,12 @@ class CategoryController extends Controller
 
     public function ajaxLoadGoodsByCategory()
     {
-        $goodsModel = new GoodsModel($this->db);
-        $idCategory = $this->request->getPostParams()['idCategory'];
+        $goodsModel = new GoodsModel(App::$db);
+
+        $idCategory = App::$request->getPostParams()['idCategory'];
         $date = $goodsModel->getGoodsByCategory($idCategory,
-                                        $this->request->getPostParams()['startIndex'],
-                                        $this->request->getPostParams()['quantityGoods']);
+            App::$request->getPostParams()['startIndex'],
+            App::$request->getPostParams()['quantityGoods']);
         if($date){
             $result['goods'] = $date;
             $result['quantity'] = count($date);

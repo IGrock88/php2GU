@@ -3,13 +3,13 @@
 namespace engine\Models;
 
 
-use engine\DB\DB;
+use engine\DB\AbstractDb;
 
 class Model
 {
     protected $db;
 
-    public function __construct(DB $db)
+    public function __construct(AbstractDb $db)
     {
         $this->db = $db;
     }

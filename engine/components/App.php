@@ -16,18 +16,18 @@ class App
 {
     use Singleton;
 
-    public $db;
-    public $request;
-    public $auth;
+    public static $db;
+    public static $request;
+    public static $auth;
 
     public function init()
     {
-        $db = DB::getInstance();
-        $request = new Request();
-        $auth = new Auth($db, $request);
+        self::$db = DB::getInstance();
+        self::$request = new Request();
+        self::$auth = new Auth(self::$db, self::$request);
         $render = new TwigRender();
 
-        (Router::getInstance())->start($render, $db, $request, $auth);
+        (Router::getInstance())->start($render, self::$request);
     }
 
 }

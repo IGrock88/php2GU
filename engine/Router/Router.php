@@ -31,7 +31,7 @@ class Router
     private $defaultMethod = "index"; //дефолтный метод в контроллере, на него будет перенаправление, если не задана третья часть пути отвечающая за выбор метода
     private $controllers = [];
 
-    public function start(IRender $render, DB $db, Request $request, Auth $auth)
+    public function start(IRender $render, Request $request)
     {
         $this->getControllers();
         $controllerPath = $request->getUrl()[1];
@@ -43,7 +43,7 @@ class Router
 
         if(isset($this->controllers[$controllerPath])){
             $controller = 'engine\\controllers\\' . $this->controllers[$controllerPath];
-            $controllerObj = new $controller($render, $db, $request, $auth);
+            $controllerObj = new $controller($render, $request);
             if(method_exists($controllerObj, $method)){
                 $controllerObj->$method();
                 exit(); //если успешно подгружен нужный класс и метод завершаем выполнение

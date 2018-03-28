@@ -3,7 +3,6 @@
 namespace engine\Controllers;
 
 
-use engine\Views\TwigRender;
 
 class ErrorController extends Controller
 {

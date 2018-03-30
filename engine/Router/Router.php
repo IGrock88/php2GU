@@ -43,14 +43,14 @@ class Router
 
         if(isset($this->controllers[$controllerPath])){
             $controller = 'engine\\controllers\\' . $this->controllers[$controllerPath];
-            $controllerObj = new $controller($render, $request);
+            $controllerObj = new $controller($render);
             if(method_exists($controllerObj, $method)){
                 $controllerObj->$method();
                 exit(); //если успешно подгружен нужный класс и метод завершаем выполнение
             }
         }
         $errorController = "\\engine\\controllers\\" . $this->errorControllerName;
-        (new $errorController())->error404(); // перенаправляем на страницу 404
+        (new $errorController($render))->error404(); // перенаправляем на страницу 404
     }
 
     private function getControllers() // получаем имена всех контроллеров, и добавляем в ассоциативный массив

@@ -43,7 +43,7 @@ class GoodsController extends Controller
             return new Response($this->render->render($this->content));
         }
         else{
-            header('Location: /error404');
+            return new Response('Упс, страницы нету', 404, ['Location: /error/error404']);
         }
     }
 }

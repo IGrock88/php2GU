@@ -16,6 +16,7 @@ namespace engine\Router;
 
 use engine\components\Auth;
 use engine\components\Request;
+use engine\components\Response;
 use engine\components\Singleton;
 use engine\DB\DB;
 use engine\Views\IRender;
@@ -48,8 +49,7 @@ class Router
                 return $controllerObj->$method();
             }
         }
-        $errorController = "\\engine\\controllers\\" . $this->errorControllerName;
-        (new $errorController($render))->error404(); // перенаправляем на страницу 404
+        return new Response('Упс, страницы нету', 404, ['Location: /error/error404']);
     }
 
     private function getControllers() // получаем имена всех контроллеров, и добавляем в ассоциативный массив

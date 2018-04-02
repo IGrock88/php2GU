@@ -6,6 +6,7 @@ namespace engine\Controllers;
 use engine\components\App;
 use engine\Models\OrderModel;
 use engine\Models\UserModel;
+use engine\components\Response;
 
 
 class UserController extends Controller
@@ -16,13 +17,13 @@ class UserController extends Controller
         $userModel = new UserModel(App::$db);
         $this->content['regStatus'] = $userModel->runRegistration();
         $this->content['content'] = 'pages/registration.tmpl';
-        $this->render->render($this->content);
+        return new Response($this->render->render($this->content));
     }
 
     public function account()
     {
         $this->content['content'] = 'pages/account.tmpl';
-        $this->render->render($this->content);
+        return new Response($this->render->render($this->content));
     }
 
     public function orders()
@@ -30,7 +31,7 @@ class UserController extends Controller
         $orderModel = new OrderModel(App::$db);
         $this->content['content'] = 'pages/orders.tmpl';
         $this->content['orders'] = $orderModel->getOrdersByUser($this->content['user']->getId());
-        $this->render->render($this->content);
+        return new Response($this->render->render($this->content));
     }
 
     public function order()
@@ -43,7 +44,7 @@ class UserController extends Controller
             $totalPriceOrder = $totalPriceOrder + ($item['price'] * $item['quantity']);
         }
         $this->content['totalPriceOrder'] = $totalPriceOrder;
-        $this->render->render($this->content);
+        return new Response($this->render->render($this->content));
     }
 
     public function delorder()
@@ -59,7 +60,7 @@ class UserController extends Controller
     {
         $userModel = new UserModel(App::$db);
         if ($userModel->checkout($this->content['user']->getId())) {
-            echo json_encode(["result" => JSON_SUCCESS]);
+            return new Response(json_encode(["result" => JSON_SUCCESS]));
         }
 
     }

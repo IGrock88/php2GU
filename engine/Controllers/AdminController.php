@@ -6,6 +6,7 @@ namespace engine\Controllers;
 use engine\components\App;
 use engine\components\Auth;
 use engine\components\Request;
+use engine\components\Response;
 use engine\DB\DB;
 use engine\Models\AdminModel;
 use engine\Views\AdminView;
@@ -30,13 +31,13 @@ class AdminController extends Controller
     public function index()
     {
         $this->content['content'] = "admin/indexAdmin.tmpl";
-        $this->render->render($this->content);
+        return new Response($this->render->render($this->content));
     }
 
     public function orders()
     {
         $this->content['content'] = "admin/orders.tmpl";
-        $this->render->render($this->content);
+        return new Response($this->render->render($this->content));
     }
 
     public function getOrders()
@@ -44,33 +45,33 @@ class AdminController extends Controller
         $ordersDate = $this->adminModel->getOrders();
         $result['orders'] = $ordersDate;
         $result['orders_quantity'] = count($ordersDate);
-        echo json_encode($result);
+        return new Response(json_encode($result));
     }
 
     public function deleteOrder()
     {
         if ($this->adminModel->deleteOrderById(App::$request->getPostParams()['idOrder'])) {
-            echo json_encode(['result' => JSON_SUCCESS]);
+            return new Response(json_encode(['result' => JSON_SUCCESS]));
         } else {
-            echo json_encode(['result' => JSON_FAILURE]);
+            return new Response(json_encode(['result' => JSON_FAILURE]));
         }
     }
 
     public function approveOrder()
     {
         if ($this->adminModel->approveOrder(App::$request->getPostParams()['idOrder'])) {
-            echo json_encode(['result' => JSON_SUCCESS]);
+            return new Response(json_encode(['result' => JSON_SUCCESS]));
         } else {
-            echo json_encode(['result' => JSON_FAILURE]);
+            return new Response(json_encode(['result' => JSON_FAILURE]));
         }
     }
 
     public function cancelApproveOrder()
     {
         if ($this->adminModel->cancelApproveOrder(App::$request->getPostParams()['idOrder'])) {
-            echo json_encode(['result' => JSON_SUCCESS]);
+            return new Response(json_encode(['result' => JSON_SUCCESS]));
         } else {
-            echo json_encode(['result' => JSON_FAILURE]);
+            return new Response(json_encode(['result' => JSON_FAILURE]));
         }
     }
 
@@ -81,10 +82,10 @@ class AdminController extends Controller
             $result['orderDetail'] = $ordersDate;
             $result['quantity'] = count($ordersDate);
             $result['result'] = JSON_SUCCESS;
-            echo json_encode($result);
+            return new Response(json_encode($result));
         } else {
             $result['result'] = JSON_FAILURE;
-            echo json_encode($result);
+            return new Response(json_encode($result));
         }
     }
 

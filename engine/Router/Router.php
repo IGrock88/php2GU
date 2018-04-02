@@ -11,14 +11,12 @@ namespace engine\Router;
 5. В каждом контроллере можно задать метод по умолчанию index, туда будут перенаправлятся запросы без третьей части url
 напр. localhost/goods/ - загрузится контроллер GoodsController и вызовется метод index()
 6. Обязательно создать контроллер для обработки ошибок, он нужен чтобы перенаправлять ошибочные запросы. Название
-можно задать в $errorControllerName
+можно ErrorController
 */
 
-use engine\components\Auth;
 use engine\components\Request;
 use engine\components\Response;
 use engine\components\Singleton;
-use engine\DB\DB;
 use engine\Views\IRender;
 
 
@@ -28,7 +26,6 @@ class Router
 
     private $controllerDir = "engine/Controllers"; // путь к дериктории с контроллерами
     private $mainControllerName = "MainController"; // основной контроллер, на него идёт перенаправление если не задан путь к контроллеру
-    private $errorControllerName = "ErrorController"; // контроллер для обработки ошибок
     private $defaultMethod = "index"; //дефолтный метод в контроллере, на него будет перенаправление, если не задана третья часть пути отвечающая за выбор метода
     private $controllers = [];
 

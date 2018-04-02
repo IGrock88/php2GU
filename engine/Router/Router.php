@@ -45,8 +45,7 @@ class Router
             $controller = 'engine\\controllers\\' . $this->controllers[$controllerPath];
             $controllerObj = new $controller($render);
             if(method_exists($controllerObj, $method)){
-                $controllerObj->$method();
-                exit(); //если успешно подгружен нужный класс и метод завершаем выполнение
+                return $controllerObj->$method();
             }
         }
         $errorController = "\\engine\\controllers\\" . $this->errorControllerName;

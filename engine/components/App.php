@@ -26,8 +26,9 @@ class App
         self::$request = new Request();
         self::$auth = new Auth(self::$db, self::$request);
         $render = new TwigRender();
-
-        (Router::getInstance())->start($render, self::$request);
+        $router = Router::getInstance();
+        $response = $router->start($render, self::$request);
+        $response->send();
     }
 
 }

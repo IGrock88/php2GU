@@ -6,6 +6,7 @@ namespace engine\Controllers;
 
 use engine\Models\GoodsModel;
 use engine\components\App;
+use engine\components\Response;
 
 class GoodsController extends Controller
 {
@@ -17,14 +18,14 @@ class GoodsController extends Controller
             $result['goods'] = $goodsModel->getFeatureGoods(App::$request->getPostParams()['featureGoods'], App::$request->getPostParams()['startIndex']);
             if($result['goods']){
                 $result['quantity'] = count($result['goods']);
-                echo json_encode($result);
+                return new Response(json_encode($result));
             }
             else{
-                echo json_encode(['result' => 2]);
+                return new Response(json_encode(['result' => JSON_WRONG]));
             }
         }
         else{
-            echo json_encode(['result' => 2]);
+            return new Response(json_encode(['result' => JSON_WRONG]));
         }
 
     }
@@ -39,7 +40,7 @@ class GoodsController extends Controller
             $category = $this->content['selectedGoods']['category'];
             $category = substr($category, 0, stripos($category, "Collection"));
             $this->content['breadCrumbCategory'] = $category;
-            $this->render->render($this->content);
+            return new Response($this->render->render($this->content));
         }
         else{
             header('Location: /error404');

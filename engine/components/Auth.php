@@ -160,7 +160,7 @@ class Auth
             $this->userExit();;
         }
 
-        return $this->isAuth;
+        return $isAuth;
     }
 
     private function checkUserRole($login){

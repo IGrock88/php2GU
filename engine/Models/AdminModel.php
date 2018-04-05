@@ -58,5 +58,19 @@ class AdminModel extends Model
         return $result;
     }
 
+    public function getGoods($startIndex, $quantityGoods = 25)
+    {
+        $startIndex = ($startIndex - 1) * $quantityGoods;
+        $this->db->connect();
+        $result = $this->db->select("select * from goods as g
+                                          JOIN designer as d ON d.designer_id=g.designer
+                                          JOIN goods_material as gm ON gm.id_product=g.id_product
+                                          JOIN materials as m ON m.id_material=gm.id_material
+                                          JOIN categoryes as c ON c.id_category=g.id_category
+                                          ORDER by g.id_product limit $startIndex, $quantityGoods");
+        $this->db->close();
+        return $result;
+    }
+
 
 }

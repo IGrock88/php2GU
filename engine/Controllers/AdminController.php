@@ -89,9 +89,24 @@ class AdminController extends Controller
         }
     }
 
+    public function addGoods()
+    {
+        $this->content['content'] = "admin/addGoods.tmpl";
+        return new Response($this->render->render($this->content));
+    }
+
     public function goods()
     {
+        $this->content['content'] = "admin/goods.tmpl";
+        $adminModel = new AdminModel(DB::getInstance());
 
+        var_dump(App::$request->getUrl()[3]);
+        $goodsDate = $adminModel->getGoods(App::$request->getUrl()[3]);
+
+        $this->content['products'] = $goodsDate;
+
+
+        return new Response($this->render->render($this->content));
     }
 
 }

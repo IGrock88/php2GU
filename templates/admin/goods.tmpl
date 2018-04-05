@@ -1,10 +1,48 @@
 {% extends basesTmpl %}
 
     {% block content %}
+        <div><a href="/admin/addGoods" class="button is-success">Добавить товар</a></div>
+        <hr>
         <div id="adminGoods">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Material</th>
+                    <th>Category</th>
+                    <th>Designer</th>
+                    <th>Change</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>id</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Material</th>
+                    <th>Category</th>
+                    <th>Designer</th>
+                    <th>Change</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                {% for item in products %}
+                <tr>
+                    <td>{{item.id_product  }}</td>
+                    <td><a href="/goods/view/{{ item.id_product }}">{{ item.title }}  </a>  </td>
+                    <td>${{ item.price / 100 }}</td>
+                    <td>{{ item.material_name}}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.designer_name }}</td>
+                    <td>Изменить</td>
+                </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
 
         </div>
-        <script>
 
-        </script>
     {% endblock %}

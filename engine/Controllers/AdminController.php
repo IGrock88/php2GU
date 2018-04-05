@@ -100,7 +100,6 @@ class AdminController extends Controller
         $this->content['content'] = "admin/goods.tmpl";
         $adminModel = new AdminModel(DB::getInstance());
 
-        var_dump(App::$request->getUrl()[3]);
         $goodsDate = $adminModel->getGoods(App::$request->getUrl()[3]);
 
         $this->content['products'] = $goodsDate;

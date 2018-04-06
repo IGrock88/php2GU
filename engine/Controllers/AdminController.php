@@ -100,7 +100,7 @@ class AdminController extends Controller
     {
         $activePage = App::$request->getUrl()[3];
         $quantityGoods = self::DEFAULT_GOODS_QUANTITY_ON_PAGE;
-        $this->content['content'] = "admin/goods.tmpl";
+        $this->content['content'] = "admin/goodsAdmin.tmpl";
         $adminModel = new AdminModel(DB::getInstance());
         $goodsDate = $adminModel->getGoods($activePage, $quantityGoods);
         $this->content['activePage'] = $activePage;

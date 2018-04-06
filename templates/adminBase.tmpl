@@ -6,10 +6,10 @@
     <title>Здравствуй хозяина!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <script src="./../js/libs/jquery-3.2.1.min.js"></script>
-    <script src="../../js/admin/Orders.js"></script>
-    <script src="../../js/admin/SingleOrder.js"></script>
-    <script src="../../js/admin/admin.js"></script>
+    <script src=".././../js/libs/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/admin/Orders.js"></script>
+    <script src="../../../js/admin/SingleOrder.js"></script>
+    <script src="../../../js/admin/admin.js"></script>
 
     <style>
         .order{
@@ -40,7 +40,7 @@
     </div>
 
     <div class="navbar-end">
-        <div class="dropdown account">
+        <div class="dropdown account" id="account">
             <div class="dropdown-trigger">
                 <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
                     <span>{{ user.getLogin }}</span>

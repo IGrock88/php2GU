@@ -17,6 +17,7 @@ class AdminController extends Controller
     private $adminModel;
     protected $basisTmpl = "adminBase.tmpl";
     const ADMIN_ROLE_ID = 2;
+    const DEFAULT_GOODS_QUANTITY_ON_PAGE = 12;
 
     public function __construct(IRender $render)
     {
@@ -97,16 +98,15 @@ class AdminController extends Controller
 
     public function goods()
     {
-        $quantityGoods = 12;
+        $activePage = App::$request->getUrl()[3];
+        $quantityGoods = self::DEFAULT_GOODS_QUANTITY_ON_PAGE;
         $this->content['content'] = "admin/goods.tmpl";
         $adminModel = new AdminModel(DB::getInstance());
-        $activePage = App::$request->getUrl()[3];
         $goodsDate = $adminModel->getGoods($activePage, $quantityGoods);
         $this->content['activePage'] = $activePage;
         $this->content['products'] = $goodsDate;
 
         $this->content['quantityPages'] = $adminModel->getGoodsQuantity() / $quantityGoods;
-
         return new Response($this->render->render($this->content));
     }
 

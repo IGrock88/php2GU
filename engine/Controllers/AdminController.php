@@ -97,13 +97,15 @@ class AdminController extends Controller
 
     public function goods()
     {
+        $quantityGoods = 12;
         $this->content['content'] = "admin/goods.tmpl";
         $adminModel = new AdminModel(DB::getInstance());
-
-        $goodsDate = $adminModel->getGoods(App::$request->getUrl()[3]);
-
+        $activePage = App::$request->getUrl()[3];
+        $goodsDate = $adminModel->getGoods($activePage, $quantityGoods);
+        $this->content['activePage'] = $activePage;
         $this->content['products'] = $goodsDate;
 
+        $this->content['quantityPages'] = $adminModel->getGoodsQuantity() / $quantityGoods;
 
         return new Response($this->render->render($this->content));
     }

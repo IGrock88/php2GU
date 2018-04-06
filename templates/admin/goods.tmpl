@@ -3,6 +3,31 @@
     {% block content %}
         <div><a href="/admin/addGoods" class="button is-success">Добавить товар</a></div>
         <hr>
+        {% if activePage == 1 %}
+            <span class="tag is-light"> Prev </span>
+            <a class="tag is-info" href="/admin/goods/{{ activePage + 1 }}"> Next </a>
+        {% elseif  activePage < quantityPages %}
+            <a class="tag is-info" href="/admin/goods/{{ activePage - 1 }}"> Prev </a>
+            <a class="tag is-info" href="/admin/goods/{{ activePage + 1 }}"> Next </a>
+        {% else %}
+
+            <a class="tag is-info" href="/admin/goods/{{ activePage - 1 }}"> Prev </a>
+            <span class="tag is-light"> Next </span>
+
+        {% endif %}
+        <br><br>
+<div class="pages">
+
+    {% for page in 1..(quantityPages + 1) %}
+        {% if page == activePage %}
+        <span class="tag is-dark">{{ page }}</span>
+        {% else %}
+        <a class="tag is-light" href="/admin/goods/{{ page }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+
+</div>
+        <hr>
         <div id="adminGoods">
             <table class="table">
                 <thead>
@@ -16,17 +41,6 @@
                     <th>Change</th>
                 </tr>
                 </thead>
-                <tfoot>
-                <tr>
-                    <th>id</th>
-                    <th>Title</th>
-                    <th>Price</th>
-                    <th>Material</th>
-                    <th>Category</th>
-                    <th>Designer</th>
-                    <th>Change</th>
-                </tr>
-                </tfoot>
                 <tbody>
                 {% for item in products %}
                 <tr>

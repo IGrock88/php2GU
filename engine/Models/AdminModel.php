@@ -81,4 +81,28 @@ class AdminModel extends Model
         return $result[0]['quantity'];
     }
 
+    public function getDesigner()
+    {
+        $this->db->connect();
+        $result = $this->db->select("select * from designer");
+        $this->db->close();
+        return $result;
+    }
+
+    public function getCategories()
+    {
+        $this->db->connect();
+        $result = $this->db->select("select * from categoryes");
+        $this->db->close();
+        return $result;
+    }
+
+    public function getMaterials()
+    {
+        $this->db->connect();
+        $result = $this->db->select("select * from materials");
+        $this->db->close();
+        return $result;
+    }
+
 }

@@ -93,7 +93,15 @@ class AdminController extends Controller
     public function addGoods()
     {
         $this->content['content'] = "admin/addGoods.tmpl";
+        $this->content['designers'] = $this->adminModel->getDesigner();
+        $this->content['categories'] = $this->adminModel->getCategories();
+        $this->content['materials'] = $this->adminModel->getMaterials();
         return new Response($this->render->render($this->content));
+    }
+
+    public function addNewProduct()
+    {
+
     }
 
     public function goods()

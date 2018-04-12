@@ -1,82 +1,91 @@
 {% extends basesTmpl %}
 
     {% block content %}
-        <form action="" method="post">
-        <div class="field">
-            <label class="label">Product title</label>
-            <div class="control">
-                <input class="input" name="productTitle" type="text" placeholder="title" required>
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label">Price</label>
-            <div class="control">
-                <input class="input" type="number" placeholder="price in cents" min="1" required>
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label">Designer</label>
-            <div class="control">
-                <div class="select">
-                    <select>
-                        <option>Select dropdown</option>
-                        <option>With options</option>
-                    </select>
+        <form action="">
+            <div class="field">
+                <label class="label">Product title</label>
+                <div class="control">
+                    <input id="title" class="input" name="productTitle" type="text" placeholder="title" required>
                 </div>
             </div>
-        </div>
 
-        <div class="field">
-            <label class="label">Category</label>
-            <div class="control">
-                <div class="select">
-                    <select>
-                        <option>Select dropdown</option>
-                        <option>With options</option>
-                    </select>
+            <div class="field">
+                <label class="label">Price</label>
+                <div class="control">
+                    <input id="price" class="input" type="number" placeholder="price in cents" min="1" required>
                 </div>
             </div>
-        </div>
 
-        <div class="field">
-            <label class="label">Material</label>
-            <div class="control">
-                <div class="select">
-                    <select>
-                        <option>Select dropdown</option>
-                        <option>With options</option>
-                    </select>
+            <div class="field">
+                <label class="label">Designer</label>
+                <div class="control">
+                    <div class="select">
+                        <select id="selectDesigner">
+                            {% for designer in designers %}
+                                <option value="{{ designer.designer_id }}">{{ designer.designer_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="field">
-            <label class="label">Short description</label>
-            <div class="control">
-                <textarea class="textarea" placeholder="Textarea" required></textarea>
+            <div class="field">
+                <label class="label">Category</label>
+                <div class="control">
+                    <div class="select">
+                        <select class="selectCategory">
+                            {% for category in categories %}
+                                <option value="{{ category.id_category }}">{{ category.category }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="field">
-            <label class="label">Full description</label>
-            <div class="control">
-                <textarea class="textarea" placeholder="Textarea" required></textarea>
+            <div class="field">
+                <label class="label">Material</label>
+                <div class="control">
+                    <div class="select">
+                        <select>
+                            {% for material in materials %}
+                                <option value="{{ material.id_material }}">{{ material.material_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <div class="field">
+                <label class="label">Short description</label>
+                <div class="control">
+                    <textarea class="textarea" placeholder="Textarea" required></textarea>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Full description</label>
+                <div class="control">
+                    <textarea class="textarea" placeholder="Textarea" required></textarea>
+                </div>
+            </div>
 
 
-        <div class="field is-grouped">
-            <div class="control">
-                <button type="submit" class="button is-link">Submit</button>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button id="newProduct" type="button" class="button is-link">Submit</button>
+                </div>
+                <div class="control">
+                    <button type="reset" class="button is-text">Cancel</button>
+                </div>
             </div>
-            <div class="control">
-                <button type="reset" class="button is-text">Cancel</button>
-            </div>
-        </div>
         </form>
         <script>
+            $('#newProduct').click(function () {
+                var title = $('#title').val();
+                var price = parseInt($('#price').val());
+                var designerId = parseInt($('#selectDesigner').val());
+                var categoryId = parseInt($('#selectCategory').val());
 
+            });
         </script>
     {% endblock %}

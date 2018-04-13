@@ -101,8 +101,15 @@ class AdminController extends Controller
 
     public function addNewProduct()
     {
+
         $request = App::$request;
-        $result = $request->getPostParams();
+        $result['title'] = $request->getPostParams()['title'];
+        $result['price'] = $request->getPostParams()['price'];
+        $result['designerId'] = $request->getPostParams()['designerId'];
+        $result['categoryId'] = $request->getPostParams()['categoryId'];
+        $result['materialId'] = $request->getPostParams()['materialId'];
+        $result['shortDesc'] = $request->getPostParams()['shortDesc'];
+        $result['fullDesc'] = $request->getPostParams()['fullDesc'];
         return new Response(json_encode($result));
     }
 

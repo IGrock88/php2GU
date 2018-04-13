@@ -45,7 +45,7 @@
                 <label class="label">Category</label>
                 <div class="control">
                     <div class="select">
-                        <select class="selectCategory">
+                        <select id="selectCategory">
                             {% for category in categories %}
                                 <option value="{{ category.id_category }}">{{ category.category }}</option>
                             {% endfor %}
@@ -58,7 +58,7 @@
                 <label class="label">Material</label>
                 <div class="control">
                     <div class="select">
-                        <select>
+                        <select id="selectMaterial">
                             {% for material in materials %}
                                 <option value="{{ material.id_material }}">{{ material.material_name }}</option>
                             {% endfor %}
@@ -70,14 +70,14 @@
             <div class="field">
                 <label class="label">Short description</label>
                 <div class="control">
-                    <textarea class="textarea" placeholder="Textarea" required></textarea>
+                    <textarea id="shortDesc" class="textarea" placeholder="Textarea" required></textarea>
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Full description</label>
                 <div class="control">
-                    <textarea class="textarea" placeholder="Textarea" required></textarea>
+                    <textarea id="fullDesc" class="textarea" placeholder="Textarea" required></textarea>
                 </div>
             </div>
 
@@ -92,12 +92,6 @@
             </div>
         </form>
         <script>
-            $('#newProduct').click(function () {
-                var title = $('#title').val();
-                var price = parseInt($('#price').val());
-                var designerId = parseInt($('#selectDesigner').val());
-                var categoryId = parseInt($('#selectCategory').val());
 
-            });
         </script>
     {% endblock %}

@@ -128,7 +128,7 @@ class AdminController extends Controller
         $this->content['activePage'] = $activePage;
         $this->content['products'] = $goodsDate;
 
-        $this->content['quantityPages'] = $adminModel->getGoodsQuantity() / $quantityGoods;
+        $this->content['quantityPages'] = ceil($adminModel->getGoodsQuantity() / $quantityGoods);
         return new Response($this->render->render($this->content));
     }
 

@@ -11,7 +11,12 @@ GoodsAdmin.prototype.addNewProduct = function (newProductData) {
 
         success: function (data) {
             if(data.result = 1){
-                console.log(data);
+                var $message = $('#successNewProduct');
+                $message.slideDown();
+                setTimeout(function () {
+                    $message.slideUp();
+                }, 1000)
+
             }
         },
         dataType: 'JSON',

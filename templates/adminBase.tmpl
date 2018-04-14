@@ -23,9 +23,34 @@
             width: 100%;
         }
 
+        .goodsImgAdmin{
+            height: 18px;
+        }
+
+        .goodsImgAdmin:hover{
+            transform: scale(10);
+            transition: transform 300ms;
+        }
+
+        #adminDialog{
+            position: fixed;
+            z-index: 10;
+            width: 100%;
+            text-align: center;
+            font-size: 26px;
+        }
+
+        #adminDialog p{
+            display: none;
+        }
+
     </style>
 </head>
 <body>
+
+<div id="adminDialog">
+    <p id="successNewProduct" class="notification is-success"> Товар добавлен</p>
+</div>
 
 <div class="navbar-menu notification is-primary">
     <div class="navbar-start">

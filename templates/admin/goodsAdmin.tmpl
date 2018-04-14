@@ -41,6 +41,7 @@
                     <th>Action</th>
                     <th>Action</th>
                     <th>Action</th>
+                    <th>Title IMG(hover for scale)</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -54,7 +55,8 @@
                     <td>{{ item.designer_name }}</td>
                     <td><a href="">Изменить</a></td>
                     <td><a href="">Удалить</a></td>
-                    <td><a href="">Добавить титульную картинку</a></td>
+                    <td><a href="">Добавить / Изменить титульную картинку</a></td>
+                    <td><img class="goodsImgAdmin" src="../../../../{{ item.img}}" alt=""></td>
                 </tr>
                     {% endfor %}
                 </tbody>

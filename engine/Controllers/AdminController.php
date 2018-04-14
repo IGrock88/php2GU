@@ -103,14 +103,19 @@ class AdminController extends Controller
     {
 
         $request = App::$request;
-        $result['title'] = $request->getPostParams()['title'];
-        $result['price'] = $request->getPostParams()['price'];
-        $result['designerId'] = $request->getPostParams()['designerId'];
-        $result['categoryId'] = $request->getPostParams()['categoryId'];
-        $result['materialId'] = $request->getPostParams()['materialId'];
-        $result['shortDesc'] = $request->getPostParams()['shortDesc'];
-        $result['fullDesc'] = $request->getPostParams()['fullDesc'];
+        $newProductData = $request->getPostParams()['newProductData'];
+        if($this->adminModel->addNewProduct($newProductData)){
+            $result['result'] = JSON_SUCCESS;
+        }
+        else{
+            $result['result'] = JSON_FAILURE;
+        }
         return new Response(json_encode($result));
+    }
+
+    public function addNewImage()
+    {
+
     }
 
     public function goods()

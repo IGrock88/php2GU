@@ -105,4 +105,20 @@ class AdminModel extends Model
         return $result;
     }
 
+    public function addNewProduct($newProductData)
+    {
+        $link = $this->db->connect();
+        mysqli_begin_transaction($link);
+        $result = $this->db->insert('goods', "title, price, designer, id_category, description, short_description",
+        [$newProductData['title'], $newProductData['price'], $newProductData['designerId'], $newProductData['categoryId'],
+            $newProductData['fullDesc'], $newProductData['shortDesc']]);
+        if($result){
+            $productId = mysqli_insert_id($link);
+            $this->db->insert('goods_material', "id_product, id_material", [$productId, $newProductData['materialId']]);
+        }
+        mysqli_commit($link);
+        $this->db->close();
+        return $result;
+    }
+
 }

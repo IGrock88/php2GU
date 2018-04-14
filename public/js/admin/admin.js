@@ -14,8 +14,20 @@ $(document).ready(function () {
         var shortDesc = $('#shortDesc').val();
         var fullDesc = $('#fullDesc').val();
 
+
+        var newProductData = {
+            title: title,
+            price: price,
+            designerId: designerId,
+            categoryId: categoryId,
+            materialId: materialId,
+            shortDesc: shortDesc,
+            fullDesc: fullDesc
+        };
+
+
         var addGoods = new GoodsAdmin();
-        addGoods.addNewProduct(title, price, designerId, categoryId, materialId, shortDesc, fullDesc);
+        addGoods.addNewProduct(newProductData);
     });
 
 

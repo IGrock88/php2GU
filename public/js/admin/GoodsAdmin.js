@@ -2,16 +2,40 @@ function GoodsAdmin() {
     
 }
 
-GoodsAdmin.prototype.addNewProduct = function (title, price, designerId, categoryId, materialId, shortDesc, fullDesc) {
+GoodsAdmin.prototype.addNewProduct = function (newProductData) {
     $.ajax({
         type: 'POST',
         url: '/admin/addNewProduct',
-        data: ({title:title, price:price, designerId:designerId, categoryId:categoryId, materialId:materialId, shortDesc:shortDesc, fullDesc:fullDesc}),
+        data: ({newProductData: newProductData}),
         context: this,
 
         success: function (data) {
-            console.log(data);
+            if(data.result = 1){
+                console.log(data);
+            }
         },
         dataType: 'JSON',
+    });
+}
+
+GoodsAdmin.prototype.addImageFile = function (idProduct) {
+
+    var file_data = $('#addNewImage').prop('files')[0];
+
+    var form_data = new FormData();
+
+    form_data.append('file', file_data);
+
+    $.ajax({
+        url: '/admin/addNewImage',
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function(php_script_response){
+            alert(php_script_response);
+        }
     });
 }

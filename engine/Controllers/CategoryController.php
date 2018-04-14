@@ -48,7 +48,7 @@ class CategoryController extends Controller
         if($date){
             $result['goods'] = $date;
             $result['quantity'] = count($date);
-            $result['result'] = 1;
+            $result['result'] = JSON_SUCCESS;
             $result['totalQuantity'] = $goodsModel->getGoodsQuantityByCategory($idCategory);
             return new Response(json_encode($result));
         }

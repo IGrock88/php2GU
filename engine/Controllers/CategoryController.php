@@ -16,8 +16,11 @@ class CategoryController extends Controller
     ];
 
 
+
     public function men(){
         $this->content['content'] = 'pages/category.tmpl';
+        $goodsModel = new GoodsModel(App::$db);
+        $this->content['designers'] = $goodsModel->getDesigner();
         $this->content['idCategory'] = $this->categoryes['men'];
         $this->content['breadCrumbCategory'] = 'men';
         return new Response($this->render->render($this->content));
@@ -25,6 +28,8 @@ class CategoryController extends Controller
 
     public function women(){
         $this->content['content'] = 'pages/category.tmpl';
+        $goodsModel = new GoodsModel(App::$db);
+        $this->content['designers'] = $goodsModel->getDesigner();
         $this->content['idCategory'] = $this->categoryes['women'];
         $this->content['breadCrumbCategory'] = 'women';
         return new Response($this->render->render($this->content));
@@ -32,6 +37,8 @@ class CategoryController extends Controller
 
     public function kids(){
         $this->content['content'] = 'pages/category.tmpl';
+        $goodsModel = new GoodsModel(App::$db);
+        $this->content['designers'] = $goodsModel->getDesigner();
         $this->content['idCategory'] = $this->categoryes['kids'];
         $this->content['breadCrumbCategory'] = 'kids';
         return new Response($this->render->render($this->content));
@@ -53,5 +60,11 @@ class CategoryController extends Controller
             return new Response(json_encode($result));
         }
     }
+
+//    private function prepareContent(){
+//        $goodsModel = new GoodsModel(App::$db);
+//        $this->content['designers'] = $goodsModel->getDesigner();
+//        $this->content['categories'] = $goodsModel->getCategories();
+//    }
 
 }

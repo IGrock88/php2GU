@@ -26,7 +26,7 @@ aside > div > label {
     position: relative;
 }
 
-label[for="category"] {
+div.input-container {
     margin-top: 56px;
 }
 

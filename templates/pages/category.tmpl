@@ -16,68 +16,47 @@
 
     <div class="container flex-container">
         <aside>
-            <div>
+            <div class="input-container">
+                {% if categories is not null %}
                 <input id="category" type="checkbox">
                 <label class="drop-down-button" for="category">Category</label>
                 <nav>
                     <ul>
-                        <li><input id="category-input-1" type="checkbox"><label
-                                    for="category-input-1">Accessories</label></li>
-                        <li><input id="category-input-2" type="checkbox"><label for="category-input-2">Bags</label></li>
-                        <li><input id="category-input-3" type="checkbox"><label for="category-input-3">Denim</label>
-                        </li>
-                        <li><input id="category-input-4" type="checkbox"><label for="category-input-4">Hoodies &
-                                Sweatshirts</label></li>
-                        <li><input id="category-input-5" type="checkbox"><label for="category-input-5">Jackets &
-                                Coats</label></li>
-                        <li><input id="category-input-6" type="checkbox"><label for="category-input-6">Pants</label>
-                        </li>
-                        <li><input id="category-input-7" type="checkbox"><label for="category-input-7">Polos</label>
-                        </li>
-                        <li><input id="category-input-8" type="checkbox"><label for="category-input-8">Shirts</label>
-                        </li>
-                        <li><input id="category-input-9" type="checkbox"><label for="category-input-9">Shoes</label>
-                        </li>
-                        <li><input id="category-input-10" type="checkbox"><label for="category-input-10">Shorts</label>
-                        </li>
-                        <li><input id="category-input-11" type="checkbox"><label for="category-input-11">Sweaters &
-                                Knits</label></li>
-                        <li><input id="category-input-12" type="checkbox"><label
-                                    for="category-input-12">T-Shirts</label></li>
-                        <li><input id="category-input-13" type="checkbox"><label for="category-input-13">Tanks</label>
-                        </li>
+                        {% for category in categories %}
+                        <li><input id="category-{{ category.id_category  }}" type="checkbox"><label
+                                    for="category-{{ category.id_category }}">{{ category.category }}</label></li>
+                        {% endfor %}
                     </ul>
                 </nav>
+                {% endif %}
             </div>
+            {#<div>#}
+                {#<input id="brand" type="checkbox">#}
+                {#<label class="drop-down-button" for="brand">BRAND</label>#}
+                {#<nav>#}
+                    {#<ul>#}
+                        {#<li><input id="brand-input-1" type="checkbox"><label for="brand-input-1">ALCOTT</label></li>#}
+                        {#<li><input id="brand-input-2" type="checkbox"><label for="brand-input-2">Calvin Klein</label>#}
+                        {#</li>#}
+                        {#<li><input id="brand-input-3" type="checkbox"><label for="brand-input-3">Diesel</label></li>#}
+                        {#<li><input id="brand-input-4" type="checkbox"><label for="brand-input-4">Gabano</label></li>#}
+                        {#<li><input id="brand-input-5" type="checkbox"><label for="brand-input-5">Geox</label></li>#}
+                    {#</ul>#}
+                {#</nav>#}
+            {#</div>#}
             <div>
-                <input id="brand" type="checkbox">
-                <label class="drop-down-button" for="brand">BRAND</label>
-                <nav>
-                    <ul>
-                        <li><input id="brand-input-1" type="checkbox"><label for="brand-input-1">ALCOTT</label></li>
-                        <li><input id="brand-input-2" type="checkbox"><label for="brand-input-2">Calvin Klein</label>
-                        </li>
-                        <li><input id="brand-input-3" type="checkbox"><label for="brand-input-3">Diesel</label></li>
-                        <li><input id="brand-input-4" type="checkbox"><label for="brand-input-4">Gabano</label></li>
-                        <li><input id="brand-input-5" type="checkbox"><label for="brand-input-5">Geox</label></li>
-                    </ul>
-                </nav>
-            </div>
-            <div>
+                {% if designers is not null %}
                 <input id="designer" type="checkbox">
                 <label class="drop-down-button" for="designer">dESIGNER</label>
                 <nav>
                     <ul>
-                        <li><input id="designer-input-1" type="checkbox"><label for="designer-input-1">Nicola
-                                Formichetti</label></li>
-                        <li><input id="designer-input-2" type="checkbox"><label for="designer-input-2">Kenzo</label>
-                        </li>
-                        <li><input id="designer-input-3" type="checkbox"><label for="designer-input-3">Marc
-                                Jacobs</label></li>
-                        <li><input id="designer-input-4" type="checkbox"><label for="designer-input-4">Fred
-                                Perry</label></li>
+                        {% for designer in designers %}
+                        <li><input id="designer-{{ designer.designer_id }}" data-designer-id="{{ designer.designer_id }}" type="checkbox">
+                            <label for="designer-{{ designer.designer_id }}">{{ designer.designer_name }}</label></li>
+                        {% endfor %}
                     </ul>
                 </nav>
+                {% endif %}
             </div>
         </aside>
 

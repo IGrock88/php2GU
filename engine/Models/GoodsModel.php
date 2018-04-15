@@ -49,4 +49,19 @@ class GoodsModel extends Model
         return $result;
     }
 
+    public function getDesigner()
+    {
+        $this->db->connect();
+        $result = $this->db->select("select * from designer");
+        $this->db->close();
+        return $result;
+    }
+
+    public function getCategories()
+    {
+        $this->db->connect();
+        $result = $this->db->select("select * from categoryes");
+        $this->db->close();
+        return $result;
+    }
 }

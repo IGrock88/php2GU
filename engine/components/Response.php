@@ -11,19 +11,19 @@ namespace engine\components;
 class Response
 {
     private $content;
-    private $status_code;
+    private $statusCode;
     private $headers;
     const DEFAULT_STATUS_CODE = 200;
 
-    public function __construct($content, $status_code = self::DEFAULT_STATUS_CODE, $headers = [])
+    public function __construct($content, $statusCode = self::DEFAULT_STATUS_CODE, $headers = [])
     {
         $this->content = $content;
-        $this->status_code = $status_code;
+        $this->statusCode = $statusCode;
         $this->headers = $headers;
     }
 
-    public function setStatusCode($status_code) {
-        $this->status_code = $status_code;
+    public function setStatusCode($statusCode) {
+        $this->statusCode = $statusCode;
     }
 
     public function setHeader($header) {
@@ -31,7 +31,7 @@ class Response
     }
 
     public function send() {
-        header('HTTP/1.1 ' . $this->status_code);
+        header('HTTP/1.1 ' . $this->statusCode);
 
         foreach ( $this->headers as $header ) {
             header($header);

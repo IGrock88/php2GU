@@ -6,29 +6,50 @@ $(document).ready(function () {
 
     $('#newProduct').click(function () {
 
-        var title = $('#title').val();
-        var price = parseInt($('#price').val());
-        var designerId = parseInt($('#selectDesigner').val());
-        var categoryId = parseInt($('#selectCategory').val());
-        var materialId = parseInt($('#selectMaterial').val());
-        var shortDesc = $('#shortDesc').val();
-        var fullDesc = $('#fullDesc').val();
+
+        var $forms = $('.checkEmpty');
+        console.log(isEmpty($forms));
 
 
-        var newProductData = {
-            title: title,
-            price: price,
-            designerId: designerId,
-            categoryId: categoryId,
-            materialId: materialId,
-            shortDesc: shortDesc,
-            fullDesc: fullDesc
-        };
+
+        if(!isEmpty($forms)){
+            var title = $forms.filter('#title').val();
+            var price = parseInt($forms.filter('#price').val());
+            var shortDesc = $forms.filter('#shortDesc').val();
+            var fullDesc = $forms.filter('#fullDesc').val();
 
 
-        var addGoods = new GoodsAdmin();
-        addGoods.addNewProduct(newProductData);
+            var designerId = parseInt($('#selectDesigner').val());
+            var categoryId = parseInt($('#selectCategory').val());
+            var materialId = parseInt($('#selectMaterial').val());
+
+            var newProductData = {
+                title: title,
+                price: price,
+                designerId: designerId,
+                categoryId: categoryId,
+                materialId: materialId,
+                shortDesc: shortDesc,
+                fullDesc: fullDesc
+            };
+
+
+            var addGoods = new GoodsAdmin();
+            addGoods.addNewProduct(newProductData);
+        }
+        else {
+            alert('Есть пустые формы');
+        }
+
     });
+    function isEmpty (inputs){
 
+        if(isNaN(parseInt(inputs.filter('#price').val()))) return true;
+
+        for(var i = 0; i < inputs.length; i++){
+            if(inputs.eq(i).val() == "")  return true;
+        }
+        return false;
+    }
 
 });

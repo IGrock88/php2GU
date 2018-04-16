@@ -1,8 +1,9 @@
 function GoodsAdmin() {
-    
+
 }
 
 GoodsAdmin.prototype.addNewProduct = function (newProductData) {
+
     $.ajax({
         type: 'POST',
         url: '/admin/addNewProduct',
@@ -10,7 +11,7 @@ GoodsAdmin.prototype.addNewProduct = function (newProductData) {
         context: this,
 
         success: function (data) {
-            if(data.result = 1){
+            if (data.result = 1) {
                 var $message = $('#successNewProduct');
                 $message.slideDown();
                 setTimeout(function () {
@@ -21,7 +22,9 @@ GoodsAdmin.prototype.addNewProduct = function (newProductData) {
         },
         dataType: 'JSON',
     });
-}
+
+
+};
 
 GoodsAdmin.prototype.addImageFile = function (idProduct) {
 
@@ -39,7 +42,7 @@ GoodsAdmin.prototype.addImageFile = function (idProduct) {
         processData: false,
         data: form_data,
         type: 'post',
-        success: function(php_script_response){
+        success: function (php_script_response) {
             alert(php_script_response);
         }
     });

@@ -14,7 +14,7 @@ $(document).ready(function () {
 
         if(!isEmpty($forms)){
             var title = $forms.filter('#title').val();
-            var price = parseInt($forms.filter('#price').val());
+            var price = parseFloat($forms.filter('#price').val());
             var shortDesc = $forms.filter('#shortDesc').val();
             var fullDesc = $forms.filter('#fullDesc').val();
 
@@ -25,7 +25,7 @@ $(document).ready(function () {
 
             var newProductData = {
                 title: title,
-                price: price,
+                price: (price.toFixed(2)) * 100,
                 designerId: designerId,
                 categoryId: categoryId,
                 materialId: materialId,
@@ -38,18 +38,29 @@ $(document).ready(function () {
             addGoods.addNewProduct(newProductData);
         }
         else {
-            alert('Есть пустые формы');
+            var $message = $('#emptyForms');
+            $message.slideDown();
+            setTimeout(function () {
+                $message.slideUp();
+            }, 1000);
         }
 
     });
     function isEmpty (inputs){
-
-        if(isNaN(parseInt(inputs.filter('#price').val()))) return true;
-
+        var result = false;
         for(var i = 0; i < inputs.length; i++){
-            if(inputs.eq(i).val() == "")  return true;
+            inputs.eq(i).removeClass('is-danger')
+            if(inputs.eq(i).val() == "")  {
+                inputs.eq(i).addClass('is-danger');
+                result = true;
+            }
         }
-        return false;
+        if(isNaN(parseInt(inputs.filter('#price').val()))) {
+            inputs.filter('#price').addClass('is-danger');
+            result = true;
+        }
+
+        return result;
     }
 
 });

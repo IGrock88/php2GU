@@ -3,7 +3,7 @@
 /* DB config */
 define('HOST', 'localhost');
 define('USER', 'root');
-define('PASS', '');
+define('PASS', 'root');
 define('DB', 'GU');
 
 define('USER_DB_TABLE', 'users');
@@ -13,4 +13,3 @@ define('JSON_SUCCESS', 1);
 define('JSON_FAILURE', 0);
 define('JSON_WRONG', 2);
 
-?>

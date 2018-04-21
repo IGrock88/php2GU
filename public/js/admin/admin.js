@@ -4,6 +4,15 @@ $(document).ready(function () {
         this.classList.toggle('is-active');
     });
 
+    $('#uploadImage').click(function () {
+        var file_data = $('#titleImage').prop('files')[0];
+        var form_data = new FormData();
+        var idProduct = $(this).attr('data-id-product');
+        form_data.append('titleImage', file_data);
+        form_data.append('idProduct', idProduct);
+        uploadFile(form_data, idProduct);
+    });
+
     $('#newProduct').click(function () {
 
 
@@ -61,6 +70,21 @@ $(document).ready(function () {
         }
 
         return result;
+    }
+    
+    function uploadFile(fileData) {
+        $.ajax({
+            url: '/admin/addTitleImage',
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: fileData,
+            type: 'post',
+            success: function(data){
+                console.log(data);
+            }
+        });
     }
 
 });

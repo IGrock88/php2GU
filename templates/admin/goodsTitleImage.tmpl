@@ -1,0 +1,9 @@
+{% extends basesTmpl %}
+
+    {% block content %}
+        <h1 class="title is-3">Change title image</h1>
+
+        <input id="titleImage" class="button is-primary" type="file">
+        <button type="button " data-id-product="{{ idProduct }}" class="button is-success" id="uploadImage">Upload File</button>
+
+    {% endblock %}

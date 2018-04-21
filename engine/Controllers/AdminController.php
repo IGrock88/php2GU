@@ -10,6 +10,7 @@ use engine\components\Response;
 use engine\DB\DB;
 use engine\Models\AdminModel;
 use engine\Models\GoodsModel;
+use engine\Models\ImageModel;
 use engine\Views\AdminView;
 use engine\Views\IRender;
 
@@ -19,12 +20,14 @@ class AdminController extends Controller
     protected $basisTmpl = "adminBase.tmpl";
     const ADMIN_ROLE_ID = 2;
     const DEFAULT_GOODS_QUANTITY_ON_PAGE = 12;
+    const GOODS_IMG_DIR = "public/img/goods/";
+    const IMG_DIR_DB = "img/goods/";
 
     public function __construct(IRender $render)
     {
         parent::__construct($render);
         if ($this->content['user']->getRole() != self::ADMIN_ROLE_ID) {
-            header("location: /");
+            return new Response('Access denied', 403, ["location: /"]);
         }
         $this->render->setBaseTmpl($this->basisTmpl);
         $this->adminModel = new AdminModel(App::$db);
@@ -115,11 +118,6 @@ class AdminController extends Controller
         return new Response(json_encode($result));
     }
 
-    public function addNewImage()
-    {
-
-    }
-
     public function goods()
     {
         $activePage = App::$request->getUrl()[3];
@@ -132,6 +130,27 @@ class AdminController extends Controller
 
         $this->content['quantityPages'] = ceil($adminModel->getGoodsQuantity() / $quantityGoods);
         return new Response($this->render->render($this->content));
+    }
+
+    public function goodsTitleImage()
+    {
+        $this->content['content'] = "admin/goodsTitleImage.tmpl";
+        $this->content['idProduct'] = App::$request->getUrl()[3];
+        return new Response($this->render->render($this->content));
+    }
+
+    public function addTitleImage()
+    {
+        $imageModel = new ImageModel(App::$db);
+        $request = App::$request;
+        $result = $imageModel->uploadFile($request->getPostParams()['idProduct'], $request->getFiles()['titleImage'],
+            self::GOODS_IMG_DIR, self::IMG_DIR_DB);
+        if($result){
+            return new Response(json_encode(['result' => JSON_SUCCESS]));
+        }
+        else{
+            return new Response(json_encode(['result' => $result]));
+        }
     }
 
 }

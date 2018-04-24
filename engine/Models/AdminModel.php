@@ -58,7 +58,7 @@ class AdminModel extends Model
         return $result;
     }
 
-    public function getGoods($startIndex, $quantityGoods)
+    public function getGoods($startIndex = 0, $quantityGoods = 1)
     {
         $startIndex = ($startIndex - 1) * $quantityGoods;
         $this->db->connect();
@@ -71,6 +71,19 @@ class AdminModel extends Model
 
         $this->db->close();
         return $result;
+    }
+
+    public function getTitleImg($idProduct)
+    {
+        $this->db->connect();
+        $result = $this->db->select("select img from goods where id_product = $idProduct");
+        $this->db->close();
+        if($result){
+            return $result[0];
+        }
+        else{
+            return false;
+        }
     }
 
     public function getGoodsQuantity()

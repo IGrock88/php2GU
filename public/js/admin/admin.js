@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    getTitleImageSrc($('#uploadImage').attr('data-id-product'));
+
     document.querySelector('#account').addEventListener('click', function () {
         this.classList.toggle('is-active');
     });
@@ -13,7 +15,7 @@ $(document).ready(function () {
         uploadFile(form_data, idProduct);
     });
 
-    $('#newProduct').click(function () {
+        $('#newProduct').click(function () {
 
 
         var $forms = $('.checkEmpty');
@@ -83,8 +85,39 @@ $(document).ready(function () {
             type: 'post',
             success: function(data){
                 console.log(data);
+                if(data != undefined){
+                    getTitleImageSrc($('#uploadImage').attr('data-id-product'));
+                }
             }
         });
+    }
+
+    function getTitleImageSrc(idProduct) {
+        $.ajax({
+            type: 'POST',
+            url: '/admin/getTitleImg',
+            data: 'idProduct=' + idProduct,
+            context: this,
+
+            success: function (data) {
+                if(data.result == 1){
+                    showTitleImage(data.img)
+                }
+            },
+            dataType: 'JSON',
+        });
+    }
+
+    function showTitleImage(src) {
+
+        var $container = $('#imgContainer');
+
+        var $img = $('<img>', {
+            src: "../../../" + src
+        });
+
+        $container.empty();
+        $container.append($img);
     }
 
 });

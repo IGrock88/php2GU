@@ -153,4 +153,18 @@ class AdminController extends Controller
         }
     }
 
+    public function getTitleImg()
+    {
+        $adminModel = new AdminModel(DB::getInstance());
+        $result = $adminModel->getTitleImg(App::$request->getPostParams()['idProduct']);
+        if($result){
+            $result['result'] = JSON_SUCCESS;
+            return new Response(json_encode($result));
+        }
+        else{
+            return new Response(json_encode(['result' => JSON_FAILURE] ));
+        }
+
+    }
+
 }

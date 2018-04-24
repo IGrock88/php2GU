@@ -5,6 +5,8 @@ require "../vendor/autoload.php";
 chdir(dirname(__DIR__));
 //start
 
-(\engine\components\App::getInstance())->init();
+
+$app = \engine\components\App::getInstance();
+$app->init();
 
 

@@ -11,8 +11,8 @@ namespace engine\Models;
 
 class AdminModel extends Model
 {
-    private $approvedOrderStatus = 2;
-    private $notApprovedOrderStatus = 1;
+    const APPROVED_ORDER_STATUS = 2;
+    const NOT_APPROVED_ORDER_STATUS = 1;
 
     public function getOrders(){
         $this->db->connect();
@@ -35,7 +35,7 @@ class AdminModel extends Model
     public function approveOrder($idOrder)
     {
         $this->db->connect();
-        $result = $this->db->update("orders",['id_order_status' => $this->approvedOrderStatus], "id_order=$idOrder");
+        $result = $this->db->update("orders",['id_order_status' => self::APPROVED_ORDER_STATUS], "id_order=$idOrder");
         $this->db->close();
         return $result;
     }
@@ -43,7 +43,7 @@ class AdminModel extends Model
     public function cancelApproveOrder($idOrder)
     {
         $this->db->connect();
-        $result = $this->db->update("orders",['id_order_status' => $this->notApprovedOrderStatus], "id_order=$idOrder");
+        $result = $this->db->update("orders",['id_order_status' => self::NOT_APPROVED_ORDER_STATUS], "id_order=$idOrder");
         $this->db->close();
         return $result;
     }

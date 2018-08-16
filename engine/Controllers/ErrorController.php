@@ -4,7 +4,7 @@ namespace engine\Controllers;
 
 use engine\components\Response;
 
-class ErrorController extends Controller
+class ErrorController extends AbstractController
 {
     public function error404()
     {

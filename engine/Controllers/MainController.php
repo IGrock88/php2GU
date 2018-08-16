@@ -9,7 +9,7 @@ namespace engine\Controllers;
 use engine\components\Response;
 
 
-class MainController extends Controller
+class MainController extends AbstractController
 {
     public function index()
     {

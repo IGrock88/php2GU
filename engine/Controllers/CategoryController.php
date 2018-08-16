@@ -7,7 +7,7 @@ use engine\Models\GoodsModel;
 use engine\components\App;
 use engine\components\Response;
 
-class CategoryController extends Controller
+class CategoryController extends AbstractController
 {
     private $categoryes = [
       "men" => 2,

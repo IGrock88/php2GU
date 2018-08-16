@@ -7,7 +7,7 @@ use engine\components\App;
 use engine\Views\IRender;
 
 
-abstract class Controller
+abstract class AbstractController
 {
     protected $content;
     protected $render;

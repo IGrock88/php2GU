@@ -8,7 +8,7 @@ use engine\Models\GoodsModel;
 use engine\components\App;
 use engine\components\Response;
 
-class GoodsController extends Controller
+class GoodsController extends AbstractController
 {
     public function featureGoods()
     {

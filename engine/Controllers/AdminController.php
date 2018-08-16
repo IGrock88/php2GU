@@ -14,7 +14,7 @@ use engine\Models\ImageModel;
 use engine\Views\AdminView;
 use engine\Views\IRender;
 
-class AdminController extends Controller
+class AdminController extends AbstractController
 {
     private $adminModel;
     protected $basisTmpl = "adminBase.tmpl";

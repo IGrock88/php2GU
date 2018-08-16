@@ -9,7 +9,7 @@ use engine\Models\UserModel;
 use engine\components\Response;
 
 
-class UserController extends Controller
+class UserController extends AbstractController
 {
 
     public function registration()

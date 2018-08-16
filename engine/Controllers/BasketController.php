@@ -8,7 +8,7 @@ use engine\components\Response;
 use engine\Models\BasketModel;
 
 
-class BasketController extends Controller
+class BasketController extends AbstractController
 {
 
     const NOT_AUTH_STATUS = 2;

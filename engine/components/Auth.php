@@ -2,17 +2,14 @@
 
 namespace engine\components;
 
-
 use engine\DB\AbstractDb;
 
 class Auth
 {
-
     private $user;
     private $db;
     private $isAuth = false;
     private $requests;
-
 
     public function __construct(AbstractDb $db, Request $request)
     {

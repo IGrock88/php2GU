@@ -30,5 +30,4 @@ class App
         $response = $router->start($render, self::$request);
         $response->send();
     }
-
 }

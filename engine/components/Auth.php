@@ -3,7 +3,7 @@
 namespace engine\components;
 
 
-use engine\DB\DB;
+use engine\DB\AbstractDb;
 
 class Auth
 {
@@ -14,7 +14,7 @@ class Auth
     private $requests;
 
 
-    public function __construct(DB $db, Request $request)
+    public function __construct(AbstractDb $db, Request $request)
     {
         session_start();
         $this->db = $db;

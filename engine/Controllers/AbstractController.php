@@ -2,16 +2,13 @@
 
 namespace engine\Controllers;
 
-
 use engine\components\App;
 use engine\Views\IRender;
-
 
 abstract class AbstractController
 {
     protected $content;
     protected $render;
-
 
     public function __construct(IRender $render)
     {

@@ -10,7 +10,7 @@ use engine\components\Response;
 use engine\DB\DB;
 use engine\Models\AdminModel;
 use engine\Models\GoodsModel;
-use engine\Models\ImageModel;
+use engine\Models\ImageUploadModel;
 use engine\Views\AdminView;
 use engine\Views\IRender;
 
@@ -123,12 +123,11 @@ class AdminController extends AbstractController
         $activePage = App::$request->getUrl()[3];
         $quantityGoods = self::DEFAULT_GOODS_QUANTITY_ON_PAGE;
         $this->content['content'] = "admin/goodsAdmin.tmpl";
-        $adminModel = new AdminModel(DB::getInstance());
-        $goodsDate = $adminModel->getGoods($activePage, $quantityGoods);
+        $goodsDate = $this->adminModel->getGoods($activePage, $quantityGoods);
         $this->content['activePage'] = $activePage;
         $this->content['products'] = $goodsDate;
 
-        $this->content['quantityPages'] = ceil($adminModel->getGoodsQuantity() / $quantityGoods);
+        $this->content['quantityPages'] = ceil($this->adminModel->getGoodsQuantity() / $quantityGoods);
         return new Response($this->render->render($this->content));
     }
 
@@ -141,7 +140,7 @@ class AdminController extends AbstractController
 
     public function addTitleImage()
     {
-        $imageModel = new ImageModel(App::$db);
+        $imageModel = new ImageUploadModel(App::$db);
         $request = App::$request;
         $result = $imageModel->uploadFile($request->getPostParams()['idProduct'], $request->getFiles()['titleImage'],
             self::GOODS_IMG_DIR, self::IMG_DIR_DB);
@@ -155,8 +154,7 @@ class AdminController extends AbstractController
 
     public function getTitleImg()
     {
-        $adminModel = new AdminModel(DB::getInstance());
-        $result = $adminModel->getTitleImg(App::$request->getPostParams()['idProduct']);
+        $result = $this->adminModel->getTitleImg(App::$request->getPostParams()['idProduct']);
         if($result){
             $result['result'] = JSON_SUCCESS;
             return new Response(json_encode($result));

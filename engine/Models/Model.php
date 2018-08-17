@@ -5,7 +5,7 @@ namespace engine\Models;
 
 use engine\DB\AbstractDb;
 
-class Model
+abstract class Model
 {
     protected $db;
 

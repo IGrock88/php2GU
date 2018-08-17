@@ -9,7 +9,7 @@ namespace engine\Models;
 
 
 
-class ImageModel extends Model
+class ImageUploadModel extends Model
 {
     const WRONG_FILE_SIZE = 5;
     const WRONG_FILE_TYPE = 6;

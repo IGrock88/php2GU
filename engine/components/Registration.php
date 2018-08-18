@@ -2,7 +2,8 @@
 
 namespace engine\components;
 
-use engine\DB\DB;
+use engine\DB\AbstractDb;
+
 
 class Registration
 {
@@ -12,7 +13,7 @@ class Registration
     const REG_STATUS_LOGIN_IS_USE = 2;
     private $regStatus = self::REG_STATUS_NO_REG;
 
-    public function __construct(DB $db)
+    public function __construct(AbstractDb $db)
     {
         $this->db = $db;
     }

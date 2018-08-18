@@ -3,9 +3,6 @@
 namespace engine\Models;
 
 
-use engine\components\Registration;
-use engine\components\Auth;
-use engine\DB\DB;
 
 class UserModel extends Model
 {

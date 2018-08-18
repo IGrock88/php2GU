@@ -1,22 +1,15 @@
 <?php
 
-namespace engine\components;
-
-use engine\DB\AbstractDb;
+namespace engine\Models;
 
 
-class Registration
+
+class Registration extends Model
 {
-    private $db;
     const REG_STATUS_NO_REG = 0;
     const REG_STATUS_SUCCESS = 1;
     const REG_STATUS_LOGIN_IS_USE = 2;
     private $regStatus = self::REG_STATUS_NO_REG;
-
-    public function __construct(AbstractDb $db)
-    {
-        $this->db = $db;
-    }
 
     public function getRegStatus()
     {

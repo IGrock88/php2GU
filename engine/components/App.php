@@ -8,6 +8,8 @@
 namespace engine\components;
 
 
+use engine\components\Response\Invoker;
+use engine\components\Response\SendCommand;
 use engine\DB\DB;
 use engine\Router\Router;
 use engine\Views\TwigRender;
@@ -28,6 +30,8 @@ class App
         $render = new TwigRender();
         $router = Router::getInstance();
         $response = $router->start($render, self::$request);
-        $response->send();
+        $sendCommand = new SendCommand($response);
+        $invoker = new Invoker($sendCommand);
+        $invoker->sendResponse();
     }
 }

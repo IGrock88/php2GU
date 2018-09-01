@@ -25,14 +25,14 @@ class BasketModel extends Model
         return $result['totalPrice'];
     }
 
-    public function getJSONBasket($idUser)
+    public function getBasket($idUser)
     {
         $basketDate = $this->loadBasketGoods($idUser);
-        return json_encode($basketJSON = [
+        return [
             "result" => 1,
             "basket" => $basketDate['goods'],
             "total_quantity" => $basketDate['totalQuantity']
-        ]);
+        ];
     }
 
     public function addProduct($idProduct, $idUser, $quantity)

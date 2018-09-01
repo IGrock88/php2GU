@@ -6,7 +6,7 @@
  */
 
 namespace engine\Controllers;
-use engine\components\Response;
+use engine\components\response\ResponsePage;
 
 
 class MainController extends AbstractController
@@ -14,6 +14,6 @@ class MainController extends AbstractController
     public function index()
     {
         $this->content['content'] = "pages/index.tmpl";
-        return new Response($this->render->render($this->content));
+        return new ResponsePage($this->render->render($this->content));
     }
 }

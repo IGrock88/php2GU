@@ -4,9 +4,10 @@ namespace engine\Controllers;
 
 
 
+use engine\components\Response\ResponseJson;
 use engine\Models\GoodsModel;
 use engine\components\App;
-use engine\components\Response;
+use engine\components\response\ResponsePage;
 
 class GoodsController extends AbstractController
 {
@@ -18,14 +19,14 @@ class GoodsController extends AbstractController
             $result['goods'] = $goodsModel->getFeatureGoods(App::$request->getPostParams()['featureGoods'], App::$request->getPostParams()['startIndex']);
             if($result['goods']){
                 $result['quantity'] = count($result['goods']);
-                return new Response(json_encode($result));
+                return new ResponseJson($result);
             }
             else{
-                return new Response(json_encode(['result' => JSON_WRONG]));
+                return new ResponseJson(['result' => JSON_WRONG]);
             }
         }
         else{
-            return new Response(json_encode(['result' => JSON_WRONG]));
+            return new ResponseJson(['result' => JSON_WRONG]);
         }
 
     }
@@ -40,10 +41,10 @@ class GoodsController extends AbstractController
             $category = $this->content['selectedGoods']['category'];
             $category = substr($category, 0, stripos($category, "Collection"));
             $this->content['breadCrumbCategory'] = $category;
-            return new Response($this->render->render($this->content));
+            return new ResponsePage($this->render->render($this->content));
         }
         else{
-            return new Response('Упс, страницы нету', 404, ['Location: /error/error404']);
+            return new ResponsePage('Упс, страницы нету', 404, ['Location: /error/error404']);
         }
     }
 }

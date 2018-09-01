@@ -4,7 +4,8 @@ namespace engine\Controllers;
 
 
 use engine\components\App;
-use engine\components\Response;
+use engine\components\Response\ResponseJson;
+use engine\components\response\ResponsePage;
 use engine\Models\BasketModel;
 
 
@@ -21,9 +22,9 @@ class BasketController extends AbstractController
             $result = $basketModel->addProduct(App::$request->getPostParams()['id_product'],
                 $this->content['user']->getId(),
                 $quantity);
-            return new Response(json_encode(["result" => $result]));
+            return new ResponseJson(["result" => $result]);
         } else {
-            return new Response(json_encode(["result" => self::NOT_AUTH_STATUS]));
+            return new ResponseJson(["result" => self::NOT_AUTH_STATUS]);
             //TODO: сделать корзину для не авторизованных пользователй с помощью куки
         }
     }
@@ -32,7 +33,7 @@ class BasketController extends AbstractController
     {
         $basketModel = new BasketModel(App::$db);
         if ($this->content['isAuth']) {
-            return new Response($basketModel->getJSONBasket($this->content['user']->getId()));
+            return new ResponseJson($basketModel->getBasket($this->content['user']->getId()));
         } else {
             echo "under construct";
             //TODO: сделать корзину для не авторизованных пользователй с помощью куки
@@ -44,7 +45,7 @@ class BasketController extends AbstractController
         $basketModel = new BasketModel(App::$db);
         if ($this->content['isAuth']) {
             $result = $basketModel->delProduct(App::$request->getPostParams()['id_product'], $this->content['user']->getId());
-            return new Response(json_encode(["result" => $result]));
+            return new ResponseJson(["result" => $result]);
         } else {
             echo "under construct";
             //TODO: сделать корзину для не авторизованных пользователй с помощью куки
@@ -54,13 +55,13 @@ class BasketController extends AbstractController
     public function checkout()
     {
         $this->content['content'] = 'pages/checkout.tmpl';
-        return new Response($this->render->render($this->content));
+        return new ResponsePage($this->render->render($this->content));
     }
 
     public function cart()
     {
         $this->content['content'] = 'pages/cart.tmpl';
-        return new Response($this->render->render($this->content));
+        return new ResponsePage($this->render->render($this->content));
     }
 
     public function ajaxChangeQuantity()
@@ -71,10 +72,10 @@ class BasketController extends AbstractController
             $result = $basketModel->updateProduct(App::$request->getPostParams()['id_product'],
                                                         $this->content['user']->getId(),
                                                         $productQuantity);
-            return new Response(json_encode(["result" => $result]));
+            return new ResponseJson(["result" => $result]);
         }
         else{
-            return new Response(json_encode(["result" => JSON_WRONG]));
+            return new ResponseJson(["result" => JSON_WRONG]);
         }
 
     }

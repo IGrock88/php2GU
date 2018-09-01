@@ -15,7 +15,8 @@ namespace engine\Router;
 */
 
 use engine\components\Request;
-use engine\components\Response;
+use engine\components\Response\AbstractResponse;
+use engine\components\response\ResponsePage;
 use engine\components\Singleton;
 use engine\Views\IRender;
 
@@ -29,7 +30,7 @@ class Router
     private $defaultMethod = "index"; //дефолтный метод в контроллере, на него будет перенаправление, если не задана третья часть пути отвечающая за выбор метода
     private $controllers = [];
 
-    public function start(IRender $render, Request $request)
+    public function start(IRender $render, Request $request): AbstractResponse
     {
         $this->getControllers();
         $controllerPath = $request->getUrl()[1];
@@ -46,7 +47,7 @@ class Router
                 return $controllerObj->$method();
             }
         }
-        return new Response('Упс, страницы нету', 404, ['Location: /error/error404']);
+        return new ResponsePage('Упс, страницы нету', 404, ['Location: /error/error404']);
     }
 
     private function getControllers() // получаем имена всех контроллеров, и добавляем в ассоциативный массив

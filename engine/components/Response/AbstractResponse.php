@@ -1,18 +1,20 @@
 <?php
 /**
- * User: IGrock
- * Date: 02.04.2018
- * Time: 18:33
+ * Created by PhpStorm.
+ * User: igroc
+ * Date: 01.09.2018
+ * Time: 18:28
  */
 
-namespace engine\components;
+namespace engine\components\Response;
 
 
-class Response
+abstract class AbstractResponse
 {
-    private $content;
-    private $statusCode;
-    private $headers;
+
+    protected $content;
+    protected $statusCode;
+    protected $headers;
     const DEFAULT_STATUS_CODE = 200;
 
     public function __construct($content, $statusCode = self::DEFAULT_STATUS_CODE, $headers = [])
@@ -30,14 +32,5 @@ class Response
         $this->headers[] = $header;
     }
 
-    public function send() {
-        header('HTTP/1.1 ' . $this->statusCode);
-
-        foreach ( $this->headers as $header ) {
-            header($header);
-        }
-
-        echo $this->content;
-    }
-
+    abstract public function send();
 }

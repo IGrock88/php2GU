@@ -4,9 +4,10 @@ namespace engine\Controllers;
 
 
 use engine\components\App;
+use engine\components\Response\ResponseJson;
 use engine\Models\OrderModel;
 use engine\Models\UserModel;
-use engine\components\Response;
+use engine\components\response\ResponsePage;
 
 
 class UserController extends AbstractController
@@ -17,13 +18,13 @@ class UserController extends AbstractController
         $userModel = new UserModel(App::$db);
         $this->content['regStatus'] = $userModel->runRegistration();
         $this->content['content'] = 'pages/registration.tmpl';
-        return new Response($this->render->render($this->content));
+        return new ResponsePage($this->render->render($this->content));
     }
 
     public function account()
     {
         $this->content['content'] = 'pages/account.tmpl';
-        return new Response($this->render->render($this->content));
+        return new ResponsePage($this->render->render($this->content));
     }
 
     public function orders()
@@ -31,7 +32,7 @@ class UserController extends AbstractController
         $orderModel = new OrderModel(App::$db);
         $this->content['content'] = 'pages/orders.tmpl';
         $this->content['orders'] = $orderModel->getOrdersByUser($this->content['user']->getId());
-        return new Response($this->render->render($this->content));
+        return new ResponsePage($this->render->render($this->content));
     }
 
     public function order()
@@ -44,7 +45,7 @@ class UserController extends AbstractController
             $totalPriceOrder = $totalPriceOrder + ($item['price'] * $item['quantity']);
         }
         $this->content['totalPriceOrder'] = $totalPriceOrder;
-        return new Response($this->render->render($this->content));
+        return new ResponsePage($this->render->render($this->content));
     }
 
     public function delorder()
@@ -60,7 +61,7 @@ class UserController extends AbstractController
     {
         $userModel = new UserModel(App::$db);
         if ($userModel->checkout($this->content['user']->getId())) {
-            return new Response(json_encode(["result" => JSON_SUCCESS]));
+            return new ResponseJson(["result" => JSON_SUCCESS]);
         }
 
     }

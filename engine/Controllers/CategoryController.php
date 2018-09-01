@@ -3,9 +3,10 @@
 namespace engine\Controllers;
 
 
+use engine\components\Response\ResponseJson;
 use engine\Models\GoodsModel;
 use engine\components\App;
-use engine\components\Response;
+use engine\components\response\ResponsePage;
 
 class CategoryController extends AbstractController
 {
@@ -23,7 +24,7 @@ class CategoryController extends AbstractController
         $this->content['designers'] = $goodsModel->getDesigner();
         $this->content['idCategory'] = $this->categoryes['men'];
         $this->content['breadCrumbCategory'] = 'men';
-        return new Response($this->render->render($this->content));
+        return new ResponsePage($this->render->render($this->content));
     }
 
     public function women(){
@@ -32,7 +33,7 @@ class CategoryController extends AbstractController
         $this->content['designers'] = $goodsModel->getDesigner();
         $this->content['idCategory'] = $this->categoryes['women'];
         $this->content['breadCrumbCategory'] = 'women';
-        return new Response($this->render->render($this->content));
+        return new ResponsePage($this->render->render($this->content));
     }
 
     public function kids(){
@@ -41,7 +42,7 @@ class CategoryController extends AbstractController
         $this->content['designers'] = $goodsModel->getDesigner();
         $this->content['idCategory'] = $this->categoryes['kids'];
         $this->content['breadCrumbCategory'] = 'kids';
-        return new Response($this->render->render($this->content));
+        return new ResponsePage($this->render->render($this->content));
     }
 
     public function ajaxLoadGoodsByCategory()
@@ -57,7 +58,7 @@ class CategoryController extends AbstractController
             $result['quantity'] = count($date);
             $result['result'] = JSON_SUCCESS;
             $result['totalQuantity'] = $goodsModel->getGoodsQuantityByCategory($idCategory);
-            return new Response(json_encode($result));
+            return new ResponseJson($result);
         }
     }
 

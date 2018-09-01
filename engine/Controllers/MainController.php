@@ -6,12 +6,13 @@
  */
 
 namespace engine\Controllers;
+use engine\components\Response\AbstractResponse;
 use engine\components\response\ResponsePage;
 
 
 class MainController extends AbstractController
 {
-    public function index()
+    public function index():AbstractResponse
     {
         $this->content['content'] = "pages/index.tmpl";
         return new ResponsePage($this->render->render($this->content));

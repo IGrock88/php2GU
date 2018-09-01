@@ -4,6 +4,7 @@ namespace engine\Controllers;
 
 
 use engine\components\App;
+use engine\components\Response\AbstractResponse;
 use engine\components\Response\ResponseJson;
 use engine\components\response\ResponsePage;
 use engine\Models\BasketModel;
@@ -14,7 +15,7 @@ class BasketController extends AbstractController
 
     const NOT_AUTH_STATUS = 2;
 
-    public function addProduct()
+    public function addProduct():AbstractResponse
     {
         $basketModel = new BasketModel(App::$db);
         $quantity = App::$request->getPostParams()['productQuantity'];
@@ -29,7 +30,7 @@ class BasketController extends AbstractController
         }
     }
 
-    public function loadBasket()
+    public function loadBasket():AbstractResponse
     {
         $basketModel = new BasketModel(App::$db);
         if ($this->content['isAuth']) {
@@ -40,7 +41,7 @@ class BasketController extends AbstractController
         }
     }
 
-    public function deleteProduct()
+    public function deleteProduct():AbstractResponse
     {
         $basketModel = new BasketModel(App::$db);
         if ($this->content['isAuth']) {
@@ -52,19 +53,19 @@ class BasketController extends AbstractController
         }
     }
 
-    public function checkout()
+    public function checkout():AbstractResponse
     {
         $this->content['content'] = 'pages/checkout.tmpl';
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function cart()
+    public function cart():AbstractResponse
     {
         $this->content['content'] = 'pages/cart.tmpl';
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function ajaxChangeQuantity()
+    public function ajaxChangeQuantity():AbstractResponse
     {
         $basketModel = new BasketModel(App::$db);
         $productQuantity = App::$request->getPostParams()['productQuantity'];

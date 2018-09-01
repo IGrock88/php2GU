@@ -4,6 +4,7 @@ namespace engine\Controllers;
 
 
 
+use engine\components\Response\AbstractResponse;
 use engine\components\Response\ResponseJson;
 use engine\Models\GoodsModel;
 use engine\components\App;
@@ -11,7 +12,7 @@ use engine\components\response\ResponsePage;
 
 class GoodsController extends AbstractController
 {
-    public function featureGoods()
+    public function featureGoods():AbstractResponse
     {
         $goodsModel = new GoodsModel(App::$db);
         if(isset(App::$request->getPostParams()['featureGoods'])){
@@ -31,7 +32,7 @@ class GoodsController extends AbstractController
 
     }
 
-    public function view()
+    public function view():AbstractResponse
     {
         $goodsModel = new GoodsModel(App::$db);
         $this->content['selectedGoods'] = $goodsModel->getGoodsById(App::$request->getUrl()[3]);

@@ -3,6 +3,7 @@
 namespace engine\Controllers;
 
 
+use engine\components\Response\AbstractResponse;
 use engine\components\Response\ResponseJson;
 use engine\Models\GoodsModel;
 use engine\components\App;
@@ -18,7 +19,8 @@ class CategoryController extends AbstractController
 
 
 
-    public function men(){
+    public function men():AbstractResponse
+    {
         $this->content['content'] = 'pages/category.tmpl';
         $goodsModel = new GoodsModel(App::$db);
         $this->content['designers'] = $goodsModel->getDesigner();
@@ -27,7 +29,8 @@ class CategoryController extends AbstractController
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function women(){
+    public function women():AbstractResponse
+    {
         $this->content['content'] = 'pages/category.tmpl';
         $goodsModel = new GoodsModel(App::$db);
         $this->content['designers'] = $goodsModel->getDesigner();
@@ -36,7 +39,8 @@ class CategoryController extends AbstractController
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function kids(){
+    public function kids():AbstractResponse
+    {
         $this->content['content'] = 'pages/category.tmpl';
         $goodsModel = new GoodsModel(App::$db);
         $this->content['designers'] = $goodsModel->getDesigner();
@@ -45,7 +49,7 @@ class CategoryController extends AbstractController
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function ajaxLoadGoodsByCategory()
+    public function ajaxLoadGoodsByCategory():AbstractResponse
     {
         $goodsModel = new GoodsModel(App::$db);
 

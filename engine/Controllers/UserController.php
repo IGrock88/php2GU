@@ -4,6 +4,7 @@ namespace engine\Controllers;
 
 
 use engine\components\App;
+use engine\components\Response\AbstractResponse;
 use engine\components\Response\ResponseJson;
 use engine\Models\OrderModel;
 use engine\Models\UserModel;
@@ -13,7 +14,7 @@ use engine\components\response\ResponsePage;
 class UserController extends AbstractController
 {
 
-    public function registration()
+    public function registration():AbstractResponse
     {
         $userModel = new UserModel(App::$db);
         $this->content['regStatus'] = $userModel->runRegistration();
@@ -21,13 +22,13 @@ class UserController extends AbstractController
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function account()
+    public function account():AbstractResponse
     {
         $this->content['content'] = 'pages/account.tmpl';
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function orders()
+    public function orders():AbstractResponse
     {
         $orderModel = new OrderModel(App::$db);
         $this->content['content'] = 'pages/orders.tmpl';
@@ -35,7 +36,7 @@ class UserController extends AbstractController
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function order()
+    public function order():AbstractResponse
     {
         $orderModel = new OrderModel(App::$db);
         $this->content['content'] = 'pages/single-order.tmpl';
@@ -48,7 +49,7 @@ class UserController extends AbstractController
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function delorder()
+    public function delorder():AbstractResponse
     {
         if ($this->content['isAuth']) {
             $orderModel = new OrderModel(App::$db);
@@ -57,7 +58,7 @@ class UserController extends AbstractController
         }
     }
 
-    public function ajaxCheckout()
+    public function ajaxCheckout():AbstractResponse
     {
         $userModel = new UserModel(App::$db);
         if ($userModel->checkout($this->content['user']->getId())) {

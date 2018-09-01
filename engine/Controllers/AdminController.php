@@ -4,6 +4,7 @@ namespace engine\Controllers;
 
 
 use engine\components\App;
+use engine\components\Response\AbstractResponse;
 use engine\components\Response\ResponseJson;
 use engine\components\response\ResponsePage;
 use engine\Models\AdminModel;
@@ -30,19 +31,19 @@ class AdminController extends AbstractController
         $this->adminModel = new AdminModel(App::$db);
     }
 
-    public function index()
+    public function index():AbstractResponse
     {
         $this->content['content'] = "admin/indexAdmin.tmpl";
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function orders()
+    public function orders():AbstractResponse
     {
         $this->content['content'] = "admin/orders.tmpl";
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function getOrders()
+    public function getOrders():AbstractResponse
     {
         $ordersDate = $this->adminModel->getOrders();
         $result['orders'] = $ordersDate;
@@ -50,7 +51,7 @@ class AdminController extends AbstractController
         return new ResponseJson($result);
     }
 
-    public function deleteOrder()
+    public function deleteOrder():AbstractResponse
     {
         if ($this->adminModel->deleteOrderById(App::$request->getPostParams()['idOrder'])) {
             return new ResponseJson(['result' => JSON_SUCCESS]);
@@ -59,7 +60,7 @@ class AdminController extends AbstractController
         }
     }
 
-    public function approveOrder()
+    public function approveOrder():AbstractResponse
     {
         if ($this->adminModel->approveOrder(App::$request->getPostParams()['idOrder'])) {
             return new ResponseJson(['result' => JSON_SUCCESS]);
@@ -68,7 +69,7 @@ class AdminController extends AbstractController
         }
     }
 
-    public function cancelApproveOrder()
+    public function cancelApproveOrder():AbstractResponse
     {
         if ($this->adminModel->cancelApproveOrder(App::$request->getPostParams()['idOrder'])) {
             return new ResponseJson(['result' => JSON_SUCCESS]);
@@ -77,7 +78,7 @@ class AdminController extends AbstractController
         }
     }
 
-    public function showOrderDetail()
+    public function showOrderDetail():AbstractResponse
     {
         $ordersDate = $this->adminModel->showOrderDetail(App::$request->getPostParams()['idOrder']);
         if ($ordersDate) {
@@ -91,7 +92,7 @@ class AdminController extends AbstractController
         }
     }
 
-    public function addGoods()
+    public function addGoods():AbstractResponse
     {
         $goodsModel = new GoodsModel(App::$db);
         $this->content['content'] = "admin/addGoods.tmpl";
@@ -101,7 +102,7 @@ class AdminController extends AbstractController
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function addNewProduct()
+    public function addNewProduct():AbstractResponse
     {
 
         $request = App::$request;
@@ -115,7 +116,7 @@ class AdminController extends AbstractController
         return new ResponseJson($result);
     }
 
-    public function goods()
+    public function goods():AbstractResponse
     {
         $activePage = App::$request->getUrl()[3];
         $quantityGoods = self::DEFAULT_GOODS_QUANTITY_ON_PAGE;
@@ -128,14 +129,14 @@ class AdminController extends AbstractController
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function goodsTitleImage()
+    public function goodsTitleImage():AbstractResponse
     {
         $this->content['content'] = "admin/goodsTitleImage.tmpl";
         $this->content['idProduct'] = App::$request->getUrl()[3];
         return new ResponsePage($this->render->render($this->content));
     }
 
-    public function addTitleImage()
+    public function addTitleImage():AbstractResponse
     {
         $imageModel = new ImageUploadModel(App::$db);
         $request = App::$request;
@@ -149,7 +150,7 @@ class AdminController extends AbstractController
         }
     }
 
-    public function getTitleImg()
+    public function getTitleImg():AbstractResponse
     {
         $result = $this->adminModel->getTitleImg(App::$request->getPostParams()['idProduct']);
         if($result){

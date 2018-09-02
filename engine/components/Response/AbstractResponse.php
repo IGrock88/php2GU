@@ -32,5 +32,20 @@ abstract class AbstractResponse
         $this->headers[] = $header;
     }
 
+    final public function process()
+    {
+        $this->sendHeaders();
+        $this->send();
+    }
+
+    final public function sendHeaders()
+    {
+        header('HTTP/1.1 ' . $this->statusCode);
+
+        foreach ( $this->headers as $header ) {
+            header($header);
+        }
+    }
+
     abstract public function send();
 }

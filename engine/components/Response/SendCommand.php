@@ -24,6 +24,6 @@ class SendCommand implements ICommand
 
     public function execute()
     {
-        $this->response->send();
+        $this->response->process();
     }
 }

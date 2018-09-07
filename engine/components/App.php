@@ -8,6 +8,7 @@
 namespace engine\components;
 
 
+use engine\components\Builder\ControllerBuilder;
 use engine\components\Response\Invoker;
 use engine\components\Response\SendCommand;
 use engine\DB\DB;
@@ -18,18 +19,24 @@ class App
 {
     use Singleton;
 
-    public static $db;
-    public static $request;
-    public static $auth;
-
     public function init()
     {
-        self::$db = DB::getInstance();
-        self::$request = new Request();
-        self::$auth = new Auth(self::$db, self::$request);
+        $db = DB::getInstance();
+        $request = new Request();
+        $auth = new Auth($db, $request);
         $render = new TwigRender();
         $router = Router::getInstance();
-        $response = $router->start($render, self::$request);
+
+        // Начало строительства контроллера
+        $controllerBuilder = new ControllerBuilder();
+        $controllerBuilder->setAuth($auth);
+        $controllerBuilder->setDb($db);
+        $controllerBuilder->setRequest($request);
+        $controllerBuilder->setRender($render);
+
+        $response = $router->start($controllerBuilder, $request);
+
+        // Паттерн команда
         $sendCommand = new SendCommand($response);
         $invoker = new Invoker($sendCommand);
         $invoker->sendResponse();

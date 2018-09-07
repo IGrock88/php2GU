@@ -14,10 +14,10 @@ class GoodsController extends AbstractController
 {
     public function featureGoods():AbstractResponse
     {
-        $goodsModel = new GoodsModel(App::$db);
-        if(isset(App::$request->getPostParams()['featureGoods'])){
+        $goodsModel = new GoodsModel($this->db);
+        if(isset($this->request->getPostParams()['featureGoods'])){
 
-            $result['goods'] = $goodsModel->getFeatureGoods(App::$request->getPostParams()['featureGoods'], App::$request->getPostParams()['startIndex']);
+            $result['goods'] = $goodsModel->getFeatureGoods($this->request->getPostParams()['featureGoods'], $this->request->getPostParams()['startIndex']);
             if($result['goods']){
                 $result['quantity'] = count($result['goods']);
                 return new ResponseJson($result);
@@ -34,8 +34,8 @@ class GoodsController extends AbstractController
 
     public function view():AbstractResponse
     {
-        $goodsModel = new GoodsModel(App::$db);
-        $this->content['selectedGoods'] = $goodsModel->getGoodsById(App::$request->getUrl()[3]);
+        $goodsModel = new GoodsModel($this->db);
+        $this->content['selectedGoods'] = $goodsModel->getGoodsById($this->request->getUrl()[3]);
         if($this->content['selectedGoods']){
             $this->content['content'] = 'pages/goods.tmpl';
             $this->content['recommendedProducts'] = $goodsModel->getFeatureGoods(4);

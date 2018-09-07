@@ -14,11 +14,11 @@ namespace engine\Router;
 можно ErrorController
 */
 
+use engine\components\Builder\ControllerBuilder;
 use engine\components\Request;
 use engine\components\Response\AbstractResponse;
 use engine\components\response\ResponsePage;
 use engine\components\Singleton;
-use engine\Views\IRender;
 
 
 class Router
@@ -30,7 +30,7 @@ class Router
     private $defaultMethod = "index"; //дефолтный метод в контроллере, на него будет перенаправление, если не задана третья часть пути отвечающая за выбор метода
     private $controllers = [];
 
-    public function start(IRender $render, Request $request): AbstractResponse
+    public function start(ControllerBuilder $builder, Request $request): AbstractResponse
     {
         $this->getControllers();
         $controllerPath = $request->getUrl()[1];
@@ -42,7 +42,8 @@ class Router
 
         if(isset($this->controllers[$controllerPath])){
             $controller = 'engine\\controllers\\' . $this->controllers[$controllerPath];
-            $controllerObj = new $controller($render);
+
+            $controllerObj = $builder->build($controller);
             if(method_exists($controllerObj, $method)){
                 return $controllerObj->$method();
             }

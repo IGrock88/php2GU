@@ -4,6 +4,7 @@ namespace engine\Controllers;
 
 
 use engine\components\App;
+use engine\components\Builder\ControllerBuilder;
 use engine\components\Response\AbstractResponse;
 use engine\components\Response\ResponseJson;
 use engine\components\response\ResponsePage;
@@ -21,14 +22,14 @@ class AdminController extends AbstractController
     const GOODS_IMG_DIR = "public/img/goods/";
     const IMG_DIR_DB = "img/goods/";
 
-    public function __construct(IRender $render)
+    public function __construct(ControllerBuilder $builder)
     {
-        parent::__construct($render);
+        parent::__construct($builder);
         if ($this->content['user']->getRole() != self::ADMIN_ROLE_ID) {
             return new ResponsePage('Access denied', 403, ["location: /"]);
         }
         $this->render->setBaseTmpl($this->basisTmpl);
-        $this->adminModel = new AdminModel(App::$db);
+        $this->adminModel = new AdminModel($this->db);
     }
 
     public function index():AbstractResponse
@@ -53,7 +54,7 @@ class AdminController extends AbstractController
 
     public function deleteOrder():AbstractResponse
     {
-        if ($this->adminModel->deleteOrderById(App::$request->getPostParams()['idOrder'])) {
+        if ($this->adminModel->deleteOrderById($this->request->getPostParams()['idOrder'])) {
             return new ResponseJson(['result' => JSON_SUCCESS]);
         } else {
             return new ResponseJson(['result' => JSON_FAILURE]);
@@ -62,7 +63,7 @@ class AdminController extends AbstractController
 
     public function approveOrder():AbstractResponse
     {
-        if ($this->adminModel->approveOrder(App::$request->getPostParams()['idOrder'])) {
+        if ($this->adminModel->approveOrder($this->request->getPostParams()['idOrder'])) {
             return new ResponseJson(['result' => JSON_SUCCESS]);
         } else {
             return new ResponseJson(['result' => JSON_FAILURE]);
@@ -71,7 +72,7 @@ class AdminController extends AbstractController
 
     public function cancelApproveOrder():AbstractResponse
     {
-        if ($this->adminModel->cancelApproveOrder(App::$request->getPostParams()['idOrder'])) {
+        if ($this->adminModel->cancelApproveOrder($this->request->getPostParams()['idOrder'])) {
             return new ResponseJson(['result' => JSON_SUCCESS]);
         } else {
             return new ResponseJson(['result' => JSON_FAILURE]);
@@ -80,7 +81,7 @@ class AdminController extends AbstractController
 
     public function showOrderDetail():AbstractResponse
     {
-        $ordersDate = $this->adminModel->showOrderDetail(App::$request->getPostParams()['idOrder']);
+        $ordersDate = $this->adminModel->showOrderDetail($this->request->getPostParams()['idOrder']);
         if ($ordersDate) {
             $result['orderDetail'] = $ordersDate;
             $result['quantity'] = count($ordersDate);
@@ -94,7 +95,7 @@ class AdminController extends AbstractController
 
     public function addGoods():AbstractResponse
     {
-        $goodsModel = new GoodsModel(App::$db);
+        $goodsModel = new GoodsModel($this->db);
         $this->content['content'] = "admin/addGoods.tmpl";
         $this->content['designers'] = $goodsModel->getDesigner();
         $this->content['categories'] = $goodsModel->getCategories();
@@ -105,7 +106,7 @@ class AdminController extends AbstractController
     public function addNewProduct():AbstractResponse
     {
 
-        $request = App::$request;
+        $request = $this->request;
         $newProductData = $request->getPostParams()['newProductData'];
         if($this->adminModel->addNewProduct($newProductData)){
             $result['result'] = JSON_SUCCESS;
@@ -118,7 +119,7 @@ class AdminController extends AbstractController
 
     public function goods():AbstractResponse
     {
-        $activePage = App::$request->getUrl()[3];
+        $activePage = $this->request->getUrl()[3];
         $quantityGoods = self::DEFAULT_GOODS_QUANTITY_ON_PAGE;
         $this->content['content'] = "admin/goodsAdmin.tmpl";
         $goodsDate = $this->adminModel->getGoods($activePage, $quantityGoods);
@@ -132,15 +133,15 @@ class AdminController extends AbstractController
     public function goodsTitleImage():AbstractResponse
     {
         $this->content['content'] = "admin/goodsTitleImage.tmpl";
-        $this->content['idProduct'] = App::$request->getUrl()[3];
+        $this->content['idProduct'] = $this->request->getUrl()[3];
         return new ResponsePage($this->render->render($this->content));
     }
 
     public function addTitleImage():AbstractResponse
     {
-        $imageModel = new ImageUploadModel(App::$db);
-        $request = App::$request;
-        $result = $imageModel->uploadFile($request->getPostParams()['idProduct'], $request->getFiles()['titleImage'],
+        $imageModel = new ImageUploadModel($this->db);
+        $request = $this->request;
+        $result = $imageModel->uploadFile($this->request->getPostParams()['idProduct'], $this->request->getFiles()['titleImage'],
             self::GOODS_IMG_DIR, self::IMG_DIR_DB);
         if($result){
             return new ResponseJson(['result' => JSON_SUCCESS]);
@@ -152,7 +153,7 @@ class AdminController extends AbstractController
 
     public function getTitleImg():AbstractResponse
     {
-        $result = $this->adminModel->getTitleImg(App::$request->getPostParams()['idProduct']);
+        $result = $this->adminModel->getTitleImg($this->request->getPostParams()['idProduct']);
         if($result){
             $result['result'] = JSON_SUCCESS;
             return new ResponseJson($result);

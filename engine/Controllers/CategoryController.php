@@ -22,7 +22,7 @@ class CategoryController extends AbstractController
     public function men():AbstractResponse
     {
         $this->content['content'] = 'pages/category.tmpl';
-        $goodsModel = new GoodsModel(App::$db);
+        $goodsModel = new GoodsModel($this->db);
         $this->content['designers'] = $goodsModel->getDesigner();
         $this->content['idCategory'] = $this->categoryes['men'];
         $this->content['breadCrumbCategory'] = 'men';
@@ -32,7 +32,7 @@ class CategoryController extends AbstractController
     public function women():AbstractResponse
     {
         $this->content['content'] = 'pages/category.tmpl';
-        $goodsModel = new GoodsModel(App::$db);
+        $goodsModel = new GoodsModel($this->db);
         $this->content['designers'] = $goodsModel->getDesigner();
         $this->content['idCategory'] = $this->categoryes['women'];
         $this->content['breadCrumbCategory'] = 'women';
@@ -42,7 +42,7 @@ class CategoryController extends AbstractController
     public function kids():AbstractResponse
     {
         $this->content['content'] = 'pages/category.tmpl';
-        $goodsModel = new GoodsModel(App::$db);
+        $goodsModel = new GoodsModel($this->db);
         $this->content['designers'] = $goodsModel->getDesigner();
         $this->content['idCategory'] = $this->categoryes['kids'];
         $this->content['breadCrumbCategory'] = 'kids';
@@ -51,12 +51,12 @@ class CategoryController extends AbstractController
 
     public function ajaxLoadGoodsByCategory():AbstractResponse
     {
-        $goodsModel = new GoodsModel(App::$db);
+        $goodsModel = new GoodsModel($this->db);
 
-        $idCategory = App::$request->getPostParams()['idCategory'];
+        $idCategory = $this->request->getPostParams()['idCategory'];
         $date = $goodsModel->getGoodsByCategory($idCategory,
-            App::$request->getPostParams()['startIndex'],
-            App::$request->getPostParams()['quantityGoods']);
+            $this->request->getPostParams()['startIndex'],
+            $this->request->getPostParams()['quantityGoods']);
         if($date){
             $result['goods'] = $date;
             $result['quantity'] = count($date);
@@ -67,7 +67,7 @@ class CategoryController extends AbstractController
     }
 
 //    private function prepareContent(){
-//        $goodsModel = new GoodsModel(App::$db);
+//        $goodsModel = new GoodsModel($this->db);
 //        $this->content['designers'] = $goodsModel->getDesigner();
 //        $this->content['categories'] = $goodsModel->getCategories();
 //    }

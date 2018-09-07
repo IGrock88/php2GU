@@ -17,10 +17,10 @@ class BasketController extends AbstractController
 
     public function addProduct():AbstractResponse
     {
-        $basketModel = new BasketModel(App::$db);
-        $quantity = App::$request->getPostParams()['productQuantity'];
+        $basketModel = new BasketModel($this->db);
+        $quantity = $this->request->getPostParams()['productQuantity'];
         if ($this->content['isAuth'] && $quantity > 0) {
-            $result = $basketModel->addProduct(App::$request->getPostParams()['id_product'],
+            $result = $basketModel->addProduct($this->request->getPostParams()['id_product'],
                 $this->content['user']->getId(),
                 $quantity);
             return new ResponseJson(["result" => $result]);
@@ -32,7 +32,7 @@ class BasketController extends AbstractController
 
     public function loadBasket():AbstractResponse
     {
-        $basketModel = new BasketModel(App::$db);
+        $basketModel = new BasketModel($this->db);
         if ($this->content['isAuth']) {
             return new ResponseJson($basketModel->getBasket($this->content['user']->getId()));
         } else {
@@ -43,9 +43,9 @@ class BasketController extends AbstractController
 
     public function deleteProduct():AbstractResponse
     {
-        $basketModel = new BasketModel(App::$db);
+        $basketModel = new BasketModel($this->db);
         if ($this->content['isAuth']) {
-            $result = $basketModel->delProduct(App::$request->getPostParams()['id_product'], $this->content['user']->getId());
+            $result = $basketModel->delProduct($this->request->getPostParams()['id_product'], $this->content['user']->getId());
             return new ResponseJson(["result" => $result]);
         } else {
             echo "under construct";
@@ -67,10 +67,10 @@ class BasketController extends AbstractController
 
     public function ajaxChangeQuantity():AbstractResponse
     {
-        $basketModel = new BasketModel(App::$db);
-        $productQuantity = App::$request->getPostParams()['productQuantity'];
+        $basketModel = new BasketModel($this->db);
+        $productQuantity = $this->request->getPostParams()['productQuantity'];
         if($productQuantity >= 0){
-            $result = $basketModel->updateProduct(App::$request->getPostParams()['id_product'],
+            $result = $basketModel->updateProduct($this->request->getPostParams()['id_product'],
                                                         $this->content['user']->getId(),
                                                         $productQuantity);
             return new ResponseJson(["result" => $result]);

@@ -16,7 +16,7 @@ class UserController extends AbstractController
 
     public function registration():AbstractResponse
     {
-        $userModel = new UserModel(App::$db);
+        $userModel = new UserModel($this->db);
         $this->content['regStatus'] = $userModel->runRegistration();
         $this->content['content'] = 'pages/registration.tmpl';
         return new ResponsePage($this->render->render($this->content));
@@ -30,7 +30,7 @@ class UserController extends AbstractController
 
     public function orders():AbstractResponse
     {
-        $orderModel = new OrderModel(App::$db);
+        $orderModel = new OrderModel($this->db);
         $this->content['content'] = 'pages/orders.tmpl';
         $this->content['orders'] = $orderModel->getOrdersByUser($this->content['user']->getId());
         return new ResponsePage($this->render->render($this->content));
@@ -38,9 +38,9 @@ class UserController extends AbstractController
 
     public function order():AbstractResponse
     {
-        $orderModel = new OrderModel(App::$db);
+        $orderModel = new OrderModel($this->db);
         $this->content['content'] = 'pages/single-order.tmpl';
-        $this->content['singleOrder'] = $orderModel->loadOrderById($this->content['user']->getId(), App::$request->getUrl()[3]);
+        $this->content['singleOrder'] = $orderModel->loadOrderById($this->content['user']->getId(), $this->request->getUrl()[3]);
         $totalPriceOrder = 0;
         foreach ($this->content['singleOrder'] as $key => $item) {
             $totalPriceOrder = $totalPriceOrder + ($item['price'] * $item['quantity']);
@@ -52,15 +52,15 @@ class UserController extends AbstractController
     public function delorder():AbstractResponse
     {
         if ($this->content['isAuth']) {
-            $orderModel = new OrderModel(App::$db);
-            $orderModel->deleteOrderById(App::$request->getUrl()[3], $this->content['user']->getId());
+            $orderModel = new OrderModel($this->db);
+            $orderModel->deleteOrderById($this->request>getUrl()[3], $this->content['user']->getId());
             header("location: /user/orders");
         }
     }
 
     public function ajaxCheckout():AbstractResponse
     {
-        $userModel = new UserModel(App::$db);
+        $userModel = new UserModel($this->db);
         if ($userModel->checkout($this->content['user']->getId())) {
             return new ResponseJson(["result" => JSON_SUCCESS]);
         }

@@ -2,19 +2,37 @@
 
 namespace engine\Controllers;
 
-use engine\components\App;
+use engine\components\Auth;
+use engine\components\Builder\ControllerBuilder;
+use engine\components\Request;
+use engine\DB\AbstractDb;
 use engine\Views\IRender;
+
 
 abstract class AbstractController
 {
+    /**
+     * @property IRender $render
+     * @property Auth $auth
+     * @property Request $request
+     * @property AbstractDb $db
+     */
     protected $content;
     protected $render;
+    protected $auth;
+    protected $request;
+    protected $db;
 
-    public function __construct(IRender $render)
+    public function __construct(ControllerBuilder $builder)
     {
-        $this->content['isAuth'] = App::$auth->isAuth();
-        $this->content['user'] = App::$auth->getUser();
-        $this->render = $render;
+
+        $this->render = $builder->getRender();
+        $this->auth = $builder->getAuth();
+        $this->request = $builder->getRequest();
+        $this->db = $builder->getDb();
+        $this->content['isAuth'] = $this->auth->isAuth();
+        $this->content['user'] = $this->auth->getUser();
+
     }
 
 }

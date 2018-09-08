@@ -7,7 +7,6 @@ namespace engine\Controllers;
 use engine\components\Response\AbstractResponse;
 use engine\components\Response\ResponseJson;
 use engine\Models\GoodsModel;
-use engine\components\App;
 use engine\components\response\ResponsePage;
 
 class GoodsController extends AbstractController
@@ -35,7 +34,7 @@ class GoodsController extends AbstractController
     public function view():AbstractResponse
     {
         $goodsModel = new GoodsModel($this->db);
-        $this->content['selectedGoods'] = $goodsModel->getGoodsById($this->request->getUrl()[3]);
+        $this->content['selectedGoods'] = $goodsModel->getGoodsById($this->request->getItemId());
         if($this->content['selectedGoods']){
             $this->content['content'] = 'pages/goods.tmpl';
             $this->content['recommendedProducts'] = $goodsModel->getFeatureGoods(4);

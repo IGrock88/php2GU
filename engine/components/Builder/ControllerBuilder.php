@@ -23,7 +23,7 @@ class ControllerBuilder
     protected $db;
 
     /**
-     * @return mixed
+     * @return IRender
      */
     public function getRender(): IRender
     {
@@ -31,7 +31,7 @@ class ControllerBuilder
     }
 
     /**
-     * @param mixed $render
+     * @param IRender $render
      */
     public function setRender(IRender $render)
     {
@@ -39,7 +39,7 @@ class ControllerBuilder
     }
 
     /**
-     * @return mixed
+     * @return Auth
      */
     public function getAuth(): Auth
     {
@@ -47,7 +47,7 @@ class ControllerBuilder
     }
 
     /**
-     * @param mixed $auth
+     * @param Auth $auth
      */
     public function setAuth(Auth $auth)
     {
@@ -55,7 +55,7 @@ class ControllerBuilder
     }
 
     /**
-     * @return mixed
+     * @return Request
      */
     public function getRequest(): Request
     {
@@ -63,7 +63,7 @@ class ControllerBuilder
     }
 
     /**
-     * @param mixed $request
+     * @param Request $request
      */
     public function setRequest(Request $request)
     {
@@ -71,7 +71,7 @@ class ControllerBuilder
     }
 
     /**
-     * @return mixed
+     * @return AbstractDb
      */
     public function getDb() : AbstractDb
     {
@@ -79,7 +79,7 @@ class ControllerBuilder
     }
 
     /**
-     * @param mixed $db
+     * @param AbstractDb $db
      */
     public function setDb(AbstractDb $db)
     {

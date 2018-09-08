@@ -3,7 +3,6 @@
 namespace engine\Controllers;
 
 
-use engine\components\App;
 use engine\components\Response\AbstractResponse;
 use engine\components\Response\ResponseJson;
 use engine\Models\OrderModel;
@@ -32,7 +31,7 @@ class UserController extends AbstractController
     {
         $orderModel = new OrderModel($this->db);
         $this->content['content'] = 'pages/orders.tmpl';
-        $this->content['orders'] = $orderModel->getOrdersByUser($this->content['user']->getId());
+        $this->content['orders'] = $orderModel->getOrdersByUser($this->auth->getUser()->getId());
         return new ResponsePage($this->render->render($this->content));
     }
 
@@ -40,7 +39,7 @@ class UserController extends AbstractController
     {
         $orderModel = new OrderModel($this->db);
         $this->content['content'] = 'pages/single-order.tmpl';
-        $this->content['singleOrder'] = $orderModel->loadOrderById($this->content['user']->getId(), $this->request->getUrl()[3]);
+        $this->content['singleOrder'] = $orderModel->loadOrderById($this->auth->getUser()->getId(), $this->request->getItemId());
         $totalPriceOrder = 0;
         foreach ($this->content['singleOrder'] as $key => $item) {
             $totalPriceOrder = $totalPriceOrder + ($item['price'] * $item['quantity']);
@@ -53,7 +52,7 @@ class UserController extends AbstractController
     {
         if ($this->content['isAuth']) {
             $orderModel = new OrderModel($this->db);
-            $orderModel->deleteOrderById($this->request>getUrl()[3], $this->content['user']->getId());
+            $orderModel->deleteOrderById($this->request->getItemId(), $this->auth->getUser()->getId());
             header("location: /user/orders");
         }
     }
@@ -61,7 +60,7 @@ class UserController extends AbstractController
     public function ajaxCheckout():AbstractResponse
     {
         $userModel = new UserModel($this->db);
-        if ($userModel->checkout($this->content['user']->getId())) {
+        if ($userModel->checkout($this->auth->getUser()->getId())) {
             return new ResponseJson(["result" => JSON_SUCCESS]);
         }
 

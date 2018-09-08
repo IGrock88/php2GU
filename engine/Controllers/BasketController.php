@@ -21,7 +21,7 @@ class BasketController extends AbstractController
         $quantity = $this->request->getPostParams()['productQuantity'];
         if ($this->content['isAuth'] && $quantity > 0) {
             $result = $basketModel->addProduct($this->request->getPostParams()['id_product'],
-                $this->content['user']->getId(),
+                $this->auth->getUser()->getId(),
                 $quantity);
             return new ResponseJson(["result" => $result]);
         } else {
@@ -34,7 +34,7 @@ class BasketController extends AbstractController
     {
         $basketModel = new BasketModel($this->db);
         if ($this->content['isAuth']) {
-            return new ResponseJson($basketModel->getBasket($this->content['user']->getId()));
+            return new ResponseJson($basketModel->getBasket($this->auth->getUser()->getId()));
         } else {
             echo "under construct";
             //TODO: сделать корзину для не авторизованных пользователй с помощью куки
@@ -45,7 +45,7 @@ class BasketController extends AbstractController
     {
         $basketModel = new BasketModel($this->db);
         if ($this->content['isAuth']) {
-            $result = $basketModel->delProduct($this->request->getPostParams()['id_product'], $this->content['user']->getId());
+            $result = $basketModel->delProduct($this->request->getPostParams()['id_product'], $this->auth->getUser()->getId());
             return new ResponseJson(["result" => $result]);
         } else {
             echo "under construct";
@@ -71,7 +71,7 @@ class BasketController extends AbstractController
         $productQuantity = $this->request->getPostParams()['productQuantity'];
         if($productQuantity >= 0){
             $result = $basketModel->updateProduct($this->request->getPostParams()['id_product'],
-                                                        $this->content['user']->getId(),
+                                                        $this->auth->getUser()->getId(),
                                                         $productQuantity);
             return new ResponseJson(["result" => $result]);
         }

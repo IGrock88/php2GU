@@ -31,5 +31,10 @@ class Request
         return $this->url;
     }
 
+    public function getItemId()
+    {
+        return $this->url[3];
+    }
+
 
 }

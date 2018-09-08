@@ -25,7 +25,7 @@ class AdminController extends AbstractController
     public function __construct(ControllerBuilder $builder)
     {
         parent::__construct($builder);
-        if ($this->content['user']->getRole() != self::ADMIN_ROLE_ID) {
+        if ($this->auth->getUser()->getRole() != self::ADMIN_ROLE_ID) {
             return new ResponsePage('Access denied', 403, ["location: /"]);
         }
         $this->render->setBaseTmpl($this->basisTmpl);
@@ -119,7 +119,7 @@ class AdminController extends AbstractController
 
     public function goods():AbstractResponse
     {
-        $activePage = $this->request->getUrl()[3];
+        $activePage = $this->request->getItemId();
         $quantityGoods = self::DEFAULT_GOODS_QUANTITY_ON_PAGE;
         $this->content['content'] = "admin/goodsAdmin.tmpl";
         $goodsDate = $this->adminModel->getGoods($activePage, $quantityGoods);
@@ -133,7 +133,7 @@ class AdminController extends AbstractController
     public function goodsTitleImage():AbstractResponse
     {
         $this->content['content'] = "admin/goodsTitleImage.tmpl";
-        $this->content['idProduct'] = $this->request->getUrl()[3];
+        $this->content['idProduct'] = $this->request->getItemId();
         return new ResponsePage($this->render->render($this->content));
     }
 

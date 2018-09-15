@@ -6,6 +6,7 @@ namespace engine\Views;
 class TwigRender implements IRender
 {
     const DEFAULT_BASE_TEMPLATE = "base.tmpl";
+    const TEMPLATES_DIR = 'templates/';
     private $basisTemplate;
 
 

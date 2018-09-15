@@ -13,6 +13,7 @@ use engine\components\Response\Invoker;
 use engine\components\Response\SendCommand;
 use engine\DB\DB;
 use engine\Router\Router;
+use engine\Views\TwigAdapter;
 use engine\Views\TwigRender;
 
 class App
@@ -24,7 +25,11 @@ class App
         $db = DB::getInstance();
         $request = new Request();
         $auth = new Auth($db, $request);
-        $render = new TwigRender();
+
+        // инстанцирование адаптера
+        $render = new TwigAdapter(new TwigRender());
+
+
         $router = Router::getInstance();
 
         // Начало строительства контроллера

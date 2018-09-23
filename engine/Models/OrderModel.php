@@ -8,6 +8,8 @@
 namespace engine\Models;
 
 
+use engine\components\User;
+
 class OrderModel extends Model
 {
     public function loadOrderById($idUser, $idOrder)
@@ -48,5 +50,17 @@ class OrderModel extends Model
         $result = $this->db->update('basket', ['id_order' => $idOder], "id_user=$idUser and id_order is null");
         $this->db->close();
         return $result;
+    }
+
+    public function insertOrder(User $user, $basketPrice)
+    {
+        $link = $this->db->connect();
+        $result = $this->db->insert("orders", "id_user, amount", [$user->getId(), $basketPrice]);
+        if ($result){
+            $idOrder = mysqli_insert_id($link);
+            $this->db->close();
+            return $idOrder;
+        }
+        return false;
     }
 }

@@ -60,8 +60,11 @@ class UserController extends AbstractController
     public function ajaxCheckout():AbstractResponse
     {
         $userModel = new UserModel($this->db);
-        if ($userModel->checkout($this->auth->getUser()->getId())) {
+        if ($userModel->createOrder($this->auth->getUser())) {
             return new ResponseJson(["result" => JSON_SUCCESS]);
+        }
+        else{
+            return new ResponseJson(['result' => JSON_FAILURE]);
         }
 
     }

@@ -20,6 +20,10 @@ class Auth
 
     }
 
+    /**
+     * @return User|mixed
+     *
+     */
     public function getUser()
     {
         return $this->user;

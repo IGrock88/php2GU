@@ -4,6 +4,8 @@
 namespace engine\DB;
 
 
+use phpDocumentor\Reflection\Types\Boolean;
+
 class DB extends AbstractDb
 {
 
@@ -30,7 +32,8 @@ class DB extends AbstractDb
         }
     }
 
-    public function insert($table, $cols, array $values)
+
+    public function insert($table, $cols, array $values): bool
     {
         $sql = 'insert into ' . $table;
         if ($cols != null) {
@@ -42,6 +45,7 @@ class DB extends AbstractDb
         }
         $values = implode(',', $values);
         $sql .= ' values (' . $values . ')';
+
         if (mysqli_query($this->connection, $sql)) {
             return true;
         } else {

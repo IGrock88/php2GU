@@ -9,7 +9,7 @@
 namespace engine\Models;
 
 
-class BasketModel extends Model
+class BasketModel extends AbstractModel
 {
 
     private $dbBasketTable = 'basket';

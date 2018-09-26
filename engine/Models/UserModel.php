@@ -4,7 +4,7 @@ namespace engine\Models;
 
 
 
-class UserModel extends Model
+class UserModel extends AbstractModel
 {
     public function runRegistration(){
         $registration = new Registration($this->db);

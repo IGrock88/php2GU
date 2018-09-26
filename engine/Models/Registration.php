@@ -4,7 +4,7 @@ namespace engine\Models;
 
 
 
-class Registration extends Model
+class Registration extends AbstractModel
 {
     const REG_STATUS_NO_REG = 0;
     const REG_STATUS_SUCCESS = 1;

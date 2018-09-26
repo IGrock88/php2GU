@@ -8,7 +8,7 @@
 namespace engine\Models;
 
 
-class OrderModel extends Model
+class OrderModel extends AbstractModel
 {
     public function loadOrderById($idUser, $idOrder)
     {

@@ -7,7 +7,7 @@ use engine\components\Registration;
 use engine\components\Auth;
 use engine\DB\DB;
 
-class GoodsModel extends Model
+class GoodsModel extends AbstractModel
 {
     private $goodsTable = "goods";
     const DEFAULT_SHOW_CATEGORY_GOODS = 9;

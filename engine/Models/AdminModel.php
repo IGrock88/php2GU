@@ -9,7 +9,7 @@
 namespace engine\Models;
 
 
-class AdminModel extends Model
+class AdminModel extends AbstractModel
 {
     const APPROVED_ORDER_STATUS = 2;
     const NOT_APPROVED_ORDER_STATUS = 1;

@@ -5,7 +5,7 @@ namespace engine\Models;
 
 use engine\DB\AbstractDb;
 
-abstract class Model
+abstract class AbstractModel
 {
     protected $db;
 
@@ -13,4 +13,5 @@ abstract class Model
     {
         $this->db = $db;
     }
+
 }

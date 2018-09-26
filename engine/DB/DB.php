@@ -42,6 +42,8 @@ class DB extends AbstractDb
         }
         $values = implode(',', $values);
         $sql .= ' values (' . $values . ')';
+
+        echo $sql;
         if (mysqli_query($this->connection, $sql)) {
             return true;
         } else {

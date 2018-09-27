@@ -11,7 +11,8 @@ namespace engine\components\Response;
 
 class ResponseJson extends AbstractResponse
 {
-    public function send() {
+    protected function sendContent()
+    {
 
         echo json_encode($this->content);
     }

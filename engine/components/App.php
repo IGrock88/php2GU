@@ -26,9 +26,7 @@ class App
         $request = new Request();
         $auth = new Auth($db, $request);
 
-        // инстанцирование адаптера
-        $render = new TwigAdapter(new TwigRender());
-
+        $render = new TwigRender();
 
         $router = Router::getInstance();
 
@@ -40,10 +38,6 @@ class App
         $controllerBuilder->setRender($render);
 
         $response = $router->start($controllerBuilder, $request);
-
-        // Паттерн команда
-        $sendCommand = new SendCommand($response);
-        $invoker = new Invoker($sendCommand);
-        $invoker->sendResponse();
+        $response->send();
     }
 }

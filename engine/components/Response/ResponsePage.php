@@ -10,8 +10,8 @@ namespace engine\components\response;
 
 class ResponsePage extends AbstractResponse
 {
-    public function send() {
-
+    protected function sendContent()
+    {
         echo $this->content;
     }
 

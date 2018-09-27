@@ -32,10 +32,10 @@ abstract class AbstractResponse
         $this->headers[] = $header;
     }
 
-    final public function process()
+    final public function send()
     {
         $this->sendHeaders();
-        $this->send();
+        $this->sendContent();
     }
 
     final public function sendHeaders()
@@ -47,5 +47,5 @@ abstract class AbstractResponse
         }
     }
 
-    abstract public function send();
+    abstract protected function sendContent();
 }

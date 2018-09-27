@@ -13,7 +13,8 @@ use engine\components\Auth;
 use engine\components\Request;
 use engine\Controllers\AbstractController;
 use engine\DB\AbstractDb;
-use engine\Views\IRenderAdapter;
+use engine\Views\IRender;
+
 
 class ControllerBuilder
 {
@@ -23,17 +24,17 @@ class ControllerBuilder
     protected $db;
 
     /**
-     * @return IRenderAdapter
+     * @return IRender
      */
-    public function getRender(): IRenderAdapter
+    public function getRender(): IRender
     {
         return $this->render;
     }
 
     /**
-     * @param IRenderAdapter $render
+     * @param IRender $render
      */
-    public function setRender(IRenderAdapter $render)
+    public function setRender(IRender $render)
     {
         $this->render = $render;
     }

@@ -2,7 +2,7 @@
 
 namespace engine\components;
 
-use engine\DB\AbstractDb;
+use engine\db\AbstractDb;
 
 class Auth
 {
@@ -36,11 +36,11 @@ class Auth
 
     private function init()
     {
-        if ($this->requests->getPostParams()['SubmitLogin'])   //Если попытка авторизации через форму, то пытаемся авторизоваться
+        if (isset($this->requests->getPostParams()['SubmitLogin']))   //Если попытка авторизации через форму, то пытаемся авторизоваться
         {
             $this->isAuth = $this->authWithCredential($_POST['login'], $_POST['pass']);
         }
-        elseif ($_SESSION['IdUserSession'])    //иначе пытаемся авторизоваться через сессии
+        elseif (isset($_SESSION['IdUserSession']))    //иначе пытаемся авторизоваться через сессии
         {
             $this->isAuth = $this->checkAuthWithSession($_SESSION['IdUserSession']);
         }
@@ -48,7 +48,7 @@ class Auth
         {
             $this->isAuth = $this->checkAuthWithCookie();
         }
-        if ($this->requests->getPostParams()['ExitLogin'])
+        if (isset($this->requests->getPostParams()['ExitLogin']))
         {
             $this->isAuth = $this->userExit();
         }
@@ -63,12 +63,16 @@ class Auth
 
     private function userExit()
     {
-        $IdUserSession = $_SESSION['IdUserSession'];
+        if (isset($_SESSION['IdUserSession'])){
+            $IdUserSession = $_SESSION['IdUserSession'];
+            $this->db->connect();
 
-        $this->db->connect();
+            $this->db->delete('users_auth', "hash_cookie = $IdUserSession");
+            $this->db->close();
+        }
 
-        $this->db->delete('users_auth', "hash_cookie = $IdUserSession");
-        $this->db->close();
+
+
 
         unset($_SESSION['id_user']);
         unset($_SESSION['IdUserSession']);
@@ -77,7 +81,7 @@ class Auth
         unset($_SESSION['pass']);
         unset($_SESSION['basket']);
         unset($_SESSION['basketGoodsQuantity']);
-        setcookie('idUserCookie','', time() - 3600 * 24 * 7);
+        //setcookie('idUserCookie','', time() - 3600 * 24 * 7);
 
         return $this->isAuth = false;
     }
@@ -104,9 +108,10 @@ class Auth
                 $this->db->close();
                 $isAuth = true;
 
-                if ($_POST['rememberme'])
-                {
-                    setcookie('idUserCookie',$idUserCookie, time() + 3600 * 24 * 7);
+                if (isset($_POST['rememberme'])){
+                    if ($_POST['rememberme']){
+                        setcookie('idUserCookie',$idUserCookie, time() + 3600 * 24 * 7);
+                    }
                 }
             }
             else
@@ -144,15 +149,19 @@ class Auth
     {
         $isAuth = false;
 
-        $idUserCookie = $_COOKIE['idUserCookie'];
-        $hash_cookie = $idUserCookie;
-        $this->db->connect();
-        $userDate = $this->db->select("select * from users_auth where hash_cookie = '$hash_cookie'");
-        $this->db->close();
+        if (isset($_COOKIE['idUserCookie'])){
+            $idUserCookie = $_COOKIE['idUserCookie'];
+            $hash_cookie = $idUserCookie;
+            $this->db->connect();
+            $userDate = $this->db->select("select * from users_auth where hash_cookie = '$hash_cookie'");
+            $this->db->close();
+        }
 
-        if ($userDate)
+
+
+        if (!empty($userDate))
         {
-            checkAuthWithSession($idUserCookie);
+            $this->checkAuthWithSession($idUserCookie);
             $isAuth = true;
         }
         else

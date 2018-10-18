@@ -1,6 +1,6 @@
 <?php
 
-namespace engine\Router;
+namespace engine\router;
 /*
 Напоминалка)
 1. Все контроллеры должны лежать в одной директории, путь задается в переменной $controllerDir
@@ -14,9 +14,9 @@ namespace engine\Router;
 можно ErrorController
 */
 
-use engine\components\Builder\ControllerBuilder;
+use engine\components\builder\ControllerBuilder;
 use engine\components\Request;
-use engine\components\Response\AbstractResponse;
+use engine\components\response\AbstractResponse;
 use engine\components\response\ResponsePage;
 use engine\components\Singleton;
 
@@ -25,7 +25,7 @@ class Router
 {
     use Singleton;
 
-    private $controllerDir = "engine/Controllers"; // путь к дериктории с контроллерами
+    private $controllerDir = "engine/controllers"; // путь к дериктории с контроллерами
     private $mainControllerName = "MainController"; // основной контроллер, на него идёт перенаправление если не задан путь к контроллеру
     private $defaultMethod = "index"; //дефолтный метод в контроллере, на него будет перенаправление, если не задана третья часть пути отвечающая за выбор метода
     private $controllers = [];
@@ -33,10 +33,15 @@ class Router
     public function start(ControllerBuilder $builder, Request $request): AbstractResponse
     {
         $this->getControllers();
-        $controllerPath = $request->getUrl()[1];
-        $method = $request->getUrl()[2];
+        if (isset($request->getUrl()[1])){
+            $controllerPath = $request->getUrl()[1];
+        }
+        if (isset($request->getUrl()[2])){
+            $method = $request->getUrl()[2];
+        }
 
-        if($method == ""){
+
+        if(empty($method)){
             $method = $this->defaultMethod;
         }
 

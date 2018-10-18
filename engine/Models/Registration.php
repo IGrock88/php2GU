@@ -1,6 +1,6 @@
 <?php
 
-namespace engine\Models;
+namespace engine\models;
 
 
 
@@ -18,7 +18,7 @@ class Registration extends Model
 
     public function init()
     {
-        if ($_POST['regNewUser']){
+        if (isset($_POST['regNewUser'])){
            $this->regNewUser($_POST['regLogin'], $_POST['regPass'], $_POST['regName']);
         }
     }

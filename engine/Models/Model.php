@@ -1,9 +1,9 @@
 <?php
 
-namespace engine\Models;
+namespace engine\models;
 
 
-use engine\DB\AbstractDb;
+use engine\db\AbstractDb;
 
 abstract class Model
 {

@@ -6,7 +6,7 @@
  * Time: 8:35
  */
 
-namespace engine\Models;
+namespace engine\models;
 
 
 class BasketModel extends Model

@@ -5,7 +5,7 @@
  * Time: 20:19
  */
 
-namespace engine\Models;
+namespace engine\models;
 
 
 use engine\components\User;

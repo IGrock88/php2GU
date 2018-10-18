@@ -1,11 +1,9 @@
 <?php
 
-namespace engine\Models;
+namespace engine\models;
 
 
-use engine\components\Registration;
-use engine\components\Auth;
-use engine\DB\DB;
+
 
 class GoodsModel extends Model
 {

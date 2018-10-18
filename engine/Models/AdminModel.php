@@ -6,7 +6,7 @@
  * Time: 19:51
  */
 
-namespace engine\Models;
+namespace engine\models;
 
 
 class AdminModel extends Model

@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class MyTest extends TestCase
 {
-    public function myFirstTest(){
+    public function testMy(){
         $this->assertEquals(1, 1);
     }
 }

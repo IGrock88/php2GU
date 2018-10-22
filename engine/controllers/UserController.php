@@ -53,7 +53,7 @@ class UserController extends AbstractController
         if ($this->content['isAuth']) {
             $orderModel = new OrderModel($this->db);
             $orderModel->deleteOrderById($this->request->getItemId(), $this->auth->getUser()->getId());
-            header("location: /user/orders");
+            return new ResponsePage('', 200, ["location: /user/orders"]);
         }
     }
 

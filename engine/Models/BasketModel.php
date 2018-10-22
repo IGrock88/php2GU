@@ -39,7 +39,17 @@ class BasketModel extends Model
     {
 
         $this->db->connect();
-        $productDate = $this->db->select("select * from $this->dbBasketTable where id_product='$idProduct' AND id_user='$idUser' AND id_order is null")[0];
+        
+        $dbResult = $this->db->select("select * from $this->dbBasketTable where id_product='$idProduct' AND id_user='$idUser' AND id_order is null");
+
+        if ($dbResult !== null){
+            $productDate = $dbResult[0];
+        }
+        else {
+            $productDate = false;
+        }
+
+
         $this->db->close();
         $result = 0;
         if ($productDate) {

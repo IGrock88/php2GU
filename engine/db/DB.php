@@ -26,9 +26,12 @@ class DB extends AbstractDb
             while ($row = mysqli_fetch_assoc($result)) {
                 $array_result[] = $row;
             }
-            return $array_result;
+            if (!empty($array_result)){
+                return $array_result;
+            }
+            return false;
         } else {
-//            echo "OOPS sql error";
+            return false;
         }
     }
 

@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     $('#buy_button').on('click', function () {
         var quantity = $('#quantity').val();
-        basket.addItem($(this).attr('data-id-product'), quantity);
+        basket.addItem($(this).attr('data-id-product'), quantity, $(this));
     })
     //слушатель для кнопок удаления из корзины
     $('.basket_items').on('click', '.delete__button', function () {

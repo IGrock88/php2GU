@@ -1151,6 +1151,13 @@ section > a button > i {
     opacity: 0.5;
 }
 
+.goods__button.active{
+    -webkit-filter: none;
+    filter: none;
+    border-bottom: 1px solid  #ffffff;
+    opacity: 0.5;
+}
+
 
 .goods figure:hover {
     -webkit-box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);

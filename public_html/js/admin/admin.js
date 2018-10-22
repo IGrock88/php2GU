@@ -12,7 +12,9 @@ $(document).ready(function () {
         var idProduct = $(this).attr('data-id-product');
         form_data.append('titleImage', file_data);
         form_data.append('idProduct', idProduct);
-        uploadFile(form_data, idProduct);
+
+        console.log(form_data, file_data);
+        //uploadFile(form_data);
     });
 
         $('#newProduct').click(function () {
@@ -77,7 +79,6 @@ $(document).ready(function () {
     function uploadFile(fileData) {
         $.ajax({
             url: '/admin/addTitleImage',
-            dataType: 'text',
             cache: false,
             contentType: false,
             processData: false,

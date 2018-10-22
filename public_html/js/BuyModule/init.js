@@ -9,7 +9,7 @@ $(document).ready(function () {
 
     // слушатели для кнопок добавления в корзину в фигурах
     $('.goods').on('click', '.buy_button', function () {
-        basket.addItem($(this).parent().attr('data-id-product'), DEFAULT_QUANTITY_PRODUCT_ADD_TO_BASKET);
+        basket.addItem($(this).parent().attr('data-id-product'), DEFAULT_QUANTITY_PRODUCT_ADD_TO_BASKET, $(this));
     });
 
     $('#buy_button').on('click', function () {

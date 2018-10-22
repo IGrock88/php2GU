@@ -129,7 +129,7 @@ Basket.prototype.setQuantity = function () {
     }
 };
 
-Basket.prototype.addItem = function (idProduct, productQuantity) {
+Basket.prototype.addItem = function (idProduct, productQuantity, button) {
     if(productQuantity > 0){
 
 
@@ -139,8 +139,14 @@ Basket.prototype.addItem = function (idProduct, productQuantity) {
         data: 'id_product=' + idProduct + '&productQuantity=' + productQuantity,
         dataType: 'json',
         context: this,
+        beforeSend: function(){
+            button.addClass('active');
+            button.text('Подождите');
+        },
         success: function (data) {
             console.log(data);
+            button.text('Add to cart');
+            button.removeClass('active');
             if(data.result == 1){
                 this.loadBasketItems();
                 var $message = $('#addProduct');

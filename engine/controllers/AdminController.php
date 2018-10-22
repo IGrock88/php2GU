@@ -19,7 +19,7 @@ class AdminController extends AbstractController
     protected $basisTmpl = "adminBase.tmpl";
     const ADMIN_ROLE_ID = 2;
     const DEFAULT_GOODS_QUANTITY_ON_PAGE = 12;
-    const GOODS_IMG_DIR = "public/img/goods/";
+    const GOODS_IMG_DIR = "public_html/img/goods/";
     const IMG_DIR_DB = "img/goods/";
 
     public function __construct(ControllerBuilder $builder)

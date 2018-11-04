@@ -175,7 +175,7 @@ class Auth
 
     private function checkUserRole($login){
         $this->db->connect();
-        $userRole = $this->db->select("select id_role from Users where login = '$login'")[0]['id_role'];
+        $userRole = $this->db->select("select id_role from users where login = '$login'")[0]['id_role'];
         $this->db->close();
         return $userRole;
     }

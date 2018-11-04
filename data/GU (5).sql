@@ -266,7 +266,7 @@ INSERT INTO `order_status` (`id_order_status`, `order_status_name`) VALUES
 -- Структура таблицы `Users`
 --
 
-CREATE TABLE `Users` (
+CREATE TABLE `users` (
   `id_user` int(11) NOT NULL,
   `login` varchar(50) NOT NULL,
   `name` text NOT NULL,
@@ -279,7 +279,7 @@ CREATE TABLE `Users` (
 -- Дамп данных таблицы `Users`
 --
 
-INSERT INTO `Users` (`id_user`, `login`, `name`, `pass`, `prim`, `id_role`) VALUES
+INSERT INTO `users` (`id_user`, `login`, `name`, `pass`, `prim`, `id_role`) VALUES
 (1, 'user', 'Иван', '$2y$10$mBPas3uNzVeY0AYq4MWu7es7BfLAmI6j4r8fjmkaNRGeupNax69ZO', '', 1),
 (7, 'Igor', 'Игорь', '$2y$10$V3zPnMWjgMNYFg398bqO1eqMcVTKzD1vqiMRRKdbdkCIfeerE9m2q', '', 1),
 (8, 'Vasya', 'Вася', '$2y$10$u0RVPhfxF9Vidj8WBRC3hObF.ksz.3qfcIPvhaVaG0KRaWC81WHtq', '', 1),
@@ -413,7 +413,7 @@ ALTER TABLE `order_status`
 --
 -- Индексы таблицы `Users`
 --
-ALTER TABLE `Users`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`);
 
 --
@@ -484,7 +484,7 @@ ALTER TABLE `order_status`
 --
 -- AUTO_INCREMENT для таблицы `Users`
 --
-ALTER TABLE `Users`
+ALTER TABLE `users`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
@@ -520,7 +520,7 @@ ALTER TABLE `orders`
 -- Ограничения внешнего ключа таблицы `users_auth`
 --
 ALTER TABLE `users_auth`
-  ADD CONSTRAINT `users_auth_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `Users` (`id_user`);
+  ADD CONSTRAINT `users_auth_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

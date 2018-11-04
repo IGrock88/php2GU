@@ -39,7 +39,7 @@ class Registration extends Model
 
     private function checkLogin($login){
         $this->db->connect();
-        return $this->db->select("select login from Users where login = '$login'");
+        return $this->db->select("select login from users where login = '$login'");
     }
 
 

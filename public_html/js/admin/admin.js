@@ -13,8 +13,7 @@ $(document).ready(function () {
         form_data.append('titleImage', file_data);
         form_data.append('idProduct', idProduct);
 
-        console.log(form_data, file_data);
-        //uploadFile(form_data);
+        uploadFile(form_data);
     });
 
         $('#newProduct').click(function () {
